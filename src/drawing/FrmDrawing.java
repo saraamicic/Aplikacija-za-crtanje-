@@ -39,6 +39,9 @@ public class FrmDrawing extends JFrame {
 	private Shape shape = null;
 	private Shape currentShape;
 
+	//provera 
+	//jel sve
+	//radi ok
 	public enum ShapeTypes {
 		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
 	}// enum je skup konstanti

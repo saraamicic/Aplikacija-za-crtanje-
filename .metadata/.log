@@ -1,0 +1,1533 @@
+!SESSION 2025-11-27 17:05:56.218 -----------------------------------------------
+eclipse.buildId=4.30.0.20231201-1200
+java.version=17.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.eclemma.core 4 0 2025-11-27 17:06:01.280
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.core [151]
+  Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+       org.jacoco.report [483]
+         Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+              org.jacoco.core [482]
+         Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+         Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+         Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.8.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.8.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.eclemma.ui 4 0 2025-11-27 17:06:01.287
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.ui [153]
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+       org.jacoco.core [482]
+  Unresolved requirement: Require-Bundle: org.eclipse.eclemma.core
+    -> Bundle-SymbolicName: org.eclipse.eclemma.core; bundle-version="3.1.8.202311140945"; singleton:="true"
+       org.eclipse.eclemma.core [151]
+         Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+              org.jacoco.report [483]
+                Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+                Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+                Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+                Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+         Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.8.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.8.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY ch.qos.logback.classic 1 0 2025-11-27 17:06:01.632
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY org.eclipse.mylyn.builds.core 4 0 2025-11-27 17:06:02.032
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.builds.core [305]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.commons.repositories.core [315]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.builds.ui 4 0 2025-11-27 17:06:02.035
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.builds.ui [306]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.builds.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.builds.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.builds.core [305]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.commons.repositories.core [315]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.activity.ui 4 0 2025-11-27 17:06:02.035
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.activity.ui [307]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.identity.ui 4 0 2025-11-27 17:06:02.045
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.identity.ui [310]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.screenshots; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.screenshots; bundle-version="4.8.0.v20250808-1924"; singleton:="true"
+              org.eclipse.mylyn.commons.screenshots [691]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.net 4 0 2025-11-27 17:06:02.048
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.net [311]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.repositories.http.core 4 0 2025-11-27 17:06:02.050
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.repositories.http.core [316]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.commons.repositories.core [315]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.repositories.ui 4 0 2025-11-27 17:06:02.057
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.repositories.ui [317]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.commons.repositories.core [315]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.xmlrpc 4 0 2025-11-27 17:06:02.060
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.xmlrpc [321]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.commons.net [311]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.context.core 4 0 2025-11-27 17:06:02.064
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.context.core [322]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.context.tasks.ui 4 0 2025-11-27 17:06:02.068
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.context.tasks.ui [323]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.tasks.ui [352]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.context.ui 4 0 2025-11-27 17:06:02.075
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.context.ui [324]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.debug.ui 4 0 2025-11-27 17:06:02.076
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.debug.ui [325]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.ide.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.ide.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.ide.ui [334]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.egit.ui 4 0 2025-11-27 17:06:02.082
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.egit.ui [326]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.ui; bundle-version="[4.0.0,5.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.tasks.ui [352]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="[4.0.0,5.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+              org.eclipse.mylyn.commons.net [311]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.commons.repositories.core [315]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="[4.0.0,5.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.team.ui; bundle-version="[4.0.0,5.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.team.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.team.ui [353]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.git.core 4 0 2025-11-27 17:06:02.087
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.git.core [327]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.versions.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.versions.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.versions.core [354]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.git.ui 4 0 2025-11-27 17:06:02.092
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.git.ui [328]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.git.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.git.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.git.core [327]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.versions.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.versions.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.versions.core [354]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+                     org.eclipse.mylyn.commons.core [687]
+                       Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.versions.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.versions.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.versions.ui [355]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.versions.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.versions.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.github.ui 4 0 2025-11-27 17:06:02.096
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.github.ui [331]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="[4.0.0,5.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Import-Package: org.eclipse.mylyn.internal.github.core.gist; version="[6.2.0,7.0.0)"
+    -> Export-Package: org.eclipse.mylyn.internal.github.core.gist; bundle-symbolic-name="org.eclipse.mylyn.github.core"; bundle-version="6.4.0.v20231102-0301"; version="6.2.1"; x-friends:="org.eclipse.mylyn.github.ui"
+       org.eclipse.mylyn.github.core [329]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="[4.0.0,5.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+              org.eclipse.mylyn.commons.net [311]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="[4.0.0,5.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+              org.eclipse.mylyn.tasks.core [348]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Import-Package: org.eclipse.mylyn.internal.github.core.issue; version="[6.2.0,7.0.0)"
+    -> Export-Package: org.eclipse.mylyn.internal.github.core.issue; bundle-symbolic-name="org.eclipse.mylyn.github.core"; bundle-version="6.4.0.v20231102-0301"; version="6.2.1"; x-friends:="org.eclipse.mylyn.github.ui"
+  Unresolved requirement: Import-Package: org.eclipse.mylyn.internal.github.core; version="[6.2.0,7.0.0)"
+    -> Export-Package: org.eclipse.mylyn.internal.github.core; bundle-symbolic-name="org.eclipse.mylyn.github.core"; bundle-version="6.4.0.v20231102-0301"; version="6.2.1"; x-friends:="org.eclipse.mylyn.github.ui"
+  Unresolved requirement: Import-Package: org.eclipse.mylyn.internal.github.core.pr; version="[6.2.0,7.0.0)"
+    -> Export-Package: org.eclipse.mylyn.internal.github.core.pr; bundle-symbolic-name="org.eclipse.mylyn.github.core"; bundle-version="6.4.0.v20231102-0301"; version="6.2.1"; x-friends:="org.eclipse.mylyn.github.ui"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.ide.ant 4 0 2025-11-27 17:06:02.100
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.ide.ant [333]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.context.core [322]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.ide.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.ide.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.ide.ui [334]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.ide.ui 4 0 2025-11-27 17:06:02.102
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.ide.ui [334]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.resources.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.resources.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.resources.ui [341]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.java.tasks 4 0 2025-11-27 17:06:02.109
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.java.tasks [335]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.tasks.ui [352]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+              org.eclipse.mylyn.commons.net [311]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.commons.repositories.core [315]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.java.ui 4 0 2025-11-27 17:06:02.112
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.java.ui [336]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.resources.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.resources.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.resources.ui [341]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.ide.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.ide.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.ide.ui [334]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.jenkins.core 4 0 2025-11-27 17:06:02.116
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.jenkins.core [337]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.builds.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.builds.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.builds.core [305]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.commons.repositories.core [315]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.jenkins.ui 4 0 2025-11-27 17:06:02.118
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.jenkins.ui [338]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.builds.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.builds.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.builds.ui [306]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.builds.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.builds.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.builds.core [305]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+                     org.eclipse.mylyn.commons.repositories.core [315]
+                       Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                         -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.builds.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.builds.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.monitor.ui 4 0 2025-11-27 17:06:02.122
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.monitor.ui [340]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.monitor.core [339]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.resources.ui 4 0 2025-11-27 17:06:02.126
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.resources.ui [341]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.reviews.core 4 0 2025-11-27 17:06:02.128
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.reviews.core [342]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.reviews.edit 4 0 2025-11-27 17:06:02.131
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.reviews.edit [343]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.reviews.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.reviews.core; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.reviews.core [342]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.reviews.ui 4 0 2025-11-27 17:06:02.137
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.reviews.ui [344]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.commons.net [311]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.tasks.ui [352]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.reviews.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.reviews.core; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.reviews.core [342]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.reviews.edit; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.reviews.edit; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.reviews.edit [343]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.tasks.bugs 4 0 2025-11-27 17:06:02.141
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.tasks.bugs [347]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.tasks.ui [352]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.tasks.index.core 4 0 2025-11-27 17:06:02.144
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.tasks.index.core [349]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+              org.eclipse.mylyn.commons.net [311]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+                     org.eclipse.mylyn.commons.core [687]
+                       Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.commons.repositories.core [315]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.tasks.ui 4 0 2025-11-27 17:06:02.149
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.tasks.ui [352]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.commons.repositories.core [315]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.ui [340]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+              org.eclipse.mylyn.context.core [322]
+                Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+                  -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.repositories.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.repositories.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.commons.repositories.ui [317]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.notifications.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.notifications.ui; bundle-version="4.8.0.v20250813-0648"; singleton:="true"
+       org.eclipse.mylyn.commons.notifications.ui [690]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.notifications.feed; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.notifications.feed; bundle-version="4.8.0.v20250809-1918"; singleton:="true"
+       org.eclipse.mylyn.commons.notifications.feed [689]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.net; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.net; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.commons.net [311]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.notifications.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.notifications.core; bundle-version="4.8.0.v20250809-1602"; singleton:="true"
+       org.eclipse.mylyn.commons.notifications.core [688]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="0.0.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.team.ui 4 0 2025-11-27 17:06:02.154
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.team.ui [353]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.monitor.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.monitor.core [339]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.ui; bundle-version="4.1.0.v20231125-1125"; singleton:="true"
+       org.eclipse.mylyn.tasks.ui [352]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.tasks.core; bundle-version="4.1.0.v20231102-0301"; singleton:="true"
+       org.eclipse.mylyn.tasks.core [348]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.core [322]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.resources.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.resources.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.resources.ui [341]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.context.ui; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.context.ui; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.context.ui [324]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.versions.core 4 0 2025-11-27 17:06:02.156
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.versions.core [354]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.versions.ui 4 0 2025-11-27 17:06:02.160
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.versions.ui [355]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.versions.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.versions.core; bundle-version="4.1.0.v20231009-0014"; singleton:="true"
+       org.eclipse.mylyn.versions.core [354]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.1.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.core 4 0 2025-11-27 17:06:02.462
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.core [687]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.notifications.core 4 0 2025-11-27 17:06:02.465
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.notifications.core [688]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="0.0.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.notifications.feed 4 0 2025-11-27 17:06:02.466
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.notifications.feed [689]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.notifications.core; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.notifications.core; bundle-version="4.8.0.v20250809-1602"; singleton:="true"
+       org.eclipse.mylyn.commons.notifications.core [688]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="0.0.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.notifications.ui 4 0 2025-11-27 17:06:02.469
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.notifications.ui [690]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.workbench; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.workbench; bundle-version="4.8.0.v20250813-0645"; singleton:="true"
+       org.eclipse.mylyn.commons.workbench [693]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+              org.eclipse.mylyn.commons.core [687]
+                Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.notifications.core; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.notifications.core; bundle-version="4.8.0.v20250809-1602"; singleton:="true"
+       org.eclipse.mylyn.commons.notifications.core [688]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="0.0.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.ui 4 0 2025-11-27 17:06:02.470
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.ui [692]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.screenshots; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.screenshots; bundle-version="4.8.0.v20250808-1924"; singleton:="true"
+       org.eclipse.mylyn.commons.screenshots [691]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.workbench 4 0 2025-11-27 17:06:02.470
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.workbench [693]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+       org.eclipse.mylyn.commons.core [687]
+         Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=21))"
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.ui; bundle-version="4.4.0"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.ui; bundle-version="4.8.0.v20250810-0711"; singleton:="true"
+       org.eclipse.mylyn.commons.ui [692]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.core; bundle-version="4.4.0"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.core; bundle-version="4.8.0.v20250808-1900"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY ch.qos.logback.classic 1 0 2025-11-27 17:06:08.357
+!MESSAGE Logback config file: C:\Users\sara\OneDrive\Desktop\Dizajnerski Proj\IT58-2023-Sara-Micic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.2.1.20231030-1438.xml
+
+!ENTRY org.eclipse.jface 2 0 2025-11-27 17:06:12.060
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2025-11-27 17:06:12.060
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolInWorkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolInWorkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-11-27 17:06:18.450
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\sara'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
