@@ -10,7 +10,7 @@ import geometry.Shape;
 public class DrawingModel {
 	private ArrayList<Shape> shapes = new ArrayList<>();
 	
-	public void add(Shape shape) //da mozemo samo da pozovemo model.add
+	public void add(Shape shape) //da mozemo samo da pozovemo model.add a ne celu listu itd
 	{
 		shapes.add(shape);
 	}

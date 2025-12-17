@@ -25,18 +25,18 @@ public DrawingModel model = new DrawingModel();
 	 * Create the panel.
 	 */
 	public PnlDrawing() {
-
 		setPreferredSize(new Dimension(1000, 500));
-
 	}
-
+/* ovo ce se obrisati jer smo premestili u drawingView
 	public void paint(Graphics g) {
 		super.paint(g);
 		Iterator<Shape> it = shapes.iterator();
 		while (it.hasNext())
 			it.next().draw(g);
 	}
-
+	*/
+	
+	//ne znam sta sa ovime ???
 	public Shape getSelected(Point p) { // vraca selektovan oblik uz prosledjenu tacku klika
 		Shape selected = null;
 		Shape temp;

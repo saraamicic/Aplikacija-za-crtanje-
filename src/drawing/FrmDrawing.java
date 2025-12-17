@@ -20,6 +20,7 @@ import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Shape;
+import mvc.DrawingView;
 
 import java.awt.FlowLayout;
 import javax.swing.ButtonGroup;
@@ -38,6 +39,7 @@ public class FrmDrawing extends JFrame {
 	private Point startPoint = null;
 	private Shape shape = null;
 	private Shape currentShape;
+	private DrawingView view;
 
 	
 	public enum ShapeTypes {
@@ -80,18 +82,19 @@ public class FrmDrawing extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1185, 653);
 		contentPane = new JPanel();
+		
 		contentPane.setBackground(new Color(254, 224, 247));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 521, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		GridBagLayout gbl_view = new GridBagLayout();
+		gbl_view.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 521, 0 };
+		gbl_view.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0 };
+		gbl_view.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_view.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, Double.MIN_VALUE };
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(gbl_view);
 		setVisible(true);
 
 		PnlDrawing pnlDrawing = new PnlDrawing();
@@ -512,6 +515,7 @@ public class FrmDrawing extends JFrame {
 		gbc_pnlDrawing.gridx = 0;
 		gbc_pnlDrawing.gridy = 2;
 		getContentPane().add(pnlDrawing, gbc_pnlDrawing);
+		
 		GridBagLayout gbl_pnlDrawing = new GridBagLayout();
 		gbl_pnlDrawing.columnWidths = new int[] { 0 };
 		gbl_pnlDrawing.rowHeights = new int[] { 0 };
@@ -525,5 +529,7 @@ public class FrmDrawing extends JFrame {
 	public ButtonGroup getButtonGroupShapes() {
 		return buttonGroupShapes;
 	}
+
+	
 
 }

@@ -17,6 +17,11 @@ public class Point extends Shape {
 		this.xCoordinate = xCoordinate;
 		this.yCoordinate = yCoordinate;
 	}
+	public Point(int xCoordinate, int yCoordinate, Color color) {
+		this.xCoordinate = xCoordinate;
+		this.yCoordinate = yCoordinate;
+		this.borderColor = color;
+	}
 
 	public Point(int xCoordinate, int yCoordinate, boolean selected) {
 		this(xCoordinate, yCoordinate); // koristimo ovaj konstruktor gore da ne bismo ponavljali kod
