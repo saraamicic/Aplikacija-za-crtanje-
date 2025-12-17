@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import geometry.Point;
 import geometry.Shape;
+import mvc.DrawingModel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,7 +18,7 @@ import java.util.Iterator;
 public class PnlDrawing extends JPanel {
 	private FrmDrawing frmDrawing;
 	private ArrayList<Shape> shapes = new ArrayList<>();
-
+public DrawingModel model = new DrawingModel();
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -68,7 +69,7 @@ public class PnlDrawing extends JPanel {
 			}
 		}
 	}
-
+//TREBA DA SE OBRISE VALJDA
 	public ArrayList<Shape> getShapes() {
 		return shapes;
 	}
