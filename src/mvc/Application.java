@@ -2,6 +2,15 @@ package mvc;
 
 import javax.swing.JFrame;
 
+
+/*
+ * Frame - dugmici, geteri i seteri
+ * Model - uradjeno 
+ * View - uradjeno
+ * Controller - logika - brisanje, modifikovanje, ono za dijaloge
+ * 
+ * */
+
 public class Application {
 
 	public static void main(String[] args) {
@@ -18,6 +27,8 @@ public class Application {
 		frame.setSize(600,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		
+		
 	}
 
 }

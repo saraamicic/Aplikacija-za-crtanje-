@@ -18,8 +18,9 @@ import java.util.Iterator;
 public class PnlDrawing extends JPanel {
 	private FrmDrawing frmDrawing;
 	private ArrayList<Shape> shapes = new ArrayList<>();
-public DrawingModel model = new DrawingModel();
+	public DrawingModel model = new DrawingModel();
 	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Create the panel.
@@ -27,14 +28,14 @@ public DrawingModel model = new DrawingModel();
 	public PnlDrawing() {
 		setPreferredSize(new Dimension(1000, 500));
 	}
-/* ovo ce se obrisati jer smo premestili u drawingView
+	//ovo ce se obrisati jer smo premestili u drawingView
 	public void paint(Graphics g) {
 		super.paint(g);
 		Iterator<Shape> it = shapes.iterator();
 		while (it.hasNext())
 			it.next().draw(g);
 	}
-	*/
+	
 	
 	//ne znam sta sa ovime ???
 	public Shape getSelected(Point p) { // vraca selektovan oblik uz prosledjenu tacku klika

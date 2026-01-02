@@ -44,7 +44,7 @@ public class FrmDrawing extends JFrame {
 	
 	public enum ShapeTypes {
 		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
-	}// enum je skup konstanti
+	}
 
 	public ShapeTypes shapeType = ShapeTypes.NONE;
 

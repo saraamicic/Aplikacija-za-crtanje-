@@ -6,8 +6,12 @@ import java.util.Iterator;
 
 import geometry.Point;
 import geometry.Shape;
+//u modelu cuvamo podatke - nasu listu sa oblicima
 
 public class DrawingModel {
+	public enum ShapeTypes {
+		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
+	}
 	private ArrayList<Shape> shapes = new ArrayList<>();
 	
 	public void add(Shape shape) //da mozemo samo da pozovemo model.add a ne celu listu itd

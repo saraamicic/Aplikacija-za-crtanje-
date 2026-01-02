@@ -1,13 +1,16 @@
 package mvc;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Iterator;
 import javax.swing.JPanel;
-import geometry.Shape;
 
+import geometry.Point;
+import geometry.Shape;
+//view nam iscrtava listu oblika preko paint metode
 public class DrawingView extends JPanel{
 
-	DrawingModel model = new DrawingModel(); // ovo je samo radi ucitavanja (da ne bi zabagovalo nesto
+	DrawingModel model = new DrawingModel(); // ovo je samo radi ucitavanja (da ne bi zabagovalo nesto)
 	
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -19,7 +22,4 @@ public class DrawingView extends JPanel{
 	public void setModel(DrawingModel model) {
 		this.model = model;
 	}
-	
-	
-	
 }
