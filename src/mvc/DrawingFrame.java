@@ -108,11 +108,23 @@ public class DrawingFrame extends JFrame {
 		getContentPane().add(tglbtnHexagon);
 		
 		JToggleButton tglbtnModify = new JToggleButton("Modify");
+		tglbtnModify.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.Modify();
+			}
+		});
 		buttonGroupShapes.add(tglbtnModify);
 		tglbtnModify.setBounds(852, 23, 84, 26);
 		getContentPane().add(tglbtnModify);
 		
 		JToggleButton tglbtnDelete = new JToggleButton("Delete");
+		tglbtnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.Delete();
+			}
+		});
 		buttonGroupShapes.add(tglbtnDelete);
 		tglbtnDelete.setBounds(946, 23, 84, 26);
 		getContentPane().add(tglbtnDelete);
