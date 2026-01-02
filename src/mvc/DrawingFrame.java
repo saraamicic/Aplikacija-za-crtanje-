@@ -59,21 +59,45 @@ public class DrawingFrame extends JFrame {
 		
 		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
+		tglbtnLine.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.setShapeType(ShapeTypes.LINE);
+			}
+		});
 		buttonGroupShapes.add(tglbtnLine);
 		tglbtnLine.setBounds(112, 23, 70, 26);
 		getContentPane().add(tglbtnLine);
 		
 		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
+		tglbtnRectangle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.setShapeType(ShapeTypes.RECTANGLE);
+			}
+		});
 		buttonGroupShapes.add(tglbtnRectangle);
 		tglbtnRectangle.setBounds(189, 23, 84, 26);
 		getContentPane().add(tglbtnRectangle);
 		
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
+		tglbtnCircle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.setShapeType(ShapeTypes.CIRCLE);
+			}
+		});
 		buttonGroupShapes.add(tglbtnCircle);
 		tglbtnCircle.setBounds(283, 23, 70, 26);
 		getContentPane().add(tglbtnCircle);
 		
 		JToggleButton tglbtnDonut = new JToggleButton("Donut");
+		tglbtnDonut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.setShapeType(ShapeTypes.DONUT);
+			}
+		});
 		buttonGroupShapes.add(tglbtnDonut);
 		tglbtnDonut.setBounds(363, 23, 70, 26);
 		getContentPane().add(tglbtnDonut);
