@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import drawing.FrmDrawing.ShapeTypes;
 import geometry.Point;
 import geometry.Shape;
 //u modelu cuvamo podatke - nasu listu sa oblicima
@@ -12,6 +13,9 @@ public class DrawingModel {
 	public enum ShapeTypes {
 		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
 	}
+	
+	public ShapeTypes shapeType = ShapeTypes.NONE;
+	
 	private ArrayList<Shape> shapes = new ArrayList<>();
 	
 	public void add(Shape shape) //da mozemo samo da pozovemo model.add a ne celu listu itd
@@ -33,5 +37,6 @@ public class DrawingModel {
 	{
 		return shapes;
 	}
-	
+
+
 }

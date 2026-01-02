@@ -21,10 +21,12 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
 
 public class DrawingFrame extends JFrame {
 	DrawingController controller;
 	DrawingView view = new DrawingView();
+	private final ButtonGroup buttonGroupShapes = new ButtonGroup();
 
 
 	
@@ -34,58 +36,72 @@ public class DrawingFrame extends JFrame {
 		setTitle("Sara crta ovde");
 		getContentPane().setSize(200, 200);
 		getContentPane().setLayout(null);
+	
 		
-		JToggleButton tglbtnPoint = new JToggleButton("Point");
-		tglbtnPoint.setBounds(32, 23, 70, 26);
-		getContentPane().add(tglbtnPoint);
-		
-		JPanel view = new JPanel();
 		view.setBounds(20, 69, 1049, 484);
 		view.setBackground(new Color(255, 255, 255));
 		getContentPane().add(view);
 		
+		JToggleButton tglbtnPoint = new JToggleButton("Point");
+		tglbtnPoint.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+				controller.setShapeType(ShapeTypes.POINT);
+				
+			}
+		});
+		buttonGroupShapes.add(tglbtnPoint);
+		tglbtnPoint.setBounds(32, 23, 70, 26);
+		getContentPane().add(tglbtnPoint);
+		
+
+		
+		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
+		buttonGroupShapes.add(tglbtnLine);
 		tglbtnLine.setBounds(112, 23, 70, 26);
 		getContentPane().add(tglbtnLine);
 		
 		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
+		buttonGroupShapes.add(tglbtnRectangle);
 		tglbtnRectangle.setBounds(189, 23, 84, 26);
 		getContentPane().add(tglbtnRectangle);
 		
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
+		buttonGroupShapes.add(tglbtnCircle);
 		tglbtnCircle.setBounds(283, 23, 70, 26);
 		getContentPane().add(tglbtnCircle);
 		
-		JToggleButton Donut = new JToggleButton("Donut");
-		Donut.setBounds(363, 23, 70, 26);
-		getContentPane().add(Donut);
+		JToggleButton tglbtnDonut = new JToggleButton("Donut");
+		buttonGroupShapes.add(tglbtnDonut);
+		tglbtnDonut.setBounds(363, 23, 70, 26);
+		getContentPane().add(tglbtnDonut);
 		
 		JToggleButton tglbtnHexagon = new JToggleButton("Hexagon");
+		buttonGroupShapes.add(tglbtnHexagon);
 		tglbtnHexagon.setBounds(443, 23, 84, 26);
 		getContentPane().add(tglbtnHexagon);
 		
 		JToggleButton tglbtnModify = new JToggleButton("Modify");
+		buttonGroupShapes.add(tglbtnModify);
 		tglbtnModify.setBounds(852, 23, 84, 26);
 		getContentPane().add(tglbtnModify);
 		
 		JToggleButton tglbtnDelete = new JToggleButton("Delete");
+		buttonGroupShapes.add(tglbtnDelete);
 		tglbtnDelete.setBounds(946, 23, 84, 26);
 		getContentPane().add(tglbtnDelete);
 		setVisible(true);
 		
 		
 	}
+	
+	
+	public ButtonGroup getButtonGroupShapes() {
+		return buttonGroupShapes;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public DrawingView getView() {
 		return view;
 	}
@@ -93,4 +109,6 @@ public class DrawingFrame extends JFrame {
 	public void SetController(DrawingController controller) {
 		this.controller=controller;
 	}
+
+
 }
