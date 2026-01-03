@@ -37,6 +37,13 @@ public class DrawingModel {
 	{
 		return shapes;
 	}
-
-
+	
+	public Shape getSelectedShape() {
+	    for (Shape s : shapes) {
+	        if (s.isSelected()) {
+	            return s;
+	        }
+	    }
+	    return null;
+	}
 }

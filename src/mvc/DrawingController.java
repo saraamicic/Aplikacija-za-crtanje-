@@ -371,7 +371,6 @@ public class DrawingController {
 		}
 		return selected;
 	}
-	
 }
 
 

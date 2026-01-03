@@ -15,6 +15,9 @@ import javax.swing.border.EmptyBorder;
 import drawing.PnlDrawing;
 import drawing.FrmDrawing.ShapeTypes;
 import javax.swing.border.LineBorder;
+
+import command.BringToBackCmd;
+
 import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -26,19 +29,18 @@ import javax.swing.ButtonGroup;
 public class DrawingFrame extends JFrame {
 	DrawingController controller;
 	DrawingView view = new DrawingView();
+	DrawingModel model;
+	BringToBackCmd btb;
 	private final ButtonGroup buttonGroupShapes = new ButtonGroup();
-
-
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
-		
 		setTitle("Sara crta ovde");
 		getContentPane().setSize(200, 200);
 		getContentPane().setLayout(null);
-	
+		btb = new BringToBackCmd(model);
 		
-		view.setBounds(20, 69, 1049, 484);
+		view.setBounds(20, 69, 1049, 449);
 		view.setBackground(new Color(255, 255, 255));
 		getContentPane().add(view);
 		
@@ -115,7 +117,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnModify);
-		tglbtnModify.setBounds(852, 23, 84, 26);
+		tglbtnModify.setBounds(891, 23, 84, 26);
 		getContentPane().add(tglbtnModify);
 		
 		JToggleButton tglbtnDelete = new JToggleButton("Delete");
@@ -126,8 +128,45 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnDelete);
-		tglbtnDelete.setBounds(946, 23, 84, 26);
+		tglbtnDelete.setBounds(985, 23, 84, 26);
 		getContentPane().add(tglbtnDelete);
+		
+		JToggleButton tglbtnUndo = new JToggleButton("Undo");
+		tglbtnUndo.setBounds(723, 23, 70, 26);
+		getContentPane().add(tglbtnUndo);
+		
+		JToggleButton tglbtnRedo = new JToggleButton("Redo");
+		tglbtnRedo.setBounds(803, 23, 76, 26);
+		getContentPane().add(tglbtnRedo);
+		
+		JToggleButton tglbtnToFront = new JToggleButton("To Front");
+		tglbtnToFront.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		tglbtnToFront.setBounds(606, 528, 96, 23);
+		getContentPane().add(tglbtnToFront);
+		
+		JToggleButton tglbtnToBack = new JToggleButton("To Back");
+		tglbtnToBack.setBounds(712, 528, 96, 23);
+		getContentPane().add(tglbtnToBack);
+		
+
+		JToggleButton tglbtnBringToBack = new JToggleButton("Bring To Back");
+		tglbtnBringToBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btb.execute();
+			}
+		});
+		tglbtnBringToBack.setBounds(818, 528, 127, 23);
+		getContentPane().add(tglbtnBringToBack);
+		
+		JToggleButton tglbtnBringToFront = new JToggleButton("Bring To Front");
+		tglbtnBringToFront.setBounds(955, 528, 114, 23);
+		getContentPane().add(tglbtnBringToFront);
 		setVisible(true);
 		
 		
@@ -145,6 +184,12 @@ public class DrawingFrame extends JFrame {
 	public void SetController(DrawingController controller) {
 		this.controller=controller;
 	}
-
-
+	public void SetModel(DrawingModel model)
+	{
+		this.model = model;
+	}
+	public void SetBringToBackCmd(BringToBackCmd btb)
+	{
+		this.btb = btb;
+	}
 }

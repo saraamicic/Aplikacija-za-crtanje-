@@ -2,6 +2,8 @@ package mvc;
 
 import javax.swing.JFrame;
 
+import command.BringToBackCmd;
+
 
 /*
  * Frame - dugmici, geteri i seteri
