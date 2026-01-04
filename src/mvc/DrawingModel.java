@@ -46,7 +46,6 @@ public class DrawingModel {
 			s = shapes.get(i);
 			if(s.isSelected()==true)
 			{
-				System.out.println("Nasli smo ga");
 				return s;
 			}
 		}

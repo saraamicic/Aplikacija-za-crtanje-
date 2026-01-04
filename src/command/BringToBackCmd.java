@@ -9,35 +9,42 @@ import mvc.DrawingModel;
 public class BringToBackCmd implements Command {
 
 	public DrawingModel model;
-	public Shape shape;
+	public Shape selectedShape;
+	public int originalIndex;
 	
 	
-	public BringToBackCmd (DrawingModel model)
+	public BringToBackCmd (Shape selectedShape, DrawingModel model)
 	{
 		this.model=model;
+		this.selectedShape = selectedShape;
 	}
 	
-	public void bringToBack(Shape shape) {
-	    model.getShapes().remove(shape);   //  ukloni sa stare pozicije
-	    model.getShapes().add(0, shape);   //  ubaci na indeks 0
-	}
-
 	@Override
 	public void execute() {
-		shape = model.vratiSelektovani();
-
-        if (shape != null) {
-            bringToBack(shape);
-        }
-        else
-        {
-        	JOptionPane.showMessageDialog(null, "Niste selektovali oblik","",JOptionPane.ERROR_MESSAGE);
-        }
+		originalIndex = model.getShapes().indexOf(selectedShape); //pamtimo njegov prvobitan indeks
+		if(selectedShape != null)
+		{
+			if (originalIndex != 0) { //ako mu indeks nije 0
+				model.getShapes().remove(selectedShape);   //  ukloni sa stare pozicije
+				model.getShapes().add(0, selectedShape);   //  ubaci na indeks 0
+				}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Niste selektovali oblik","",JOptionPane.ERROR_MESSAGE);
+		}
 	}
-
+	
 	@Override
 	public void unexecute() {
-		// TODO Auto-generated method stub
+		int originalIndex = model.getShapes().indexOf(selectedShape);
+		//znaci ako je nas selektovani oblik skroz pozadi, na nultom indeksu, vratimo ga na prvobitni indeks i obrisemo sa nultog
+		if(model.getShapes().indexOf(selectedShape)==0)
+		{
+			model.getShapes().remove(0);
+			model.getShapes().add(originalIndex, selectedShape);
+		}
+		
 
 	}
 

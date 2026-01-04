@@ -161,6 +161,12 @@ public class DrawingFrame extends JFrame {
 		getContentPane().add(tglbtnBringToBack);
 		
 		JToggleButton tglbtnBringToFront = new JToggleButton("Bring To Front");
+		tglbtnBringToFront.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.BringToFront();
+			}
+		});
 		tglbtnBringToFront.setBounds(955, 528, 114, 23);
 		getContentPane().add(tglbtnBringToFront);
 		setVisible(true);

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import command.BringToBackCmd;
+import command.BringToFrontCmd;
 import drawing.DlgCircle;
 import drawing.DlgDonut;
 import drawing.DlgLine;
@@ -28,12 +29,11 @@ public class DrawingController {
 	private Point startPoint = null;
 	private Shape shape = null;
 	private Shape currentShape;
-	
+	public Shape selectedShape;
 	public DrawingController(DrawingModel model, DrawingFrame frame)
 	{
 		this.model = model;
 		this.frame = frame;
-	
 		frame.getView().addMouseListener(new MouseAdapter() {
 		@Override
 		//crtanje
@@ -376,13 +376,18 @@ public class DrawingController {
 	
 	public void BringToBack()
 	{
-		if(model.getShapes().size()>1) //ima smisla slati ga pozadi samo ako imamo vise od 1 oblika
-		{
-			BringToBackCmd btb = new BringToBackCmd(model);
-			btb.execute();
-			frame.repaint();
-		}
-		
+		selectedShape = model.vratiSelektovani();
+		BringToBackCmd btb = new BringToBackCmd(selectedShape,model);
+		btb.execute();
+		frame.repaint();
+	}
+	
+	public void BringToFront()
+	{	
+		selectedShape = model.vratiSelektovani();
+		BringToFrontCmd btf = new BringToFrontCmd(selectedShape,model);
+		btf.execute();
+		frame.repaint();
 	}
 	
 	
