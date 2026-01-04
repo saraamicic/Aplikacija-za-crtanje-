@@ -43,8 +43,11 @@ public class ToBackCmd implements Command {
 		{
 			originalIndex = model.getShapes().indexOf(selectedShape);//njegov originalni indeks
 
+			if(originalIndex < model.getShapes().size()- 1)
+			{
 				model.remove(selectedShape);
 				model.getShapes().add(originalIndex + 1, selectedShape);
+			}
 		}
 		else 
 		{
