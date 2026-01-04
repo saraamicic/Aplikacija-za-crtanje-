@@ -10,6 +10,7 @@ import geometry.Shape;
 //u modelu cuvamo podatke - nasu listu sa oblicima
 
 public class DrawingModel {
+	public Shape s;
 	public enum ShapeTypes {
 		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
 	}
@@ -38,12 +39,17 @@ public class DrawingModel {
 		return shapes;
 	}
 	
-	public Shape getSelectedShape() {
-	    for (Shape s : shapes) {
-	        if (s.isSelected()) {
-	            return s;
-	        }
-	    }
-	    return null;
+	public Shape vratiSelektovani()
+	{
+		for(int i=0;i<shapes.size();i++)
+		{
+			s = shapes.get(i);
+			if(s.isSelected()==true)
+			{
+				System.out.println("Nasli smo ga");
+				return s;
+			}
+		}
+		return null;
 	}
 }

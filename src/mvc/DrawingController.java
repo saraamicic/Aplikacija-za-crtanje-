@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import command.BringToBackCmd;
 import drawing.DlgCircle;
 import drawing.DlgDonut;
 import drawing.DlgLine;
@@ -371,6 +372,20 @@ public class DrawingController {
 		}
 		return selected;
 	}
+	
+	
+	public void BringToBack()
+	{
+		if(model.getShapes().size()>1) //ima smisla slati ga pozadi samo ako imamo vise od 1 oblika
+		{
+			BringToBackCmd btb = new BringToBackCmd(model);
+			btb.execute();
+			frame.repaint();
+		}
+		
+	}
+	
+	
 }
 
 

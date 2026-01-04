@@ -29,8 +29,6 @@ import javax.swing.ButtonGroup;
 public class DrawingFrame extends JFrame {
 	DrawingController controller;
 	DrawingView view = new DrawingView();
-	DrawingModel model;
-	BringToBackCmd btb;
 	private final ButtonGroup buttonGroupShapes = new ButtonGroup();
 	
 	public DrawingFrame() {
@@ -38,8 +36,6 @@ public class DrawingFrame extends JFrame {
 		setTitle("Sara crta ovde");
 		getContentPane().setSize(200, 200);
 		getContentPane().setLayout(null);
-		btb = new BringToBackCmd(model);
-		
 		view.setBounds(20, 69, 1049, 449);
 		view.setBackground(new Color(255, 255, 255));
 		getContentPane().add(view);
@@ -158,7 +154,7 @@ public class DrawingFrame extends JFrame {
 		tglbtnBringToBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				btb.execute();
+				controller.BringToBack();
 			}
 		});
 		tglbtnBringToBack.setBounds(818, 528, 127, 23);
@@ -184,12 +180,7 @@ public class DrawingFrame extends JFrame {
 	public void SetController(DrawingController controller) {
 		this.controller=controller;
 	}
-	public void SetModel(DrawingModel model)
-	{
-		this.model = model;
-	}
-	public void SetBringToBackCmd(BringToBackCmd btb)
-	{
-		this.btb = btb;
-	}
+
+
+
 }
