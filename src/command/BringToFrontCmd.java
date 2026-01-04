@@ -29,7 +29,7 @@ public class BringToFrontCmd implements Command {
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Niste selektovali oblik","",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please select a shape first","",JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}

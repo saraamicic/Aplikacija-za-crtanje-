@@ -5,8 +5,6 @@ import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Shape;
-
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
@@ -15,6 +13,8 @@ import javax.swing.JOptionPane;
 
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
+import command.ToBackCmd;
+import command.ToFrontCmd;
 import drawing.DlgCircle;
 import drawing.DlgDonut;
 import drawing.DlgLine;
@@ -390,6 +390,21 @@ public class DrawingController {
 		frame.repaint();
 	}
 	
+	public void ToBack()
+	{
+		selectedShape = model.vratiSelektovani();
+		ToBackCmd tb = new ToBackCmd(selectedShape, model);
+		tb.execute();
+		frame.repaint();
+	}
+	
+	public void ToFront()
+	{
+		selectedShape = model.vratiSelektovani();
+		ToFrontCmd tf = new ToFrontCmd(selectedShape, model);
+		tf.execute();
+		frame.repaint();
+	}
 	
 }
 

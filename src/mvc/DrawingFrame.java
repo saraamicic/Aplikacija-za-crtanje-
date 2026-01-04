@@ -139,13 +139,19 @@ public class DrawingFrame extends JFrame {
 		tglbtnToFront.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				controller.ToFront();
 			}
 		});
 		tglbtnToFront.setBounds(606, 528, 96, 23);
 		getContentPane().add(tglbtnToFront);
 		
 		JToggleButton tglbtnToBack = new JToggleButton("To Back");
+		tglbtnToBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.ToBack();
+			}
+		});
 		tglbtnToBack.setBounds(712, 528, 96, 23);
 		getContentPane().add(tglbtnToBack);
 		
