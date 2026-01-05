@@ -3,14 +3,15 @@ package command;
 public class SelectShapeCmd implements Command {
 
 	@Override
+	//selektujem oblik
 	public void execute() {
-		// TODO Auto-generated method stub
+		
 
 	}
-
+	//odselektujem ga
 	@Override
 	public void unexecute() {
-		// TODO Auto-generated method stub
+		
 
 	}
 

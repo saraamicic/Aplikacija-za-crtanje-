@@ -1,4 +1,5 @@
 package mvc;
+
 import geometry.Circle;
 import geometry.Donut;
 import geometry.Line;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
+import command.ModifyPointCmd;
 import command.RemoveShapeCmd;
 import command.ToBackCmd;
 import command.ToFrontCmd;
@@ -23,6 +25,7 @@ import drawing.DlgLine;
 import drawing.DlgPoint;
 import drawing.DlgRectangle;
 import drawing.FrmDrawing.ShapeTypes;
+
 public class DrawingController {
 
 	DrawingModel model;
@@ -32,175 +35,182 @@ public class DrawingController {
 	private Shape shape = null;
 	private Shape currentShape;
 	public Shape selectedShape;
-	public DrawingController(DrawingModel model, DrawingFrame frame)
-	{
+
+	public DrawingController(DrawingModel model, DrawingFrame frame) {
 		this.model = model;
 		this.frame = frame;
 		frame.getView().addMouseListener(new MouseAdapter() {
-		@Override
-		//crtanje
-		public void mouseClicked(MouseEvent e) {
-			switch(shapeType)
-			{
-			case POINT:
-				Point p = new Point(e.getX(), e.getY());
-				DlgPoint dlgPoint = new DlgPoint(p);
-				dlgPoint.getTextFieldXCoordinate().setEditable(false);
-				dlgPoint.getTextFieldYCoordinate().setEditable(false);
-				dlgPoint.setVisible(true);
-				if (dlgPoint.isOk()) {
-					p.setBorderColor(dlgPoint.getColorPoint());
-					AddShapeCmd addShapePoint = new AddShapeCmd(p,model);
-					addShapePoint.execute(); //dodajemo tacku u listu
-				}
-				setShapeType(ShapeTypes.NONE);
-				frame.getButtonGroupShapes().clearSelection();
-				break;
-				
-			case LINE:
-				if (startPoint == null) {
-					startPoint = new Point(e.getX(), e.getY());
-				} else {
-					Line l = new Line(startPoint, new Point(e.getX(), e.getY()));
-					DlgLine dlgLine = new DlgLine(l);
-					dlgLine.getTextFieldXStartPoint().setEditable(false);
-					dlgLine.getTextFieldYStartPoint().setEditable(false);
-					dlgLine.getTextFieldXEndPoint().setEditable(false);
-					dlgLine.getTextFieldYEndPoint().setEditable(false);
-					dlgLine.setVisible(true);
-					startPoint = null;
-					if (dlgLine.isOk()) {
-						l.setBorderColor(dlgLine.getLineColor());
-						AddShapeCmd addShapeLine = new AddShapeCmd(l,model);
-						addShapeLine.execute(); 
+			@Override
+			// crtanje
+			public void mouseClicked(MouseEvent e) {
+				switch (shapeType) {
+				case POINT:
+					Point p = new Point(e.getX(), e.getY());
+					DlgPoint dlgPoint = new DlgPoint(p);
+					dlgPoint.getTextFieldXCoordinate().setEditable(false);
+					dlgPoint.getTextFieldYCoordinate().setEditable(false);
+					dlgPoint.setVisible(true);
+					if (dlgPoint.isOk()) {
+						p.setBorderColor(dlgPoint.getColorPoint());
+						AddShapeCmd addShapePoint = new AddShapeCmd(p, model);
+						addShapePoint.execute(); // dodajemo tacku u listu
 					}
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
+					break;
+
+				case LINE:
+					if (startPoint == null) {
+						startPoint = new Point(e.getX(), e.getY());
+					} else {
+						Line l = new Line(startPoint, new Point(e.getX(), e.getY()));
+						DlgLine dlgLine = new DlgLine(l);
+						dlgLine.getTextFieldXStartPoint().setEditable(false);
+						dlgLine.getTextFieldYStartPoint().setEditable(false);
+						dlgLine.getTextFieldXEndPoint().setEditable(false);
+						dlgLine.getTextFieldYEndPoint().setEditable(false);
+						dlgLine.setVisible(true);
+						startPoint = null;
+						if (dlgLine.isOk()) {
+							l.setBorderColor(dlgLine.getLineColor());
+							AddShapeCmd addShapeLine = new AddShapeCmd(l, model);
+							addShapeLine.execute();
+						}
+						setShapeType(ShapeTypes.NONE);
+						frame.getButtonGroupShapes().clearSelection();
+					}
+
+					break;
+
+				case RECTANGLE:
+					Point upperLeftPoint = new Point(e.getX(), e.getY());
+
+					Rectangle r = new Rectangle(upperLeftPoint, 0, 0);
+					DlgRectangle dlgRectangle = new DlgRectangle(r);
+
+					dlgRectangle.getTextFieldXUpperLeft().setEditable(false);
+					dlgRectangle.getTextFieldYUpperLeft().setEditable(false);
+					dlgRectangle.setVisible(true);
+
+					if (dlgRectangle.isOk()) {
+						int width = Integer.parseInt(dlgRectangle.getTextFieldWidth().getText());
+						int height = Integer.parseInt(dlgRectangle.getTextFieldHeight().getText());
+						Rectangle r1 = new Rectangle(upperLeftPoint, width, height);
+						r1.setBorderColor(dlgRectangle.getBorderColor());
+						r1.setAreaColor(dlgRectangle.getAreaColor());
+						AddShapeCmd addShapeRectangle = new AddShapeCmd(r1, model);
+						addShapeRectangle.execute();
+					}
+					setShapeType(ShapeTypes.NONE);
+					frame.getButtonGroupShapes().clearSelection();
+					break;
+
+				case CIRCLE:
+					Point center = new Point(e.getX(), e.getY());
+
+					Circle c = new Circle(center, 0);
+					DlgCircle dlgCircle = new DlgCircle(c);
+
+					dlgCircle.getTextFieldXCenter().setEditable(false);
+					dlgCircle.getTextFieldYCenter().setEditable(false);
+					dlgCircle.setVisible(true);
+
+					if (dlgCircle.isOk()) {
+						int radius = Integer.parseInt(dlgCircle.getTextFieldRadius().getText());
+						Circle c1 = new Circle(center, radius);
+						c1.setBorderColor(dlgCircle.getBorderColor());
+						c1.setAreaColor(dlgCircle.getAreaColor());
+						AddShapeCmd addShapeCircle = new AddShapeCmd(c1, model);
+						addShapeCircle.execute();
+
+					}
+					setShapeType(ShapeTypes.NONE);
+					frame.getButtonGroupShapes().clearSelection();
+					break;
+
+				case DONUT:
+					Point centerD = new Point(e.getX(), e.getY());
+
+					Donut d = new Donut(centerD, 0, 0);
+					DlgDonut dlgDonut = new DlgDonut(d);
+					dlgDonut.getTextFieldXDonutCenter().setText(Integer.toString(d.getCenter().getXCoordinate()));
+					dlgDonut.getTextFieldYDonutCenter().setText(Integer.toString(d.getCenter().getYCoordinate()));
+					dlgDonut.getTextFieldXDonutCenter().setEditable(false);
+					dlgDonut.getTextFieldYDonutCenter().setEditable(false);
+					dlgDonut.setVisible(true);
+					if (dlgDonut.isOk()) {
+						int radius = Integer.parseInt(dlgDonut.getTextFieldDonutRadius().getText());
+						int innerRadius = Integer.parseInt(dlgDonut.getTextFieldInnerRadius().getText());
+						Donut d1 = new Donut(centerD, radius, innerRadius);
+						d1.setBorderColor(dlgDonut.getBorderColor());
+						d1.setAreaColor(dlgDonut.getAreaColor());
+						AddShapeCmd addShapeDonut = new AddShapeCmd(d1, model);
+						addShapeDonut.execute();
+
+					}
+					setShapeType(ShapeTypes.NONE);
+					frame.getButtonGroupShapes().clearSelection();
+					break;
+
+				case NONE:
+					setShapeType(ShapeTypes.NONE);
+					break;
+
+				default:
+					setShapeType(ShapeTypes.NONE);
+					break;
 				}
 
-				break;
-				
-			case RECTANGLE:
-				Point upperLeftPoint = new Point(e.getX(), e.getY());
-
-				Rectangle r = new Rectangle(upperLeftPoint, 0, 0);
-				DlgRectangle dlgRectangle = new DlgRectangle(r);
-
-				dlgRectangle.getTextFieldXUpperLeft().setEditable(false);
-				dlgRectangle.getTextFieldYUpperLeft().setEditable(false);
-				dlgRectangle.setVisible(true);
-
-				if (dlgRectangle.isOk()) {
-					int width = Integer.parseInt(dlgRectangle.getTextFieldWidth().getText());
-					int height = Integer.parseInt(dlgRectangle.getTextFieldHeight().getText());
-					Rectangle r1 = new Rectangle(upperLeftPoint, width, height);
-					r1.setBorderColor(dlgRectangle.getBorderColor());
-					r1.setAreaColor(dlgRectangle.getAreaColor());
-					AddShapeCmd addShapeRectangle = new AddShapeCmd(r1,model);
-					addShapeRectangle.execute(); 
-				}
-				setShapeType(ShapeTypes.NONE);
-				frame.getButtonGroupShapes().clearSelection();
-				break;
-				
-			case CIRCLE:
-				Point center = new Point(e.getX(), e.getY());
-
-				Circle c = new Circle(center, 0);
-				DlgCircle dlgCircle = new DlgCircle(c);
-
-				dlgCircle.getTextFieldXCenter().setEditable(false);
-				dlgCircle.getTextFieldYCenter().setEditable(false);
-				dlgCircle.setVisible(true);
-
-				if (dlgCircle.isOk()) {
-					int radius = Integer.parseInt(dlgCircle.getTextFieldRadius().getText());
-					Circle c1 = new Circle(center, radius);
-					c1.setBorderColor(dlgCircle.getBorderColor());
-					c1.setAreaColor(dlgCircle.getAreaColor());
-					AddShapeCmd addShapeCircle = new AddShapeCmd(c1,model);
-					addShapeCircle.execute(); 
-					
-				}
-				setShapeType(ShapeTypes.NONE);
-				frame.getButtonGroupShapes().clearSelection();
-				break;
-
-			case DONUT:
-				Point centerD = new Point(e.getX(), e.getY());
-
-				Donut d = new Donut(centerD, 0, 0);
-				DlgDonut dlgDonut = new DlgDonut(d);
-				dlgDonut.getTextFieldXDonutCenter().setText(Integer.toString(d.getCenter().getXCoordinate()));
-				dlgDonut.getTextFieldYDonutCenter().setText(Integer.toString(d.getCenter().getYCoordinate()));
-				dlgDonut.getTextFieldXDonutCenter().setEditable(false);
-				dlgDonut.getTextFieldYDonutCenter().setEditable(false);
-				dlgDonut.setVisible(true);
-				if (dlgDonut.isOk()) {
-					int radius = Integer.parseInt(dlgDonut.getTextFieldDonutRadius().getText());
-					int innerRadius = Integer.parseInt(dlgDonut.getTextFieldInnerRadius().getText());
-					Donut d1 = new Donut(centerD, radius, innerRadius);
-					d1.setBorderColor(dlgDonut.getBorderColor());
-					d1.setAreaColor(dlgDonut.getAreaColor());
-					AddShapeCmd addShapeDonut = new AddShapeCmd(d1,model);
-					addShapeDonut.execute(); 
-					
-				}
-				setShapeType(ShapeTypes.NONE);
-				frame.getButtonGroupShapes().clearSelection();
-				break;
-
-			case NONE:
-				setShapeType(ShapeTypes.NONE);
-				break;
-
-			default:
-				setShapeType(ShapeTypes.NONE);
-				break;
-			}
-			
-			frame.repaint();
-		}
-		//selektovanje
-		public void mousePressed(MouseEvent e) {
-			Point clickedPoint = new Point(e.getX(), e.getY());
-			currentShape = getSelected(clickedPoint);
-			if (shape != null && currentShape != null) {
-				if (shape.equals(currentShape)) {
-					currentShape.setSelected(false);
-					shape.setSelected(false);
-					shape = null;
-					frame.repaint();
-					return;
-				}
-			}
-
-			if (currentShape != null) {
-				currentShape.setSelected(true);
-			}
-			if (currentShape == null && shape != null) {
-				shape.setSelected(false);
 				frame.repaint();
 			}
-			frame.repaint();
-			shape = currentShape;
-		}
-	});
-		
-}
-	//modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
-	public void Modify()
-	{
+
+			// selektovanje
+			public void mousePressed(MouseEvent e) {
+				Point clickedPoint = new Point(e.getX(), e.getY());
+				currentShape = getSelected(clickedPoint);
+				if (shape != null && currentShape != null) {
+					if (shape.equals(currentShape)) {
+						currentShape.setSelected(false);
+						shape.setSelected(false);
+						shape = null;
+						frame.repaint();
+						return;
+					}
+				}
+
+				if (currentShape != null) {
+					currentShape.setSelected(true);
+				}
+				if (currentShape == null && shape != null) {
+					shape.setSelected(false);
+					frame.repaint();
+				}
+				frame.repaint();
+				shape = currentShape;
+			}
+		});
+
+	}
+
+	// modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu
+	// funkciju
+	public void Modify() {
 		if (shape != null) {
 			if (shape instanceof Point) {
-				Point modifyPoint = (Point) shape;
+				Point modifyPoint = (Point) shape; //ovo nam je stari point
 				DlgPoint dlgPointM = new DlgPoint(modifyPoint);
 				dlgPointM.setColorPoint(modifyPoint.getBorderColor());
 				dlgPointM.setVisible(true);
+				
 				if (dlgPointM.isOk()) {
-					modifyPoint.setXCoordinate(Integer.parseInt(dlgPointM.getTextFieldXCoordinate().getText()));
-					modifyPoint.setYCoordinate(Integer.parseInt(dlgPointM.getTextFieldYCoordinate().getText()));
-					modifyPoint.setBorderColor(dlgPointM.getColorPoint());
+					Point newStatePoint = new Point(); //znaci ovo je point na kakav updatujemo nas stari point
+					newStatePoint.setXCoordinate(Integer.parseInt(dlgPointM.getTextFieldXCoordinate().getText()));
+					newStatePoint.setYCoordinate(Integer.parseInt(dlgPointM.getTextFieldYCoordinate().getText()));
+					newStatePoint.setBorderColor(dlgPointM.getColorPoint());
+					
+					ModifyPointCmd modifPoint = new ModifyPointCmd(modifyPoint,newStatePoint);
+					modifPoint.execute();
+					frame.repaint();
 					modifyPoint.setSelected(false);
 				}
 			}
@@ -304,7 +314,8 @@ public class DrawingController {
 					modifyCircle.setSelected(false);
 				}
 
-				;}
+				;
+			}
 
 			frame.getButtonGroupShapes().clearSelection();
 
@@ -316,35 +327,29 @@ public class DrawingController {
 		frame.getButtonGroupShapes().clearSelection();
 		shape = null;
 		frame.repaint();
-	
+
 	}
-	
-	//brisanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
-	public void Delete()
-	{
+
+	// brisanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
+	public void Delete() {
 		selectedShape = model.vratiSelektovani();
-		if(selectedShape != null)
-		{
+		if (selectedShape != null) {
 			if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-				RemoveShapeCmd remove = new RemoveShapeCmd(selectedShape,model);
+				RemoveShapeCmd remove = new RemoveShapeCmd(selectedShape, model);
 				remove.execute();
 				frame.repaint();
-			} 
-			else {
+			} else {
 				selectedShape.setSelected(false);
 			}
-			
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Select the shape you want to delete!", "", JOptionPane.ERROR_MESSAGE);
 		}
-		else 
-		{
-		JOptionPane.showMessageDialog(null, "Select the shape you want to delete!", "", JOptionPane.ERROR_MESSAGE);
-		}
-		
+
 		frame.repaint();
 		frame.getButtonGroupShapes().clearSelection();
 	}
-	
-	
+
 	public ShapeTypes getShapeType() {
 		return shapeType;
 	}
@@ -353,7 +358,7 @@ public class DrawingController {
 		this.shapeType = shapeType;
 	}
 
-	//ovo nam treba radi selektovanja
+	// ovo nam treba radi selektovanja
 	public Shape getSelected(Point p) { // vraca selektovan oblik uz prosledjenu tacku klika
 		Shape selected = null;
 		Shape temp;
@@ -367,40 +372,33 @@ public class DrawingController {
 		}
 		return selected;
 	}
-	
-	
-	public void BringToBack()
-	{
+
+	public void BringToBack() {
 		selectedShape = model.vratiSelektovani();
-		BringToBackCmd btb = new BringToBackCmd(selectedShape,model);
+		BringToBackCmd btb = new BringToBackCmd(selectedShape, model);
 		btb.execute();
 		frame.repaint();
 	}
-	
-	public void BringToFront()
-	{	
+
+	public void BringToFront() {
 		selectedShape = model.vratiSelektovani();
-		BringToFrontCmd btf = new BringToFrontCmd(selectedShape,model);
+		BringToFrontCmd btf = new BringToFrontCmd(selectedShape, model);
 		btf.execute();
 		frame.repaint();
 	}
-	
-	public void ToBack()
-	{
+
+	public void ToBack() {
 		selectedShape = model.vratiSelektovani();
 		ToBackCmd tb = new ToBackCmd(selectedShape, model);
 		tb.execute();
 		frame.repaint();
 	}
-	
-	public void ToFront()
-	{
+
+	public void ToFront() {
 		selectedShape = model.vratiSelektovani();
 		ToFrontCmd tf = new ToFrontCmd(selectedShape, model);
 		tf.execute();
 		frame.repaint();
 	}
-	
+
 }
-
-

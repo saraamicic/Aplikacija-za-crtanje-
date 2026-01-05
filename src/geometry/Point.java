@@ -6,6 +6,7 @@ import java.awt.Graphics;
 public class Point extends Shape {
 	private int xCoordinate;
 	private int yCoordinate;
+	private Color borderColor;
 
 	// defaultni konstruktor
 	public Point() {
@@ -62,6 +63,14 @@ public class Point extends Shape {
 
 	public void setYCoordinate(int yCoordinate) {
 		this.yCoordinate = yCoordinate;
+	}
+	
+	public Color getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
 	}
 
 	public double distance(Point secondPoint) {
