@@ -46,14 +46,11 @@ public class DrawingFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 			
 				controller.setShapeType(ShapeTypes.POINT);
-				
 			}
 		});
 		buttonGroupShapes.add(tglbtnPoint);
 		tglbtnPoint.setBounds(32, 23, 70, 26);
 		getContentPane().add(tglbtnPoint);
-		
-
 		
 		
 		JToggleButton tglbtnLine = new JToggleButton("Line");

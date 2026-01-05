@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
+import command.RemoveShapeCmd;
 import command.ToBackCmd;
 import command.ToFrontCmd;
 import drawing.DlgCircle;
@@ -321,24 +322,18 @@ public class DrawingController {
 	//brisanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
 	public void Delete()
 	{
-		if(shape != null)
+		selectedShape = model.vratiSelektovani();
+		if(selectedShape != null)
 		{
-			Shape deleted;
-			Iterator<Shape> it = model.getShapes().iterator();
-			while (it.hasNext()) {
-				deleted = it.next();
-				if (deleted.isSelected()) {
-					if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-						model.remove(deleted);
-						frame.repaint();
-						break;
-					} 
-					else {
-						deleted.setSelected(false);
-						break;
-					}
-				}
+			if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
+				RemoveShapeCmd remove = new RemoveShapeCmd(selectedShape,model);
+				remove.execute();
+				frame.repaint();
+			} 
+			else {
+				selectedShape.setSelected(false);
 			}
+			
 		}
 		else 
 		{

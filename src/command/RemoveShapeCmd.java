@@ -1,17 +1,27 @@
 package command;
 
+import geometry.Shape;
+import mvc.DrawingModel;
+
 public class RemoveShapeCmd implements Command {
 
-	@Override
+	public DrawingModel model;
+	public Shape shape;
+	
+	public RemoveShapeCmd(Shape shape, DrawingModel model)
+	{
+		this.model = model;
+		this.shape = shape;
+	}
+	
+	//uklanja oblik iz liste
 	public void execute() {
-		// TODO Auto-generated method stub
+		model.remove(shape);
 
 	}
 
-	@Override
 	public void unexecute() {
-		// TODO Auto-generated method stub
-
+		model.add(shape);
 	}
 
 }
