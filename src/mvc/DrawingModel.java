@@ -51,4 +51,15 @@ public class DrawingModel {
 		}
 		return null;
 	}
+
+	public ShapeTypes getShapeType() {
+		return shapeType;
+	}
+
+	public void setShapeType(ShapeTypes shapeType) {
+		this.shapeType = shapeType;
+	}
+	
+	
+	
 }

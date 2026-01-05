@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
 import command.ToBackCmd;
@@ -47,11 +48,9 @@ public class DrawingController {
 				dlgPoint.getTextFieldYCoordinate().setEditable(false);
 				dlgPoint.setVisible(true);
 				if (dlgPoint.isOk()) {
-
-					model.add(p);
 					p.setBorderColor(dlgPoint.getColorPoint());
-					
-
+					AddShapeCmd addShapePoint = new AddShapeCmd(p,model);
+					addShapePoint.execute(); //dodajemo tacku u listu
 				}
 				setShapeType(ShapeTypes.NONE);
 				frame.getButtonGroupShapes().clearSelection();
@@ -71,9 +70,8 @@ public class DrawingController {
 					startPoint = null;
 					if (dlgLine.isOk()) {
 						l.setBorderColor(dlgLine.getLineColor());
-						model.add(l);
-						
-
+						AddShapeCmd addShapeLine = new AddShapeCmd(l,model);
+						addShapeLine.execute(); 
 					}
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
@@ -95,10 +93,10 @@ public class DrawingController {
 					int width = Integer.parseInt(dlgRectangle.getTextFieldWidth().getText());
 					int height = Integer.parseInt(dlgRectangle.getTextFieldHeight().getText());
 					Rectangle r1 = new Rectangle(upperLeftPoint, width, height);
-					model.add(r1);
 					r1.setBorderColor(dlgRectangle.getBorderColor());
 					r1.setAreaColor(dlgRectangle.getAreaColor());
-					
+					AddShapeCmd addShapeRectangle = new AddShapeCmd(r1,model);
+					addShapeRectangle.execute(); 
 				}
 				setShapeType(ShapeTypes.NONE);
 				frame.getButtonGroupShapes().clearSelection();
@@ -117,9 +115,10 @@ public class DrawingController {
 				if (dlgCircle.isOk()) {
 					int radius = Integer.parseInt(dlgCircle.getTextFieldRadius().getText());
 					Circle c1 = new Circle(center, radius);
-					model.add(c1);
 					c1.setBorderColor(dlgCircle.getBorderColor());
 					c1.setAreaColor(dlgCircle.getAreaColor());
+					AddShapeCmd addShapeCircle = new AddShapeCmd(c1,model);
+					addShapeCircle.execute(); 
 					
 				}
 				setShapeType(ShapeTypes.NONE);
@@ -140,9 +139,10 @@ public class DrawingController {
 					int radius = Integer.parseInt(dlgDonut.getTextFieldDonutRadius().getText());
 					int innerRadius = Integer.parseInt(dlgDonut.getTextFieldInnerRadius().getText());
 					Donut d1 = new Donut(centerD, radius, innerRadius);
-					model.add(d1);
 					d1.setBorderColor(dlgDonut.getBorderColor());
 					d1.setAreaColor(dlgDonut.getAreaColor());
+					AddShapeCmd addShapeDonut = new AddShapeCmd(d1,model);
+					addShapeDonut.execute(); 
 					
 				}
 				setShapeType(ShapeTypes.NONE);
