@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
 import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
+import command.ModifyLineCmd;
 import command.ModifyPointCmd;
+import command.ModifyRectangleCmd;
 import command.RemoveShapeCmd;
 import command.ToBackCmd;
 import command.ToFrontCmd;
@@ -216,26 +218,28 @@ public class DrawingController {
 			}
 
 			else if (shape instanceof Line) {
-				Line modifyLine = (Line) shape;
+				Line modifyLine = (Line) shape; //ovo nam je stara linija
 				DlgLine dlgLineM = new DlgLine(modifyLine);
 				dlgLineM.setLineColor(modifyLine.getBorderColor());
 				dlgLineM.setVisible(true);
 				if (dlgLineM.isOk()) {
-					modifyLine.getStartPoint()
-							.setXCoordinate(Integer.parseInt(dlgLineM.getTextFieldXStartPoint().getText()));
-					modifyLine.getStartPoint()
-							.setYCoordinate(Integer.parseInt(dlgLineM.getTextFieldYStartPoint().getText()));
-					modifyLine.getEndPoint()
-							.setXCoordinate(Integer.parseInt(dlgLineM.getTextFieldXEndPoint().getText()));
-					modifyLine.getEndPoint()
-							.setYCoordinate(Integer.parseInt(dlgLineM.getTextFieldYEndPoint().getText()));
-					modifyLine.setBorderColor(dlgLineM.getLineColor());
+					//moramo ovako tacke da napravimo zbog nullpointerexceptiona
+					Point stPoint = new Point(Integer.parseInt(dlgLineM.getTextFieldXStartPoint().getText()),Integer.parseInt(dlgLineM.getTextFieldYStartPoint().getText()));
+					Point enPoint = new Point(Integer.parseInt(dlgLineM.getTextFieldXEndPoint().getText()),Integer.parseInt(dlgLineM.getTextFieldYEndPoint().getText()));
+					
+					Line newStateLine = new Line(stPoint,enPoint); //ovakvu liniju zelimo posle updejta, znaci iz dijaloga preuzmemo vrednosti
+					newStateLine.setBorderColor(dlgLineM.getLineColor());
+					
+					ModifyLineCmd modifLine = new ModifyLineCmd(modifyLine,newStateLine);
+					modifLine.execute();
+					frame.repaint();
+
 					modifyLine.setSelected(false);
 				}
 			}
 
 			else if (shape instanceof Rectangle) {
-				Rectangle modifyRect = (Rectangle) shape;
+				Rectangle modifyRect = (Rectangle) shape;//stari pravougaonik
 				DlgRectangle dlgRectM = new DlgRectangle(modifyRect);
 
 				dlgRectM.getTextFieldWidth().setText(Integer.toString(modifyRect.getWidth()));
@@ -246,17 +250,20 @@ public class DrawingController {
 				dlgRectM.setVisible(true);
 
 				if (dlgRectM.isOk()) {
-					modifyRect.getUpperLeftPoint()
-							.setXCoordinate(Integer.parseInt(dlgRectM.getTextFieldXUpperLeft().getText()));
-					modifyRect.getUpperLeftPoint()
-							.setYCoordinate(Integer.parseInt(dlgRectM.getTextFieldYUpperLeft().getText()));
-
-					modifyRect.setWidth(Integer.parseInt(dlgRectM.getTextFieldWidth().getText()));
-					modifyRect.setHeight(Integer.parseInt(dlgRectM.getTextFieldHeight().getText()));
-					modifyRect.setBorderColor(dlgRectM.getBorderColor());
-					modifyRect.setAreaColor(dlgRectM.getAreaColor());
+					
+					Point upLeft = new Point(Integer.parseInt(dlgRectM.getTextFieldXUpperLeft().getText()),Integer.parseInt(dlgRectM.getTextFieldYUpperLeft().getText()));
+					
+					Rectangle newStateRect = new Rectangle();
+					newStateRect.setUpperLeftPoint(upLeft);
+					newStateRect.setHeight(Integer.parseInt(dlgRectM.getTextFieldHeight().getText()));
+					newStateRect.setWidth(Integer.parseInt(dlgRectM.getTextFieldWidth().getText()));
+					newStateRect.setBorderColor(dlgRectM.getBorderColor());
+					newStateRect.setAreaColor(dlgRectM.getAreaColor());
+			
+					ModifyRectangleCmd modifRect = new ModifyRectangleCmd(modifyRect, newStateRect);
+					modifRect.execute();
+					frame.repaint();
 					modifyRect.setSelected(false);
-
 				}
 
 			} else if (shape instanceof Donut) {
