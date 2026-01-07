@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
+import command.ModifyCircleCmd;
+import command.ModifyDonutCmd;
 import command.ModifyLineCmd;
 import command.ModifyPointCmd;
 import command.ModifyRectangleCmd;
@@ -213,7 +215,7 @@ public class DrawingController {
 					ModifyPointCmd modifPoint = new ModifyPointCmd(modifyPoint,newStatePoint);
 					modifPoint.execute();
 					frame.repaint();
-					modifyPoint.setSelected(false);
+					//modifyPoint.setSelected(false);
 				}
 			}
 
@@ -234,7 +236,7 @@ public class DrawingController {
 					modifLine.execute();
 					frame.repaint();
 
-					modifyLine.setSelected(false);
+					//modifyLine.setSelected(false);
 				}
 			}
 
@@ -262,12 +264,13 @@ public class DrawingController {
 			
 					ModifyRectangleCmd modifRect = new ModifyRectangleCmd(modifyRect, newStateRect);
 					modifRect.execute();
+					//modifyRect.setSelected(true);
 					frame.repaint();
-					modifyRect.setSelected(false);
+					//modifyRect.setSelected(false);
 				}
 
 			} else if (shape instanceof Donut) {
-				Donut modifyDonut = (Donut) shape;
+				Donut modifyDonut = (Donut) shape; //stari donut
 				DlgDonut dlgDonutM = new DlgDonut(modifyDonut);
 				dlgDonutM.getTextFieldDonutRadius().setText(Integer.toString(modifyDonut.getRadius()));
 				dlgDonutM.getTextFieldInnerRadius().setText(Integer.toString(modifyDonut.getInnerRadius()));
@@ -275,24 +278,24 @@ public class DrawingController {
 				dlgDonutM.setBorderColor(modifyDonut.getBorderColor());
 				dlgDonutM.setVisible(true);
 				if (dlgDonutM.isOk()) {
-					modifyDonut.getCenter()
-							.setXCoordinate(Integer.parseInt(dlgDonutM.getTextFieldXDonutCenter().getText()));
-					modifyDonut.getCenter()
-							.setYCoordinate(Integer.parseInt(dlgDonutM.getTextFieldYDonutCenter().getText()));
+					
+					Point p1 = new Point(Integer.parseInt(dlgDonutM.getTextFieldXDonutCenter().getText()),Integer.parseInt(dlgDonutM.getTextFieldYDonutCenter().getText()));
+					Donut newStateDonut = new Donut(); //kakav zelimo da bude
+					newStateDonut.setCenter(p1);
 					try {
-						modifyDonut.setRadius(Integer.parseInt(dlgDonutM.getTextFieldDonutRadius().getText()));
-					} catch (NumberFormatException e1) {
+						newStateDonut.setRadius(Integer.parseInt(dlgDonutM.getTextFieldDonutRadius().getText()));
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e.printStackTrace();
 					}
-
-					modifyDonut.setInnerRadius(Integer.parseInt(dlgDonutM.getTextFieldInnerRadius().getText()));
-					modifyDonut.setBorderColor(dlgDonutM.getBorderColor());
-					modifyDonut.setAreaColor(dlgDonutM.getAreaColor());
-					modifyDonut.setSelected(false);
+					newStateDonut.setInnerRadius(Integer.parseInt(dlgDonutM.getTextFieldInnerRadius().getText()));
+					newStateDonut.setBorderColor(dlgDonutM.getBorderColor());
+					newStateDonut.setAreaColor(dlgDonutM.getAreaColor());
+					
+					ModifyDonutCmd modifDonut = new ModifyDonutCmd(modifyDonut, newStateDonut);
+					modifDonut.execute();
+					frame.repaint();
+					modifyDonut.setSelected(true);
 
 				}
 			} else if (shape instanceof Circle) {
@@ -304,24 +307,27 @@ public class DrawingController {
 				dlgCircleM.setVisible(true);
 
 				if (dlgCircleM.isOk()) {
-					modifyCircle.getCenter()
-							.setXCoordinate(Integer.parseInt(dlgCircleM.getTextFieldXCenter().getText()));
-					modifyCircle.getCenter()
-							.setYCoordinate(Integer.parseInt(dlgCircleM.getTextFieldYCenter().getText()));
-					int r = Integer.parseInt(dlgCircleM.getTextFieldRadius().getText());
+					Point p1 = new Point(Integer.parseInt(dlgCircleM.getTextFieldXCenter().getText()),Integer.parseInt(dlgCircleM.getTextFieldYCenter().getText()));
+					Circle newStateCircle = new Circle();
+					newStateCircle.setCenter(p1);
 					try {
-						modifyCircle.setRadius(r);
-					} catch (Exception e1) {
+						newStateCircle.setRadius(Integer.parseInt(dlgCircleM.getTextFieldRadius().getText()));
+					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e.printStackTrace();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-
-					modifyCircle.setBorderColor(dlgCircleM.getBorderColor());
-					modifyCircle.setAreaColor(dlgCircleM.getAreaColor());
+					
+					newStateCircle.setBorderColor(dlgCircleM.getBorderColor());
+					newStateCircle.setAreaColor(dlgCircleM.getAreaColor());
+					ModifyCircleCmd modifCirc = new ModifyCircleCmd (modifyCircle,newStateCircle);
+					modifCirc.execute();
+					frame.repaint();
+					
 					modifyCircle.setSelected(false);
 				}
-
-				;
 			}
 
 			frame.getButtonGroupShapes().clearSelection();
@@ -330,7 +336,6 @@ public class DrawingController {
 			JOptionPane.showMessageDialog(null, "Select the shape you want to modify first!", "",
 					JOptionPane.ERROR_MESSAGE);
 		}
-
 		frame.getButtonGroupShapes().clearSelection();
 		shape = null;
 		frame.repaint();
