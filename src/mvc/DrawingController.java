@@ -8,12 +8,14 @@ import geometry.Rectangle;
 import geometry.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
 import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
+import command.Command;
 import command.ModifyCircleCmd;
 import command.ModifyDonutCmd;
 import command.ModifyLineCmd;
@@ -38,6 +40,8 @@ public class DrawingController {
 	private Point startPoint = null;
 	private Shape shape; 
 	public Shape selectedShape;
+	Stack <Command> undoStack = new Stack<Command>(); //znaci cuva sve sto implementira interfejs command
+	Stack <Command> redoStack = new Stack<Command>();
 
 	public DrawingController(DrawingModel model, DrawingFrame frame) {
 		this.model = model;
@@ -57,6 +61,8 @@ public class DrawingController {
 						p.setBorderColor(dlgPoint.getColorPoint());
 						AddShapeCmd addShapePoint = new AddShapeCmd(p, model);
 						addShapePoint.execute(); // dodajemo tacku u listu
+						undoStack.add(addShapePoint);
+						redoStack.clear();
 					}
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
@@ -78,6 +84,8 @@ public class DrawingController {
 							l.setBorderColor(dlgLine.getLineColor());
 							AddShapeCmd addShapeLine = new AddShapeCmd(l, model);
 							addShapeLine.execute();
+							undoStack.add(addShapeLine);
+							redoStack.clear();
 						}
 						setShapeType(ShapeTypes.NONE);
 						frame.getButtonGroupShapes().clearSelection();
@@ -103,6 +111,8 @@ public class DrawingController {
 						r1.setAreaColor(dlgRectangle.getAreaColor());
 						AddShapeCmd addShapeRectangle = new AddShapeCmd(r1, model);
 						addShapeRectangle.execute();
+						undoStack.add(addShapeRectangle);
+						redoStack.clear();
 					}
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
@@ -125,6 +135,8 @@ public class DrawingController {
 						c1.setAreaColor(dlgCircle.getAreaColor());
 						AddShapeCmd addShapeCircle = new AddShapeCmd(c1, model);
 						addShapeCircle.execute();
+						undoStack.add(addShapeCircle);
+						redoStack.clear();
 
 					}
 					setShapeType(ShapeTypes.NONE);
@@ -149,6 +161,8 @@ public class DrawingController {
 						d1.setAreaColor(dlgDonut.getAreaColor());
 						AddShapeCmd addShapeDonut = new AddShapeCmd(d1, model);
 						addShapeDonut.execute();
+						undoStack.add(addShapeDonut);
+						redoStack.clear();
 
 					}
 					setShapeType(ShapeTypes.NONE);
@@ -166,7 +180,7 @@ public class DrawingController {
 
 				frame.repaint();
 			}
-
+			//selektovanje
 			public void mousePressed(MouseEvent e) {
 			    Point clickedPoint = new Point(e.getX(), e.getY());
 			    Shape clickedShape = getSelected(clickedPoint);
@@ -393,5 +407,23 @@ public class DrawingController {
 		tf.execute();
 		frame.repaint();
 	}
+	
+	public void Undo() { //pozivam u frejmu
+        if (!undoStack.isEmpty()) {
+            Command cmd = undoStack.pop();
+            cmd.unexecute();
+            redoStack.push(cmd);
+            frame.repaint();
+        }
+    }
+
+    public void Redo() { //pozivam u frejmu
+        if (!redoStack.isEmpty()) {
+            Command cmd = redoStack.pop();
+            cmd.execute();
+            undoStack.push(cmd);
+            frame.repaint();
+        }
+    }
 
 }

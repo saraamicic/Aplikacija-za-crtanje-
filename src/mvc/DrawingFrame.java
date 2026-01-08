@@ -125,10 +125,22 @@ public class DrawingFrame extends JFrame {
 		getContentPane().add(tglbtnDelete);
 		
 		JToggleButton tglbtnUndo = new JToggleButton("Undo");
+		tglbtnUndo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.Undo();
+			}
+		});
 		tglbtnUndo.setBounds(723, 23, 70, 26);
 		getContentPane().add(tglbtnUndo);
 		
 		JToggleButton tglbtnRedo = new JToggleButton("Redo");
+		tglbtnRedo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.Redo();
+			}
+		});
 		tglbtnRedo.setBounds(803, 23, 76, 26);
 		getContentPane().add(tglbtnRedo);
 		
