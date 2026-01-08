@@ -39,6 +39,7 @@ public class ModifyCircleCmd implements Command {
 		}
 		circle.setBorderColor(newState.getBorderColor());
 		circle.setAreaColor(newState.getAreaColor());
+		
 	}
 
 	@Override

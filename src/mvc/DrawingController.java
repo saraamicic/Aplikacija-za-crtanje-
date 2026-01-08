@@ -8,7 +8,6 @@ import geometry.Rectangle;
 import geometry.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -21,6 +20,7 @@ import command.ModifyLineCmd;
 import command.ModifyPointCmd;
 import command.ModifyRectangleCmd;
 import command.RemoveShapeCmd;
+import command.SelectShapeCmd;
 import command.ToBackCmd;
 import command.ToFrontCmd;
 import drawing.DlgCircle;
@@ -36,8 +36,7 @@ public class DrawingController {
 	DrawingFrame frame;
 	public ShapeTypes shapeType = ShapeTypes.NONE;
 	private Point startPoint = null;
-	private Shape shape = null;
-	private Shape currentShape;
+	private Shape shape; 
 	public Shape selectedShape;
 
 	public DrawingController(DrawingModel model, DrawingFrame frame) {
@@ -168,36 +167,33 @@ public class DrawingController {
 				frame.repaint();
 			}
 
-			// selektovanje
 			public void mousePressed(MouseEvent e) {
-				Point clickedPoint = new Point(e.getX(), e.getY());
-				currentShape = getSelected(clickedPoint);
-				if (shape != null && currentShape != null) {
-					if (shape.equals(currentShape)) {
-						currentShape.setSelected(false);
-						shape.setSelected(false);
-						shape = null;
-						frame.repaint();
-						return;
-					}
-				}
+			    Point clickedPoint = new Point(e.getX(), e.getY());
+			    Shape clickedShape = getSelected(clickedPoint);
 
-				if (currentShape != null) {
-					currentShape.setSelected(true);
-				}
-				if (currentShape == null && shape != null) {
-					shape.setSelected(false);
-					frame.repaint();
-				}
-				frame.repaint();
-				shape = currentShape;
+			    //shape nam je oblik pre klika, tj prethodni oblik
+			    SelectShapeCmd select = new SelectShapeCmd(clickedShape, shape);
+			    select.execute();
+			    shape = model.vratiSelektovani();
+			    
+			    frame.repaint();
 			}
 		});
 
+	}	
+	
+	//ovo nam treba radi selektovanja
+	public Shape getSelected(Point p) {
+	    for (int i = model.getShapes().size() - 1; i >= 0; i--) { //idemo od poslednjeg
+	        Shape s = model.get(i);
+	        if (s.contains(p.getXCoordinate(), p.getYCoordinate())) {
+	            return s;
+	        }
+	    }
+	   return null;
 	}
 
-	// modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu
-	// funkciju
+	// modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
 	public void Modify() {
 		if (shape != null) {
 			if (shape instanceof Point) {
@@ -368,21 +364,6 @@ public class DrawingController {
 
 	public void setShapeType(ShapeTypes shapeType) {
 		this.shapeType = shapeType;
-	}
-
-	// ovo nam treba radi selektovanja
-	public Shape getSelected(Point p) { // vraca selektovan oblik uz prosledjenu tacku klika
-		Shape selected = null;
-		Shape temp;
-		Iterator<Shape> it = model.getShapes().iterator();
-		while (it.hasNext()) {
-			temp = it.next();
-			if (temp.contains(p.getXCoordinate(), p.getYCoordinate())) {
-				selected = temp;
-			}
-			temp.setSelected(false);
-		}
-		return selected;
 	}
 
 	public void BringToBack() {
