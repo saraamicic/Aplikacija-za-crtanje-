@@ -2,6 +2,7 @@ package command;
 
 import geometry.Shape;
 import mvc.DrawingModel;
+import mvc.DrawingModel.ShapeTypes;
 
 public class AddShapeCmd implements Command {
 
@@ -12,6 +13,7 @@ public class AddShapeCmd implements Command {
 	{
 		this.shape = shape;
 		this.model = model;
+		
 	}
 	
 	@Override
@@ -30,7 +32,15 @@ public class AddShapeCmd implements Command {
 	
 	public String toString()
 	{
-		return "ADD " + shape.toString() + " Color: " + shape.getBorderColor().toString();
+		//if(model.getShapeType() == ShapeTypes.LINE || model.getShapeType() == ShapeTypes.POINT)
+		//{
+			return "ADD " + shape.toString() + " Color: " + shape.getBorderColor().toString();
+		//}
+		//else
+		//{
+		//	return "ADD " + shape.toString() + " Border color: " + shape.getBorderColor().toString() + " Area color: " + shape.getAreaColor().toString();
+		//	
+		//}
 	}
 
 }

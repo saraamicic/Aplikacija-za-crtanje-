@@ -37,9 +37,12 @@ public class BringToBackCmd implements Command {
 	public void unexecute() {
 			model.getShapes().remove(0);
 			model.getShapes().add(originalIndex, selectedShape);
-		
-		
-
 	}
 
+	public String toString()
+	{
+		return "Bring To Back shape: " + selectedShape.toString();
+	}
+	
 }
+

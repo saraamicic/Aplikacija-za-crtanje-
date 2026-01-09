@@ -33,5 +33,10 @@ public class ModifyPointCmd implements Command {
 		point.setBorderColor(original.getBorderColor());
 		
 	}
+	
+	public String toString()
+	{
+		return "MODIFY new values: " + newState.toString() + " Color: " + newState.getBorderColor().toString();
+	}
 
 }

@@ -53,5 +53,10 @@ public class ToFrontCmd implements Command {
 		}
 
 	}
+	
+	public String toString()
+	{
+		return "To Front shape:" + selectedShape.toString();
+	}
 
 }

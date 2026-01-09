@@ -42,5 +42,10 @@ public class BringToFrontCmd implements Command {
 		model.getShapes().add(originalIndex, selectedShape);
 
 	}
+	
+	public String toString()
+	{
+		return "Bring To Front shape:" + selectedShape.toString();
+	}
 
 }

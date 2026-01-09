@@ -56,5 +56,11 @@ public class ModifyCircleCmd implements Command {
 		circle.setBorderColor(oldState.getBorderColor());
 		circle.setAreaColor(oldState.getAreaColor());
 	}
+	
+	public String toString()
+	{
+		return "MODIFY new values: " + newState.toString() + " Border color: " + newState.getBorderColor().toString() 
+				+ " Area color: " + newState.getAreaColor().toString();	
+	}
 
 }

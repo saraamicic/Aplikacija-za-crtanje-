@@ -40,4 +40,10 @@ public class SelectShapeCmd implements Command {
 	        }
 	}
 
+	public String toString()
+	{
+			return "SELECTED "  + clickedShape.toString() + " Color: " + clickedShape.getBorderColor().toString();
+	
+		
+	}
 }

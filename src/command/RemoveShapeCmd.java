@@ -23,5 +23,10 @@ public class RemoveShapeCmd implements Command {
 	public void unexecute() {
 		model.add(shape);
 	}
+	
+	public String toString()
+	{
+		return "DELETE " + shape.toString() + " Color: " + shape.getBorderColor().toString();
+	}
 
 }

@@ -59,5 +59,10 @@ public class ModifyDonutCmd implements Command {
 		donut.setBorderColor(oldState.getBorderColor());
 		donut.setAreaColor(oldState.getAreaColor());
 	}
+	public String toString()
+	{
+		return "MODIFY new values: " + newState.toString() + " Border color: " + newState.getBorderColor().toString() 
+				+ " Area color: " + newState.getAreaColor().toString();	
+	}
 
 }

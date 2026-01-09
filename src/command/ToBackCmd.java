@@ -55,4 +55,8 @@ public class ToBackCmd implements Command {
 		}
 	}
 
+	public String toString()
+	{
+		return "To Back shape:" + selectedShape.toString();
+	}
 }
