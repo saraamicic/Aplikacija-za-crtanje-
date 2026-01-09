@@ -188,6 +188,8 @@ public class DrawingController {
 			    //shape nam je oblik pre klika, tj prethodni oblik
 			    SelectShapeCmd select = new SelectShapeCmd(clickedShape, shape);
 			    select.execute();
+			    undoStack.push(select);
+			    redoStack.clear();
 			    shape = model.vratiSelektovani();
 			    
 			    frame.repaint();
@@ -224,8 +226,10 @@ public class DrawingController {
 					
 					ModifyPointCmd modifPoint = new ModifyPointCmd(modifyPoint,newStatePoint);
 					modifPoint.execute();
+					undoStack.push(modifPoint);
+					redoStack.clear();
 					frame.repaint();
-					//modifyPoint.setSelected(false);
+					modifyPoint.setSelected(false);
 				}
 			}
 
@@ -244,9 +248,11 @@ public class DrawingController {
 					
 					ModifyLineCmd modifLine = new ModifyLineCmd(modifyLine,newStateLine);
 					modifLine.execute();
+					undoStack.push(modifLine);
+					redoStack.clear();
 					frame.repaint();
 
-					//modifyLine.setSelected(false);
+					modifyLine.setSelected(false);
 				}
 			}
 
@@ -274,9 +280,11 @@ public class DrawingController {
 			
 					ModifyRectangleCmd modifRect = new ModifyRectangleCmd(modifyRect, newStateRect);
 					modifRect.execute();
-					//modifyRect.setSelected(true);
+					undoStack.push(modifRect);
+					redoStack.clear();
+					
 					frame.repaint();
-					//modifyRect.setSelected(false);
+					modifyRect.setSelected(false);
 				}
 
 			} else if (shape instanceof Donut) {
@@ -304,8 +312,10 @@ public class DrawingController {
 					
 					ModifyDonutCmd modifDonut = new ModifyDonutCmd(modifyDonut, newStateDonut);
 					modifDonut.execute();
+					undoStack.push(modifDonut);
+					redoStack.clear();
 					frame.repaint();
-					modifyDonut.setSelected(true);
+					modifyDonut.setSelected(false);
 
 				}
 			} else if (shape instanceof Circle) {
@@ -334,6 +344,8 @@ public class DrawingController {
 					newStateCircle.setAreaColor(dlgCircleM.getAreaColor());
 					ModifyCircleCmd modifCirc = new ModifyCircleCmd (modifyCircle,newStateCircle);
 					modifCirc.execute();
+					undoStack.push(modifCirc);
+					redoStack.clear();
 					frame.repaint();
 					
 					modifyCircle.setSelected(false);
@@ -359,6 +371,8 @@ public class DrawingController {
 			if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
 				RemoveShapeCmd remove = new RemoveShapeCmd(selectedShape, model);
 				remove.execute();
+				undoStack.push(remove);
+				redoStack.clear();
 				frame.repaint();
 			} else {
 				selectedShape.setSelected(false);
@@ -384,6 +398,8 @@ public class DrawingController {
 		selectedShape = model.vratiSelektovani();
 		BringToBackCmd btb = new BringToBackCmd(selectedShape, model);
 		btb.execute();
+		undoStack.push(btb);
+		redoStack.clear();
 		frame.repaint();
 	}
 
@@ -391,6 +407,8 @@ public class DrawingController {
 		selectedShape = model.vratiSelektovani();
 		BringToFrontCmd btf = new BringToFrontCmd(selectedShape, model);
 		btf.execute();
+		undoStack.push(btf);
+		redoStack.clear();
 		frame.repaint();
 	}
 
@@ -398,6 +416,8 @@ public class DrawingController {
 		selectedShape = model.vratiSelektovani();
 		ToBackCmd tb = new ToBackCmd(selectedShape, model);
 		tb.execute();
+		undoStack.push(tb);
+		redoStack.clear();
 		frame.repaint();
 	}
 
@@ -405,6 +425,8 @@ public class DrawingController {
 		selectedShape = model.vratiSelektovani();
 		ToFrontCmd tf = new ToFrontCmd(selectedShape, model);
 		tf.execute();
+		undoStack.push(tf);
+		redoStack.clear();
 		frame.repaint();
 	}
 	

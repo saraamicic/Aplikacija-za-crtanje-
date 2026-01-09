@@ -2,13 +2,6 @@ package mvc;
 
 import javax.swing.JFrame;
 
-/*
- * Frame - dugmici, geteri i seteri
- * Model - uradjeno 
- * View - uradjeno
- * Controller - logika - brisanje, modifikovanje, ono za dijaloge
- * 
- * */
 
 public class Application {
 

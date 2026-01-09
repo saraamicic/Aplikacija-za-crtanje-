@@ -129,6 +129,7 @@ public class DrawingFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.Undo();
+				tglbtnUndo.setSelected(false);
 			}
 		});
 		tglbtnUndo.setBounds(723, 23, 70, 26);
@@ -139,6 +140,8 @@ public class DrawingFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.Redo();
+				tglbtnRedo.setSelected(false);
+				
 			}
 		});
 		tglbtnRedo.setBounds(803, 23, 76, 26);
@@ -159,6 +162,7 @@ public class DrawingFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.ToBack();
+				tglbtnToBack.setSelected(false);
 			}
 		});
 		tglbtnToBack.setBounds(712, 528, 96, 23);
@@ -170,6 +174,7 @@ public class DrawingFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.BringToBack();
+				tglbtnBringToBack.setSelected(false);
 			}
 		});
 		tglbtnBringToBack.setBounds(818, 528, 127, 23);
@@ -180,6 +185,7 @@ public class DrawingFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.BringToFront();
+				tglbtnBringToFront.setSelected(false);
 			}
 		});
 		tglbtnBringToFront.setBounds(955, 528, 114, 23);
