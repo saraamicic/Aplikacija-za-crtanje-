@@ -43,7 +43,7 @@ public class Donut extends Circle {
 	@Override
 	public String toString() {
 		// Center: (x,y), radius = r, innerRadius = ir
-		return super.toString() + ", innerRadius =" + innerRadius;
+		return "DONUT " + super.toString() + ", innerRadius =" + innerRadius;
 	}
 
 	@Override
@@ -84,6 +84,8 @@ public class Donut extends Circle {
 		g.drawOval(getCenter().getXCoordinate() - innerRadius, getCenter().getYCoordinate() - innerRadius,
 				2 * innerRadius, 2 * innerRadius);
 		g.setColor(new Color(255,255,255));
+		
+		
 		g.fillOval(getCenter().getXCoordinate() - innerRadius, getCenter().getYCoordinate() - innerRadius,
 				2 * innerRadius, 2 * innerRadius);
 

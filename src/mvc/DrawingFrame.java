@@ -9,18 +9,22 @@ import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 import drawing.FrmDrawing.ShapeTypes;
 import javax.swing.ButtonGroup;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class DrawingFrame extends JFrame {
 	DrawingController controller;
 	DrawingView view = new DrawingView();
 	private final ButtonGroup buttonGroupShapes = new ButtonGroup();
+	JTextArea textAreaLog;
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
 		setTitle("Sara crta ovde");
 		getContentPane().setSize(200, 200);
 		getContentPane().setLayout(null);
-		view.setBounds(20, 69, 1049, 449);
+		view.setBounds(287, 69, 792, 449);
 		view.setBackground(new Color(255, 255, 255));
 		getContentPane().add(view);
 		
@@ -174,9 +178,20 @@ public class DrawingFrame extends JFrame {
 		});
 		tglbtnBringToFront.setBounds(955, 528, 114, 23);
 		getContentPane().add(tglbtnBringToFront);
+		
+		textAreaLog = new JTextArea();
+		textAreaLog.setBackground(new Color(235, 235, 235));
+		textAreaLog.setBounds(22, 69, 240, 449);
+		
 		setVisible(true);
+		textAreaLog.setEnabled(false);
+		textAreaLog.setDisabledTextColor(Color.black);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(22, 69, 240, 449);
+		getContentPane().add(scrollPane);
 		
+		scrollPane.setViewportView(textAreaLog);
 	}
 	
 	
@@ -191,7 +206,8 @@ public class DrawingFrame extends JFrame {
 	public void SetController(DrawingController controller) {
 		this.controller=controller;
 	}
-
-
-
+	public JTextArea getTextArea()
+	{
+		return textAreaLog;
+	}
 }

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import command.AddShapeCmd;
 import command.BringToBackCmd;
@@ -42,10 +43,12 @@ public class DrawingController {
 	public Shape selectedShape;
 	Stack <Command> undoStack = new Stack<Command>(); //znaci cuva sve sto implementira interfejs command
 	Stack <Command> redoStack = new Stack<Command>();
+	JTextArea log;
 
 	public DrawingController(DrawingModel model, DrawingFrame frame) {
 		this.model = model;
 		this.frame = frame;
+		log = frame.getTextArea();
 		frame.getView().addMouseListener(new MouseAdapter() {
 			@Override
 			// crtanje
@@ -59,8 +62,10 @@ public class DrawingController {
 					dlgPoint.setVisible(true);
 					if (dlgPoint.isOk()) {
 						p.setBorderColor(dlgPoint.getColorPoint());
+						
 						AddShapeCmd addShapePoint = new AddShapeCmd(p, model);
 						addShapePoint.execute(); // dodajemo tacku u listu
+						log.append(addShapePoint.toString()+ "\n");
 						undoStack.add(addShapePoint);
 						redoStack.clear();
 					}
@@ -84,6 +89,7 @@ public class DrawingController {
 							l.setBorderColor(dlgLine.getLineColor());
 							AddShapeCmd addShapeLine = new AddShapeCmd(l, model);
 							addShapeLine.execute();
+							log.append(addShapeLine.toString()+ "\n");
 							undoStack.add(addShapeLine);
 							redoStack.clear();
 						}
@@ -111,6 +117,7 @@ public class DrawingController {
 						r1.setAreaColor(dlgRectangle.getAreaColor());
 						AddShapeCmd addShapeRectangle = new AddShapeCmd(r1, model);
 						addShapeRectangle.execute();
+						log.append(addShapeRectangle.toString()+ "\n" );
 						undoStack.add(addShapeRectangle);
 						redoStack.clear();
 					}
@@ -135,6 +142,7 @@ public class DrawingController {
 						c1.setAreaColor(dlgCircle.getAreaColor());
 						AddShapeCmd addShapeCircle = new AddShapeCmd(c1, model);
 						addShapeCircle.execute();
+						log.append(addShapeCircle.toString() + "\n");
 						undoStack.add(addShapeCircle);
 						redoStack.clear();
 
@@ -161,6 +169,7 @@ public class DrawingController {
 						d1.setAreaColor(dlgDonut.getAreaColor());
 						AddShapeCmd addShapeDonut = new AddShapeCmd(d1, model);
 						addShapeDonut.execute();
+						log.append(addShapeDonut.toString() + "\n");
 						undoStack.add(addShapeDonut);
 						redoStack.clear();
 
@@ -229,7 +238,7 @@ public class DrawingController {
 					undoStack.push(modifPoint);
 					redoStack.clear();
 					frame.repaint();
-					modifyPoint.setSelected(false);
+					
 				}
 			}
 
@@ -252,7 +261,7 @@ public class DrawingController {
 					redoStack.clear();
 					frame.repaint();
 
-					modifyLine.setSelected(false);
+					
 				}
 			}
 
@@ -284,7 +293,7 @@ public class DrawingController {
 					redoStack.clear();
 					
 					frame.repaint();
-					modifyRect.setSelected(false);
+					
 				}
 
 			} else if (shape instanceof Donut) {
@@ -315,7 +324,7 @@ public class DrawingController {
 					undoStack.push(modifDonut);
 					redoStack.clear();
 					frame.repaint();
-					modifyDonut.setSelected(false);
+					
 
 				}
 			} else if (shape instanceof Circle) {
@@ -348,7 +357,6 @@ public class DrawingController {
 					redoStack.clear();
 					frame.repaint();
 					
-					modifyCircle.setSelected(false);
 				}
 			}
 
@@ -359,7 +367,6 @@ public class DrawingController {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		frame.getButtonGroupShapes().clearSelection();
-		shape = null;
 		frame.repaint();
 
 	}

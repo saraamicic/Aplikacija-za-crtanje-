@@ -74,7 +74,7 @@ public class Circle extends Shape {
 	}
 
 	public String toString() {
-		return "Center: " + center + ", radius=" + radius;
+		return "CIRCLE Center: " + center + ", radius=" + radius;
 	}
 
 	public boolean equals(Object obj) {

@@ -27,5 +27,10 @@ public class AddShapeCmd implements Command {
 		model.remove(shape);
 
 	}
+	
+	public String toString()
+	{
+		return "ADD " + shape.toString() + " Color: " + shape.getBorderColor().toString();
+	}
 
 }

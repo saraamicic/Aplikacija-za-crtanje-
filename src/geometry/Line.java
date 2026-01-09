@@ -70,7 +70,7 @@ public class Line extends Shape {
 	}
 
 	public String toString() {
-		return startPoint + "-->" + endPoint;
+		return "LINE " + startPoint + "-->" + endPoint;
 	}
 
 	public boolean equals(Object obj) {
