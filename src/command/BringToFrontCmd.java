@@ -8,6 +8,7 @@ import mvc.DrawingModel;
 public class BringToFrontCmd implements Command {
 	public DrawingModel model;
 	public int lastIndex;
+	public int originalIndex;
 	public Shape selectedShape;
 	
 	public BringToFrontCmd (Shape selectedShape, DrawingModel model)
@@ -20,6 +21,7 @@ public class BringToFrontCmd implements Command {
 	@Override
 	//trebamo oblik da premestimo na kraj liste 
 	public void execute() {
+		originalIndex = model.getShapes().indexOf(selectedShape);
 		lastIndex = model.getShapes().size() - 1; //da znamo koji je indeks poslednjeg elementa
 		if(selectedShape != null)
 		{
@@ -36,6 +38,8 @@ public class BringToFrontCmd implements Command {
 
 	@Override
 	public void unexecute() {
+		model.remove(selectedShape);
+		model.getShapes().add(originalIndex, selectedShape);
 
 	}
 
