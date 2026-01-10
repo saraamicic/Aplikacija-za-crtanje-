@@ -14,7 +14,7 @@ import geometry.Point;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
-import javax.swing.JTextArea;
+
 
 public class DlgPoint extends JDialog {
 
@@ -31,7 +31,7 @@ public class DlgPoint extends JDialog {
 	private JTextField textFieldXCoordinate;
 	private JTextField textFieldYCoordinate;
 	private boolean ok;
-	private Point p;
+	
 	private Color colorPoint;
 	
 

@@ -2,6 +2,9 @@ package geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 
 public class Donut extends Circle {
 //iz klase donut je vidljivo sve iz circle (radius, center..)
@@ -79,41 +82,38 @@ public class Donut extends Circle {
 
 	public void draw(Graphics g) {
 
-		super.draw(g);
-		g.setColor(borderColor);
-		g.drawOval(getCenter().getXCoordinate() - innerRadius, getCenter().getYCoordinate() - innerRadius,
-				2 * innerRadius, 2 * innerRadius);
-		g.setColor(new Color(255,255,255));
-		
-		
-		g.fillOval(getCenter().getXCoordinate() - innerRadius, getCenter().getYCoordinate() - innerRadius,
-				2 * innerRadius, 2 * innerRadius);
+		Graphics2D g2d = (Graphics2D) g;
+		// veci krug (crta iz gornjeg levog ugla umesto centra pa oduzmemo od x i y radius
+	    Ellipse2D outerCircle = new Ellipse2D.Double(getCenter().getXCoordinate() - getRadius(),
+	            getCenter().getYCoordinate() - getRadius(), 2 * getRadius(), 2 * getRadius()
+	    );
 
-		if (this.isSelected()) {
-			g.setColor(Color.BLUE);
-			g.drawRect(getCenter().getXCoordinate() - 2 - innerRadius, getCenter().getYCoordinate() - 2, 4, 4); // za
-																												// kvadratic
-																												// levo
-																												// od
-																												// centra
-			g.drawRect(getCenter().getXCoordinate() - 2 + innerRadius, getCenter().getYCoordinate() - 2, 4, 4); // za
-																												// kvadratic
-																												// desno
-																												// od
-																												// centra
-			g.drawRect(getCenter().getXCoordinate() - 2, getCenter().getYCoordinate() - 2 - innerRadius, 4, 4); // za
-																												// kvadratic
-																												// gore
-																												// od
-																												// centra
-			g.drawRect(getCenter().getXCoordinate() - 2, getCenter().getYCoordinate() - 2 + innerRadius, 4, 4); // za
-																												// kvadratic
-																												// dole
-																												// od
-																												// centra
-		}
-		g.setColor(Color.BLACK);
+	    // manji krug 
+	    Ellipse2D innerCircle = new Ellipse2D.Double(getCenter().getXCoordinate() - innerRadius,
+	            getCenter().getYCoordinate() - innerRadius, 2 * innerRadius, 2 * innerRadius
+	    );
 
+	    // od povrsine velikog kruga ja oduzmem taj manji, pa mi ostane samo krofna
+	    Area donutArea = new Area(outerCircle);
+	    donutArea.subtract(new Area(innerCircle));
+	    
+	    g2d.setColor(getAreaColor());
+	    g2d.fill(donutArea);
+	    g2d.setColor(getBorderColor());
+	    g2d.draw(donutArea);
+
+	    if (isSelected()) {
+	        g2d.setColor(Color.BLUE);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2 - innerRadius, getCenter().getYCoordinate() - 2, 4, 4);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2 + innerRadius, getCenter().getYCoordinate() - 2, 4, 4);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2, getCenter().getYCoordinate() - 2 - innerRadius, 4, 4);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2, getCenter().getYCoordinate() - 2 + innerRadius, 4, 4);
+	        
+	        g2d.drawRect(getCenter().getXCoordinate() - 2 - getRadius(), getCenter().getYCoordinate() - 2, 4, 4);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2 + getRadius(), getCenter().getYCoordinate() - 2, 4, 4);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2, getCenter().getYCoordinate() - 2 - getRadius(), 4, 4);
+	        g2d.drawRect(getCenter().getXCoordinate() - 2, getCenter().getYCoordinate() - 2 + getRadius(), 4, 4);
+	    }
 	}
 
 	public int compareTo(Object obj) {
