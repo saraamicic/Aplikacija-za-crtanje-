@@ -59,10 +59,10 @@ public class DrawingController {
 					DlgPoint dlgPoint = new DlgPoint(p);
 					dlgPoint.getTextFieldXCoordinate().setEditable(false);
 					dlgPoint.getTextFieldYCoordinate().setEditable(false);
+					dlgPoint.setColorPoint(frame.defaultBorderColor);//default boja
 					dlgPoint.setVisible(true);
 					if (dlgPoint.isOk()) {
 						p.setBorderColor(dlgPoint.getColorPoint());
-						
 						AddShapeCmd addShapePoint = new AddShapeCmd(p, model);
 						addShapePoint.execute(); // dodajemo tacku u listu
 						log.append(addShapePoint.toString()+ "\n");
@@ -83,6 +83,7 @@ public class DrawingController {
 						dlgLine.getTextFieldYStartPoint().setEditable(false);
 						dlgLine.getTextFieldXEndPoint().setEditable(false);
 						dlgLine.getTextFieldYEndPoint().setEditable(false);
+						dlgLine.setLineColor(frame.defaultBorderColor);
 						dlgLine.setVisible(true);
 						startPoint = null;
 						if (dlgLine.isOk()) {
@@ -107,6 +108,8 @@ public class DrawingController {
 
 					dlgRectangle.getTextFieldXUpperLeft().setEditable(false);
 					dlgRectangle.getTextFieldYUpperLeft().setEditable(false);
+					dlgRectangle.setBorderColor(frame.getDefaultBorderColor());
+					dlgRectangle.setAreaColor(frame.getDefaultAreaColor());
 					dlgRectangle.setVisible(true);
 
 					if (dlgRectangle.isOk()) {
@@ -133,6 +136,8 @@ public class DrawingController {
 
 					dlgCircle.getTextFieldXCenter().setEditable(false);
 					dlgCircle.getTextFieldYCenter().setEditable(false);
+					dlgCircle.setBorderColor(frame.getDefaultBorderColor());
+					dlgCircle.setAreaColor(frame.getDefaultAreaColor());
 					dlgCircle.setVisible(true);
 
 					if (dlgCircle.isOk()) {
@@ -160,6 +165,8 @@ public class DrawingController {
 					dlgDonut.getTextFieldYDonutCenter().setText(Integer.toString(d.getCenter().getYCoordinate()));
 					dlgDonut.getTextFieldXDonutCenter().setEditable(false);
 					dlgDonut.getTextFieldYDonutCenter().setEditable(false);
+					dlgDonut.setBorderColor(frame.getDefaultBorderColor());
+					dlgDonut.setAreaColor(frame.getDefaultAreaColor());
 					dlgDonut.setVisible(true);
 					if (dlgDonut.isOk()) {
 						int radius = Integer.parseInt(dlgDonut.getTextFieldDonutRadius().getText());

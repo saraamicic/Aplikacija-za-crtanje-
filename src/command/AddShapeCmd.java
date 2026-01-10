@@ -2,7 +2,7 @@ package command;
 
 import geometry.Shape;
 import mvc.DrawingModel;
-import mvc.DrawingModel.ShapeTypes;
+
 
 public class AddShapeCmd implements Command {
 

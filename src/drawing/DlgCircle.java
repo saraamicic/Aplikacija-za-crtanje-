@@ -33,7 +33,6 @@ public class DlgCircle extends JDialog {
 	
 	private Color borderColor;
 	private Color areaColor;
-
 	/**
 	 * Launch the application.
 	 */

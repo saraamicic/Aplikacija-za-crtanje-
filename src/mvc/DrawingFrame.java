@@ -10,23 +10,34 @@ import javax.swing.JToggleButton;
 import drawing.FrmDrawing.ShapeTypes;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class DrawingFrame extends JFrame {
 	DrawingController controller;
 	DrawingView view = new DrawingView();
 	private final ButtonGroup buttonGroupShapes = new ButtonGroup();
 	JTextArea textAreaLog;
+	Color defaultBorderColor;
+	Color defaultAreaColor;
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
 		setTitle("Sara crta ovde");
 		getContentPane().setSize(200, 200);
 		getContentPane().setLayout(null);
-		view.setBounds(287, 69, 792, 449);
+		view.setBounds(409, 69, 734, 449);
 		view.setBackground(new Color(255, 255, 255));
 		getContentPane().add(view);
+		defaultBorderColor = Color.BLACK;
+		defaultAreaColor = Color.WHITE;
 		
 		JToggleButton tglbtnPoint = new JToggleButton("Point");
 		tglbtnPoint.addMouseListener(new MouseAdapter() {
@@ -120,7 +131,7 @@ public class DrawingFrame extends JFrame {
 				tglbtnUndo.setSelected(false);
 			}
 		});
-		tglbtnUndo.setBounds(723, 23, 70, 26);
+		tglbtnUndo.setBounds(409, 528, 70, 26);
 		getContentPane().add(tglbtnUndo);
 		
 		JToggleButton tglbtnRedo = new JToggleButton("Redo");
@@ -132,7 +143,7 @@ public class DrawingFrame extends JFrame {
 				
 			}
 		});
-		tglbtnRedo.setBounds(803, 23, 76, 26);
+		tglbtnRedo.setBounds(489, 528, 76, 26);
 		getContentPane().add(tglbtnRedo);
 		
 		JToggleButton tglbtnToFront = new JToggleButton("To Front");
@@ -142,7 +153,7 @@ public class DrawingFrame extends JFrame {
 				controller.ToFront();
 			}
 		});
-		tglbtnToFront.setBounds(606, 528, 96, 23);
+		tglbtnToFront.setBounds(661, 530, 96, 23);
 		getContentPane().add(tglbtnToFront);
 		
 		JToggleButton tglbtnToBack = new JToggleButton("To Back");
@@ -153,7 +164,7 @@ public class DrawingFrame extends JFrame {
 				tglbtnToBack.setSelected(false);
 			}
 		});
-		tglbtnToBack.setBounds(712, 528, 96, 23);
+		tglbtnToBack.setBounds(774, 530, 96, 23);
 		getContentPane().add(tglbtnToBack);
 		
 
@@ -165,7 +176,7 @@ public class DrawingFrame extends JFrame {
 				tglbtnBringToBack.setSelected(false);
 			}
 		});
-		tglbtnBringToBack.setBounds(818, 528, 127, 23);
+		tglbtnBringToBack.setBounds(880, 528, 127, 23);
 		getContentPane().add(tglbtnBringToBack);
 		
 		JToggleButton tglbtnBringToFront = new JToggleButton("Bring To Front");
@@ -176,7 +187,7 @@ public class DrawingFrame extends JFrame {
 				tglbtnBringToFront.setSelected(false);
 			}
 		});
-		tglbtnBringToFront.setBounds(955, 528, 114, 23);
+		tglbtnBringToFront.setBounds(1017, 528, 126, 23);
 		getContentPane().add(tglbtnBringToFront);
 		
 		textAreaLog = new JTextArea();
@@ -188,10 +199,37 @@ public class DrawingFrame extends JFrame {
 		textAreaLog.setDisabledTextColor(Color.black);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 69, 240, 449);
+		scrollPane.setBounds(22, 69, 355, 449);
 		getContentPane().add(scrollPane);
 		
 		scrollPane.setViewportView(textAreaLog);
+		
+		JLabel lblLog = new JLabel("Command Log:");
+		lblLog.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblLog.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setColumnHeaderView(lblLog);
+		
+		JButton btnDefaultBorderColor = new JButton("Border Color");
+		btnDefaultBorderColor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				defaultBorderColor = JColorChooser.showDialog(null, "Choose default border color", Color.black);
+				btnDefaultBorderColor.setBackground(defaultBorderColor);
+			}
+		});
+		btnDefaultBorderColor.setBounds(649, 23, 108, 26);
+		getContentPane().add(btnDefaultBorderColor);
+		
+		JButton btnDefaultAreaColor = new JButton("Area Color");
+		btnDefaultAreaColor.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				defaultAreaColor = JColorChooser.showDialog(null, "Choose default area color", Color.black);
+				btnDefaultAreaColor.setBackground(defaultAreaColor);
+			}
+		});
+		btnDefaultAreaColor.setBounds(767, 23, 102, 26);
+		getContentPane().add(btnDefaultAreaColor);
+		
 	}
 	
 	
@@ -209,5 +247,24 @@ public class DrawingFrame extends JFrame {
 	public JTextArea getTextArea()
 	{
 		return textAreaLog;
+	}
+
+	public Color getDefaultBorderColor() {
+		return defaultBorderColor;
+	}
+
+
+	public void setDefaultBorderColor(Color defaultBorderColor) {
+		this.defaultBorderColor = defaultBorderColor;
+	}
+
+
+	public Color getDefaultAreaColor() {
+		return defaultAreaColor;
+	}
+
+
+	public void setDefaultAreaColor(Color defaultAreaColor) {
+		this.defaultAreaColor = defaultAreaColor;
 	}
 }
