@@ -197,7 +197,7 @@ public class DrawingController {
 			    //shape nam je oblik pre klika, tj prethodni oblik
 			    SelectShapeCmd select = new SelectShapeCmd(clickedShape, shape);
 			    select.execute();
-			    //log.append(select.toString() + "\n");
+			    log.append(select.toString() + "\n");
 			    undoStack.push(select);
 			    redoStack.clear();
 			    shape = model.vratiSelektovani();
@@ -449,19 +449,21 @@ public class DrawingController {
 		frame.repaint();
 	}
 	
-	public void Undo() { //pozivam u frejmu
+	public void Undo() { 
         if (!undoStack.isEmpty()) {
-            Command cmd = undoStack.pop();
+            Command cmd = undoStack.pop(); //cuvam popovanu u cmd
             cmd.unexecute();
+            log.append("UNDO " + cmd.toString() + "\n");
             redoStack.push(cmd);
             frame.repaint();
         }
     }
 
-    public void Redo() { //pozivam u frejmu
+    public void Redo() { 
         if (!redoStack.isEmpty()) {
             Command cmd = redoStack.pop();
             cmd.execute();
+            log.append("REDO " + cmd.toString() + "\n");
             undoStack.push(cmd);
             frame.repaint();
         }

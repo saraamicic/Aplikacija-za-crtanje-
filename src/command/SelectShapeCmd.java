@@ -42,7 +42,13 @@ public class SelectShapeCmd implements Command {
 
 	public String toString()
 	{
+		if(clickedShape!=null)
+		{
 			return "SELECTED "  + clickedShape.toString() + " Color: " + clickedShape.getBorderColor().toString();
+		}
+		else{
+			return "DESELECTED";
+		}
 	
 		
 	}
