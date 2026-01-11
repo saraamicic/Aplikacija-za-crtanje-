@@ -8,6 +8,8 @@ import geometry.Rectangle;
 import geometry.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -197,19 +199,15 @@ public class DrawingController {
 				frame.repaint();
 			}
 			//selektovanje
-			public void mousePressed(MouseEvent e) {
-			    Point clickedPoint = new Point(e.getX(), e.getY());
-			    Shape clickedShape = getSelected(clickedPoint);
-
-			    //shape nam je oblik pre klika, tj prethodni oblik
-			    SelectShapeCmd select = new SelectShapeCmd(clickedShape, shape);
+			public void mousePressed(MouseEvent e) {	
+				Point clickedPoint = new Point(e.getX(), e.getY());
+				Shape clickedShape = getSelected(clickedPoint);
+				SelectShapeCmd select = new SelectShapeCmd(clickedShape, model);
 			    select.execute();
 			    log.append(select.toString() + "\n");
 			    undoStack.push(select);
 			    redoStack.clear();
-			    shape = model.vratiSelektovani();
-			    
-			    frame.repaint();
+				frame.repaint();
 			}
 		});
 
@@ -228,7 +226,9 @@ public class DrawingController {
 
 	// modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
 	public void Modify() {
-		if (shape != null) {
+		if(model.getSelectedShapes().size()==1)
+		{
+			shape = model.getSelectedShapes().get(0);
 			if (shape instanceof Point) {
 				Point modifyPoint = (Point) shape; //ovo nam je stari point
 				DlgPoint dlgPointM = new DlgPoint(modifyPoint);
@@ -372,36 +372,49 @@ public class DrawingController {
 					frame.repaint();
 					
 				}
-			}
-
 			frame.getButtonGroupShapes().clearSelection();
 
-		} else {
-			JOptionPane.showMessageDialog(null, "Select the shape you want to modify first!", "",
-					JOptionPane.ERROR_MESSAGE);
+		} 
+	}
+	
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
 		}
 		frame.getButtonGroupShapes().clearSelection();
 		frame.repaint();
 
 	}
 
-	// brisanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
 	public void Delete() {
-		selectedShape = model.vratiSelektovani();
-		if (selectedShape != null) {
-			if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-				RemoveShapeCmd remove = new RemoveShapeCmd(selectedShape, model);
-				remove.execute();
-				log.append(remove.toString() + "\n");
-				undoStack.push(remove);
-				redoStack.clear();
-				frame.repaint();
-			} else {
-				selectedShape.setSelected(false);
+		
+		if(model.getSelectedShapes().size()!=0)
+		{
+			Iterator <Shape> it = model.getSelectedShapes().iterator();
+			
+			if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) 
+			{
+				while(it.hasNext())
+				{
+					RemoveShapeCmd remove = new RemoveShapeCmd(it.next(),model);
+					remove.execute();
+					log.append(remove.toString() + "\n");
+					undoStack.push(remove);
+					redoStack.clear();
+					frame.repaint();
+				}
 			}
-
-		} else {
-			JOptionPane.showMessageDialog(null, "Select the shape you want to delete!", "", JOptionPane.ERROR_MESSAGE);
+			else
+			{
+				while(it.hasNext())
+				{
+					it.next().setSelected(false);
+				}
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Select the shapes you want to delete!", "", JOptionPane.ERROR_MESSAGE);
 		}
 
 		frame.repaint();
@@ -417,43 +430,80 @@ public class DrawingController {
 	}
 
 	public void BringToBack() {
-		selectedShape = model.vratiSelektovani();
-		BringToBackCmd btb = new BringToBackCmd(selectedShape, model);
-		btb.execute();
-		log.append(btb.toString() + "\n");
-		undoStack.push(btb);
-		redoStack.clear();
-		frame.repaint();
+		
+		if(model.getSelectedShapes().size()==1)
+		{
+			selectedShape = model.returnOneSelected();
+			BringToBackCmd btb = new BringToBackCmd(selectedShape, model);
+			btb.execute();
+			log.append(btb.toString() + "\n");
+			undoStack.push(btb);
+			redoStack.clear();
+			frame.repaint();
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
 	}
 
 	public void BringToFront() {
-		selectedShape = model.vratiSelektovani();
-		BringToFrontCmd btf = new BringToFrontCmd(selectedShape, model);
-		btf.execute();
-		log.append(btf.toString() + "\n");
-		undoStack.push(btf);
-		redoStack.clear();
-		frame.repaint();
+		
+		if(model.getSelectedShapes().size()==1)
+		{
+			selectedShape = model.returnOneSelected();
+			BringToFrontCmd btf = new BringToFrontCmd(selectedShape, model);
+			btf.execute();
+			log.append(btf.toString() + "\n");
+			undoStack.push(btf);
+			redoStack.clear();
+			frame.repaint();
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
 	}
 
 	public void ToBack() {
-		selectedShape = model.vratiSelektovani();
-		ToBackCmd tb = new ToBackCmd(selectedShape, model);
-		tb.execute();
-		log.append(tb.toString() + "\n");
-		undoStack.push(tb);
-		redoStack.clear();
-		frame.repaint();
+		
+		if(model.getSelectedShapes().size()==1)
+		{
+			selectedShape = model.returnOneSelected();
+			ToBackCmd tb = new ToBackCmd(selectedShape, model);
+			tb.execute();
+			log.append(tb.toString() + "\n");
+			undoStack.push(tb);
+			redoStack.clear();
+			frame.repaint();
+		}
+		else 
+		{
+			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 
 	public void ToFront() {
-		selectedShape = model.vratiSelektovani();
-		ToFrontCmd tf = new ToFrontCmd(selectedShape, model);
-		tf.execute();
-		log.append(tf.toString() + "\n");
-		undoStack.push(tf);
-		redoStack.clear();
-		frame.repaint();
+
+		if(model.getSelectedShapes().size()==1)
+		{
+			selectedShape = model.returnOneSelected();
+			ToFrontCmd tf = new ToFrontCmd(selectedShape, model);
+			tf.execute();
+			log.append(tf.toString() + "\n");
+			undoStack.push(tf);
+			redoStack.clear();
+			frame.repaint();
+		}
+		else 
+		{
+			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	public void Undo() { 

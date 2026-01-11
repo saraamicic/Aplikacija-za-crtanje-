@@ -36,7 +36,8 @@ public class ModifyPointCmd implements Command {
 	
 	public String toString()
 	{
-		return "MODIFY new values: " + newState.toString() + " Color: " + newState.getBorderColor().toString();
+		return "MODIFY old values: " + original.toString() + " new values: " + newState.toString();
+				
 	}
 
 }

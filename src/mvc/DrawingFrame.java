@@ -51,7 +51,6 @@ public class DrawingFrame extends JFrame {
 		tglbtnPoint.setBounds(32, 23, 70, 26);
 		getContentPane().add(tglbtnPoint);
 		
-		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
 		tglbtnLine.addMouseListener(new MouseAdapter() {
 			@Override

@@ -1,55 +1,66 @@
 package command;
 
 import geometry.Shape;
+import mvc.DrawingModel;
 
 public class SelectShapeCmd implements Command {
 
-	Shape clickedShape;
-	Shape oldShape;
+	private Shape shape;
+	private DrawingModel model;
+	private Boolean state;
 	
-	public SelectShapeCmd(Shape clickedShape,Shape shape)
+	public SelectShapeCmd(Shape shape,DrawingModel model)
 	{
-		this.clickedShape = clickedShape;
-		this.oldShape = shape;
+		this.shape = shape;
+		this.model = model;
 	}
 	
 	@Override
 	//selektujem oblik
 	public void execute() {
-		 // Ako vec postoji selektovan oblik deselektujemo ga
-		if (oldShape != null) {
-			oldShape.setSelected(false);
-	    }
-
-	    // Ako kliknemo na oblik koji NIJE bio selektovan selektujemo ga
-	    if (clickedShape != null && clickedShape != oldShape) {
-	        clickedShape.setSelected(true);
-	    }
+		
+		state = model.getSelectedShapes().contains(shape); //true ako je bio selectovan, false ako nije
+		
+		if(state == true)
+		{
+			model.getSelectedShapes().remove(shape);
+			shape.setSelected(false);
+		}
+		if (state == false && shape!=null)
+		{
+			model.getSelectedShapes().add(shape);
+			shape.setSelected(true);
+		}
 
 	}
 	
 	@Override
 	public void unexecute() {
-		 if (clickedShape != null) {
-	            clickedShape.setSelected(false);
-	        }
-
-	        // vrati staru selekciju
-	        if (oldShape != null) {
-	            oldShape.setSelected(true);
-	        }
+		
+		if(state == true)
+		{
+			shape.setSelected(true);
+			model.getSelectedShapes().add(shape);
+		}
+		if (state == false && shape!=null)
+		{
+			model.getSelectedShapes().remove(shape);
+			shape.setSelected(false);
+		}
+		
 	}
 
+	
 	public String toString()
 	{
-		if(clickedShape!=null)
+		if(state==false)
 		{
-			return "SELECTED "  + clickedShape.toString() + " Color: " + clickedShape.getBorderColor().toString();
+			return "SELECTED " + shape;
 		}
-		else{
-			return "DESELECTED";
+		else
+		{
+			return "DESELECTED " + shape;
 		}
 	
-		
 	}
 }
