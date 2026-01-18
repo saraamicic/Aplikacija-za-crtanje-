@@ -7,7 +7,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
-import drawing.FrmDrawing.ShapeTypes;
+import mvc.DrawingModel.ShapeTypes;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;

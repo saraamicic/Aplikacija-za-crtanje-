@@ -32,7 +32,6 @@ import java.awt.Font;
 import javax.swing.UIManager;
 
 public class FrmDrawing extends JFrame {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroupShapes = new ButtonGroup();
@@ -40,10 +39,10 @@ public class FrmDrawing extends JFrame {
 	private Shape shape = null;
 	private Shape currentShape;
 	private DrawingView view;
-
+/*
 	
 	public enum ShapeTypes {
-		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
+		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE, HEXAGON
 	}
 
 	public ShapeTypes shapeType = ShapeTypes.NONE;
@@ -55,7 +54,7 @@ public class FrmDrawing extends JFrame {
 	public void setShapeType(ShapeTypes shapeType) {
 		this.shapeType = shapeType;
 	}
-
+*/
 	/**
 	 * Launch the application.
 	 */
@@ -75,7 +74,7 @@ public class FrmDrawing extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmDrawing() {
+	public FrmDrawing() {/*
 		setBackground(new Color(255, 255, 255));
 
 		setTitle("Sara Micic IT58/2023");
@@ -313,6 +312,8 @@ public class FrmDrawing extends JFrame {
 
 			}
 		});
+		
+		
 		buttonGroupShapes.add(tglbtnCircle);
 		GridBagConstraints gbc_tglbtnCircle = new GridBagConstraints();
 		gbc_tglbtnCircle.insets = new Insets(0, 0, 5, 5);
@@ -524,12 +525,11 @@ public class FrmDrawing extends JFrame {
 		pnlDrawing.setLayout(gbl_pnlDrawing);
 		setVisible(true);
 
-	}
-
+	}*/
+/*
 	public ButtonGroup getButtonGroupShapes() {
-		return buttonGroupShapes;
+		return buttonGroupShapes;*/
 	}
 
-	
 
 }

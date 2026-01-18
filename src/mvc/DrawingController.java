@@ -1,6 +1,7 @@
 package mvc;
 
 import geometry.Circle;
+
 import geometry.Donut;
 import geometry.Line;
 import geometry.Point;
@@ -33,19 +34,20 @@ import drawing.DlgDonut;
 import drawing.DlgLine;
 import drawing.DlgPoint;
 import drawing.DlgRectangle;
-import drawing.FrmDrawing.ShapeTypes;
+import mvc.DrawingModel;
+import mvc.DrawingModel.ShapeTypes;
 
 public class DrawingController {
 
 	DrawingModel model;
 	DrawingFrame frame;
-	public ShapeTypes shapeType = ShapeTypes.NONE;
 	private Point startPoint = null;
 	private Shape shape; 
 	public Shape selectedShape;
 	Stack <Command> undoStack = new Stack<Command>(); //znaci cuva sve sto implementira interfejs command
 	Stack <Command> redoStack = new Stack<Command>();
 	JTextArea log;
+	public ShapeTypes shapeType = mvc.DrawingModel.ShapeTypes.NONE;
 
 	public DrawingController(DrawingModel model, DrawingFrame frame) {
 		this.model = model;
@@ -186,7 +188,10 @@ public class DrawingController {
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
 					break;
-
+				
+				case HEXAGON:
+					
+				break;
 				case NONE:
 					setShapeType(ShapeTypes.NONE);
 					break;

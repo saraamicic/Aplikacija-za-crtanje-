@@ -7,7 +7,7 @@ import geometry.Shape;
 public class DrawingModel {
 	public Shape s;
 	public enum ShapeTypes {
-		POINT, LINE, RECTANGLE, CIRCLE, DONUT, NONE
+		POINT, LINE, RECTANGLE, CIRCLE, DONUT, HEXAGON, NONE
 	}
 	
 	public ShapeTypes shapeType = ShapeTypes.NONE;
@@ -48,13 +48,6 @@ public class DrawingModel {
 		return null;
 	}
 	
-	public ShapeTypes getShapeType() {
-		return shapeType;
-	}
-
-	public void setShapeType(ShapeTypes shapeType) {
-		this.shapeType = shapeType;
-	}
 	
 	public ArrayList<Shape> getSelectedShapes()
 	{
