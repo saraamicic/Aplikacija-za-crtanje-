@@ -52,16 +52,10 @@ public class SelectShapeCmd implements Command {
 	
 	public String toString()
 	{
-		
-		if(state==false)
+		if (state == false)
 		{
 			return "SELECTED " + shape;
 		}
-		else if (state == null)
-		{
-			return null;
-		}
-		
 		else
 		{
 			return "DESELECTED " + shape;

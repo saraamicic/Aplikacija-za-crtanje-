@@ -9,7 +9,6 @@ import geometry.Rectangle;
 import geometry.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -37,7 +36,6 @@ import drawing.DlgHexagon;
 import drawing.DlgLine;
 import drawing.DlgPoint;
 import drawing.DlgRectangle;
-import mvc.DrawingModel;
 import mvc.DrawingModel.ShapeTypes;
 
 public class DrawingController {
@@ -58,7 +56,7 @@ public class DrawingController {
 		log = frame.getTextArea();
 		frame.getView().addMouseListener(new MouseAdapter() {
 			@Override
-			// crtanje
+			
 			public void mouseClicked(MouseEvent e) {
 				switch (shapeType) {
 				case POINT:
@@ -222,6 +220,24 @@ public class DrawingController {
 					
 				case NONE:
 					setShapeType(ShapeTypes.NONE);
+					//selektovanje
+						
+						Point clickedPoint = new Point(e.getX(), e.getY());
+						Shape clickedShape = getSelected(clickedPoint);
+						if(clickedShape != null)
+						{
+							SelectShapeCmd select = new SelectShapeCmd(clickedShape, model);
+						    select.execute();
+						    
+						    log.append(select.toString() + "\n");
+						    undoStack.push(select);
+						    redoStack.clear();
+							frame.repaint();
+						}
+						
+					
+					
+					
 					break;
 
 				default:
@@ -232,16 +248,23 @@ public class DrawingController {
 				frame.repaint();
 			}
 			//selektovanje
-			public void mousePressed(MouseEvent e) {	
+			/*public void mousePressed(MouseEvent e) {	
 				Point clickedPoint = new Point(e.getX(), e.getY());
 				Shape clickedShape = getSelected(clickedPoint);
-				SelectShapeCmd select = new SelectShapeCmd(clickedShape, model);
-			    select.execute();
-			    log.append(select.toString() + "\n");
-			    undoStack.push(select);
-			    redoStack.clear();
-				frame.repaint();
+				if(clickedShape != null)
+				{
+					SelectShapeCmd select = new SelectShapeCmd(clickedShape, model);
+				    select.execute();
+				    
+				    log.append(select.toString() + "\n");
+				    undoStack.push(select);
+				    redoStack.clear();
+					frame.repaint();
+				}
+				
 			}
+			*/
+			
 		});
 
 	}	

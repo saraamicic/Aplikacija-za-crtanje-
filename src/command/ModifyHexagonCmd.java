@@ -1,8 +1,6 @@
 package command;
 
 import adapter.HexagonAdapter;
-import geometry.Circle;
-import geometry.Point;
 
 public class ModifyHexagonCmd implements Command {
 
