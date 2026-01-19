@@ -16,12 +16,14 @@ import java.util.Stack;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+import adapter.HexagonAdapter;
 import command.AddShapeCmd;
 import command.BringToBackCmd;
 import command.BringToFrontCmd;
 import command.Command;
 import command.ModifyCircleCmd;
 import command.ModifyDonutCmd;
+import command.ModifyHexagonCmd;
 import command.ModifyLineCmd;
 import command.ModifyPointCmd;
 import command.ModifyRectangleCmd;
@@ -31,6 +33,7 @@ import command.ToBackCmd;
 import command.ToFrontCmd;
 import drawing.DlgCircle;
 import drawing.DlgDonut;
+import drawing.DlgHexagon;
 import drawing.DlgLine;
 import drawing.DlgPoint;
 import drawing.DlgRectangle;
@@ -190,8 +193,33 @@ public class DrawingController {
 					break;
 				
 				case HEXAGON:
+					Point centerH = new Point(e.getX(),e.getY());
+					HexagonAdapter hex = new HexagonAdapter(centerH.getXCoordinate(),centerH.getYCoordinate(),0);
+					DlgHexagon dlgHex = new DlgHexagon(hex);
+					dlgHex.getTextFieldXCenter().setEditable(false);
+					dlgHex.getTextFieldYCenter().setEditable(false);
+					dlgHex.setBorderColor(frame.getDefaultBorderColor());
+					dlgHex.setAreaColor(frame.getDefaultAreaColor());
+					dlgHex.setVisible(true);
 					
-				break;
+					
+					if (dlgHex.isOk()) {
+						int radius = Integer.parseInt(dlgHex.getTextFieldRadius().getText());
+						HexagonAdapter hex1 = new HexagonAdapter(centerH.getXCoordinate(),centerH.getYCoordinate(),radius);
+						hex1.setBorderColor(dlgHex.getBorderColor());
+						hex1.setAreaColor(dlgHex.getAreaColor());
+						
+						AddShapeCmd addShapeHex = new AddShapeCmd(hex1, model);
+						addShapeHex.execute();
+						log.append(addShapeHex.toString() + "\n");
+						undoStack.add(addShapeHex);
+						redoStack.clear();
+
+					}
+					setShapeType(ShapeTypes.NONE);
+					frame.getButtonGroupShapes().clearSelection();
+					break;
+					
 				case NONE:
 					setShapeType(ShapeTypes.NONE);
 					break;
@@ -380,6 +408,34 @@ public class DrawingController {
 			frame.getButtonGroupShapes().clearSelection();
 
 		} 
+			else if (shape instanceof HexagonAdapter) {
+				HexagonAdapter modifyHex = (HexagonAdapter) shape;
+				DlgHexagon dlgHexM = new DlgHexagon(modifyHex);
+				dlgHexM.getTextFieldRadius().setText(Integer.toString(modifyHex.getRadius()));
+				dlgHexM.setBorderColor(modifyHex.getBorderColor());
+				dlgHexM.setAreaColor(modifyHex.getAreaColor());
+				dlgHexM.setVisible(true);
+
+				if (dlgHexM.isOk()) {
+					
+					Point p1 = new Point(Integer.parseInt(dlgHexM.getTextFieldXCenter().getText()), Integer.parseInt(dlgHexM.getTextFieldYCenter().getText())  );
+					HexagonAdapter newStateHex = new HexagonAdapter(p1.getXCoordinate(),p1.getYCoordinate(), Integer.parseInt( dlgHexM.getTextFieldRadius().getText()) );
+					
+					newStateHex.setBorderColor(dlgHexM.getBorderColor());
+					newStateHex.setAreaColor(dlgHexM.getAreaColor());
+					ModifyHexagonCmd modifHex = new ModifyHexagonCmd(modifyHex, newStateHex);
+					
+					modifHex.execute();
+					log.append(modifHex.toString() + "\n");
+					undoStack.push(modifHex);
+					redoStack.clear();
+					frame.repaint();
+				}
+			frame.getButtonGroupShapes().clearSelection();
+
+		} 
+			
+			
 	}
 	
 		else

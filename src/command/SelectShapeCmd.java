@@ -16,10 +16,9 @@ public class SelectShapeCmd implements Command {
 	}
 	
 	@Override
-	//selektujem oblik
 	public void execute() {
 		
-		state = model.getSelectedShapes().contains(shape); //true ako je bio selectovan, false ako nije
+		state = model.getSelectedShapes().contains(shape); //true ako je bio selektovan, false ako nije
 		
 		if(state == true)
 		{
@@ -53,10 +52,16 @@ public class SelectShapeCmd implements Command {
 	
 	public String toString()
 	{
+		
 		if(state==false)
 		{
 			return "SELECTED " + shape;
 		}
+		else if (state == null)
+		{
+			return null;
+		}
+		
 		else
 		{
 			return "DESELECTED " + shape;

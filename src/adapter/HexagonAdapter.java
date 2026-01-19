@@ -1,5 +1,6 @@
 package adapter;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import geometry.Shape;
 import hexagon.Hexagon;
@@ -40,20 +41,58 @@ public class HexagonAdapter extends Shape {
 	}
 	//dodala
 	public String toString() {
-		return "CIRCLE Center: (" + hexagon.getX() + "," + hexagon.getY() + ", radius=" + hexagon.getR();
+		return "HEXAGON Center: (" + hexagon.getX() + "," + hexagon.getY() + ", radius=" + hexagon.getR() + ")";
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		
 		hexagon.paint(g);
+		
+		//za selektovanje
+		if (this.isSelected()) {
+		    g.setColor(Color.BLUE);
+
+		    int cx = hexagon.getX();
+		    int cy = hexagon.getY();
+
+		    // za centar
+		    g.drawRect(cx - 2, cy - 2, 4, 4);
+
+		    // temena heksagona
+		    for (int i = 0; i < 6; i++) {
+		        double angle = Math.toRadians(60 * i);
+		        int x = (int) (cx + hexagon.getR() * Math.cos(angle));
+		        int y = (int) (cy + hexagon.getR() * Math.sin(angle));
+
+		        g.drawRect(x - 2, y - 2, 4, 4);
+		    }
+		}
+	}
+	
+	
+	
+	public void setBorderColor(Color borderColor)
+	{
+		hexagon.setBorderColor(borderColor);
+	}
+	
+	public void setAreaColor(Color areaColor)
+	{
+		hexagon.setAreaColor(areaColor);
 	}
 
-	/*public void setRadius(int radius)
+	
+	public Color getBorderColor()
 	{
-		hexagon.setR(radius);
+		return hexagon.getBorderColor();
 	}
-	*/
+	
+	public Color getAreaColor()
+	{
+		return hexagon.getAreaColor();
+	}
+	
 	public void setRadius(int radius) throws Exception 
 	{
 		if (radius < 0)

@@ -97,6 +97,12 @@ public class DrawingFrame extends JFrame {
 		getContentPane().add(tglbtnDonut);
 		
 		JToggleButton tglbtnHexagon = new JToggleButton("Hexagon");
+		tglbtnHexagon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controller.setShapeType(ShapeTypes.HEXAGON);
+			}
+		});
 		buttonGroupShapes.add(tglbtnHexagon);
 		tglbtnHexagon.setBounds(443, 23, 84, 26);
 		getContentPane().add(tglbtnHexagon);
