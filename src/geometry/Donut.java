@@ -45,8 +45,7 @@ public class Donut extends Circle {
 
 	@Override
 	public String toString() {
-		// Center: (x,y), radius = r, innerRadius = ir
-		return "DONUT " + super.toString() + ", innerRadius =" + innerRadius;
+		return "DONUT Center: (" + getCenter().getXCoordinate() + ", " + getCenter().getYCoordinate() + "), radius=" + getRadius() + ", innerRadius= " + innerRadius;
 	}
 
 	@Override

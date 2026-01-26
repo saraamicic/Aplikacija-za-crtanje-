@@ -36,11 +36,11 @@ public class AddShapeCmd implements Command {
 	{
 		if( shape instanceof Point || shape instanceof Line )
 		{
-			return "ADD " + shape.toString() + " Color: " + shape.getBorderColor().toString();
+			return "ADD " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
 		}
 		else 
 		{
-			return "ADD " + shape.toString() + " Border color: " + shape.getBorderColor().toString() + " Area color: " + shape.getAreaColor().toString();
+			return "ADD " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
 		}
 	
 	}

@@ -1,5 +1,7 @@
 package command;
 
+import geometry.Line;
+import geometry.Point;
 import geometry.Shape;
 import mvc.DrawingModel;
 
@@ -52,13 +54,31 @@ public class SelectShapeCmd implements Command {
 	
 	public String toString()
 	{
+		
+
+		
+		
 		if (state == false)
 		{
-			return "SELECTED " + shape;
+			if( shape instanceof Point || shape instanceof Line )
+			{
+				return "SELECTED " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
+			}
+			else 
+			{
+				return "SELECTED " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
+			}
 		}
 		else
 		{
-			return "DESELECTED " + shape;
+			if( shape instanceof Point || shape instanceof Line )
+			{
+				return "DESELECTED " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
+			}
+			else 
+			{
+				return "DESELECTED " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
+			}
 		}
 	
 	}

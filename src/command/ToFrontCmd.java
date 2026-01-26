@@ -2,6 +2,8 @@ package command;
 
 import javax.swing.JOptionPane;
 
+import geometry.Line;
+import geometry.Point;
 import geometry.Shape;
 import mvc.DrawingModel;
 
@@ -56,7 +58,14 @@ public class ToFrontCmd implements Command {
 	
 	public String toString()
 	{
-		return "To Front shape:" + selectedShape.toString();
+		if( selectedShape instanceof Point || selectedShape instanceof Line )
+		{
+			return "To Front shape: " + selectedShape.toString() + " Color: " + selectedShape.getBorderColor().getRGB();
+		}
+		else 
+		{
+			return "To Front shape " + selectedShape.toString() + " Border color: " + selectedShape.getBorderColor().getRGB() + " Area color: " + selectedShape.getAreaColor().getRGB();
+		}
 	}
 
 }

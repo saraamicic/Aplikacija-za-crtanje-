@@ -47,7 +47,7 @@ public class ModifyRectangleCmd implements Command {
 	}
 	public String toString()
 	{
-		return "MODIFY new values: " + newState.toString() + " Border color: " + newState.getBorderColor().toString() 
-				+ " Area color: " + newState.getAreaColor().toString();	
+		return "MODIFY old values: " + rectangle.toString() + " Border Color: " + rectangle.getBorderColor().getRGB() + " Area Color: " + rectangle.getAreaColor().getRGB()
+				+ ", new values: " + newState.toString() + " Border Color: " + newState.getBorderColor().getRGB() + " Area Color: " + newState.getAreaColor().getRGB();
 	}
 }

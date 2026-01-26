@@ -70,7 +70,8 @@ public class Line extends Shape {
 	}
 
 	public String toString() {
-		return "LINE " + startPoint + "-->" + endPoint;
+		return "LINE StartPoint: (" + startPoint.getXCoordinate() + ", " + startPoint.getYCoordinate() +
+				") EndPoint: (" + endPoint.getXCoordinate() + ", " + endPoint.getYCoordinate() + ")";
 	}
 
 	public boolean equals(Object obj) {

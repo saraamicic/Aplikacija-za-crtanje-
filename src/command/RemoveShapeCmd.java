@@ -1,5 +1,7 @@
 package command;
 
+import geometry.Line;
+import geometry.Point;
 import geometry.Shape;
 import mvc.DrawingModel;
 
@@ -26,7 +28,15 @@ public class RemoveShapeCmd implements Command {
 	
 	public String toString()
 	{
-		return "DELETE " + shape.toString() + " Color: " + shape.getBorderColor().toString();
+		if( shape instanceof Point || shape instanceof Line )
+		{
+			return "DELETE " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
+		}
+		else 
+		{
+			return "DELETE " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
+		}
+		
 	}
 
 }
