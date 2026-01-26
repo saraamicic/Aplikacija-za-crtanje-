@@ -1,4 +1,4 @@
-package drawing;
+/*package drawing;
 
 import java.awt.EventQueue;
 
@@ -56,8 +56,8 @@ public class FrmDrawing extends JFrame {
 	}
 */
 	/**
-	 * Launch the application.
-	 */
+	 * Launch the application./*
+	 *//*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,11 +70,11 @@ public class FrmDrawing extends JFrame {
 			}
 		});
 	}
-
+/*
 	/**
 	 * Create the frame.
 	 */
-	public FrmDrawing() {/*
+	/*public FrmDrawing() {/*
 		setBackground(new Color(255, 255, 255));
 
 		setTitle("Sara Micic IT58/2023");
@@ -529,7 +529,7 @@ public class FrmDrawing extends JFrame {
 /*
 	public ButtonGroup getButtonGroupShapes() {
 		return buttonGroupShapes;*/
-	}
+/*	}
 
 
-}
+}*/

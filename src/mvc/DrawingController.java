@@ -37,6 +37,8 @@ import drawing.DlgLine;
 import drawing.DlgPoint;
 import drawing.DlgRectangle;
 import mvc.DrawingModel.ShapeTypes;
+import observer.UpdateButtons;
+
 
 public class DrawingController {
 
@@ -53,6 +55,12 @@ public class DrawingController {
 	public DrawingController(DrawingModel model, DrawingFrame frame) {
 		this.model = model;
 		this.frame = frame;
+		
+		UpdateButtons updateButtons = new UpdateButtons(frame);
+		model.addPropertyChangeListener(updateButtons);
+		model.setRedo(redoStack.isEmpty());
+		model.setUndo(undoStack.isEmpty());
+		
 		log = frame.getTextArea();
 		frame.getView().addMouseListener(new MouseAdapter() {
 			@Override
@@ -73,6 +81,13 @@ public class DrawingController {
 						log.append(addShapePoint.toString()+ "\n");
 						undoStack.add(addShapePoint);
 						redoStack.clear();
+						
+						model.setUndo(undoStack.isEmpty());
+						model.setRedo(redoStack.isEmpty());
+						
+						
+						
+						
 					}
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
@@ -98,6 +113,9 @@ public class DrawingController {
 							log.append(addShapeLine.toString()+ "\n");
 							undoStack.add(addShapeLine);
 							redoStack.clear();
+							
+							model.setUndo(undoStack.isEmpty());
+							model.setRedo(redoStack.isEmpty());
 						}
 						setShapeType(ShapeTypes.NONE);
 						frame.getButtonGroupShapes().clearSelection();
@@ -128,6 +146,9 @@ public class DrawingController {
 						log.append(addShapeRectangle.toString()+ "\n" );
 						undoStack.add(addShapeRectangle);
 						redoStack.clear();
+						
+						model.setUndo(undoStack.isEmpty());
+						model.setRedo(redoStack.isEmpty());
 					}
 					setShapeType(ShapeTypes.NONE);
 					frame.getButtonGroupShapes().clearSelection();
@@ -155,6 +176,9 @@ public class DrawingController {
 						log.append(addShapeCircle.toString() + "\n");
 						undoStack.add(addShapeCircle);
 						redoStack.clear();
+						
+						model.setUndo(undoStack.isEmpty());
+						model.setRedo(redoStack.isEmpty());
 
 					}
 					setShapeType(ShapeTypes.NONE);
@@ -184,6 +208,9 @@ public class DrawingController {
 						log.append(addShapeDonut.toString() + "\n");
 						undoStack.add(addShapeDonut);
 						redoStack.clear();
+						
+						model.setUndo(undoStack.isEmpty());
+						model.setRedo(redoStack.isEmpty());
 
 					}
 					setShapeType(ShapeTypes.NONE);
@@ -212,6 +239,9 @@ public class DrawingController {
 						log.append(addShapeHex.toString() + "\n");
 						undoStack.add(addShapeHex);
 						redoStack.clear();
+						
+						model.setUndo(undoStack.isEmpty());
+						model.setRedo(redoStack.isEmpty());
 
 					}
 					setShapeType(ShapeTypes.NONE);
@@ -232,6 +262,10 @@ public class DrawingController {
 						    log.append(select.toString() + "\n");
 						    undoStack.push(select);
 						    redoStack.clear();
+						    
+						    model.setUndo(undoStack.isEmpty());
+							model.setRedo(redoStack.isEmpty());
+							
 							frame.repaint();
 						}
 						
@@ -302,6 +336,10 @@ public class DrawingController {
 					log.append(modifPoint.toString() + "\n");
 					undoStack.push(modifPoint);
 					redoStack.clear();
+					
+					model.setUndo(undoStack.isEmpty());
+					model.setRedo(redoStack.isEmpty());
+					
 					frame.repaint();
 					
 				}
@@ -325,6 +363,10 @@ public class DrawingController {
 					log.append(modifLine.toString() + "\n");
 					undoStack.push(modifLine);
 					redoStack.clear();
+					
+					model.setUndo(undoStack.isEmpty());
+					model.setRedo(redoStack.isEmpty());
+					
 					frame.repaint();
 
 					
@@ -359,6 +401,9 @@ public class DrawingController {
 					undoStack.push(modifRect);
 					redoStack.clear();
 					
+					model.setUndo(undoStack.isEmpty());
+					model.setRedo(redoStack.isEmpty());
+					
 					frame.repaint();
 					
 				}
@@ -392,6 +437,10 @@ public class DrawingController {
 					
 					undoStack.push(modifDonut);
 					redoStack.clear();
+					model.setRedo(redoStack.isEmpty());
+					model.setUndo(undoStack.isEmpty());
+	
+					
 					frame.repaint();
 					
 
@@ -425,6 +474,10 @@ public class DrawingController {
 					log.append(modifCirc.toString() + "\n");
 					undoStack.push(modifCirc);
 					redoStack.clear();
+					
+					model.setUndo(undoStack.isEmpty());
+					model.setRedo(redoStack.isEmpty());
+					
 					frame.repaint();
 					
 				}
@@ -452,6 +505,10 @@ public class DrawingController {
 					log.append(modifHex.toString() + "\n");
 					undoStack.push(modifHex);
 					redoStack.clear();
+					
+					model.setUndo(undoStack.isEmpty());
+					model.setRedo(redoStack.isEmpty());
+					
 					frame.repaint();
 				}
 			frame.getButtonGroupShapes().clearSelection();
@@ -485,6 +542,10 @@ public class DrawingController {
 					log.append(remove.toString() + "\n");
 					undoStack.push(remove);
 					redoStack.clear();
+					
+					model.setUndo(undoStack.isEmpty());
+					model.setRedo(redoStack.isEmpty());
+					
 					frame.repaint();
 				}
 			}
@@ -523,6 +584,11 @@ public class DrawingController {
 			log.append(btb.toString() + "\n");
 			undoStack.push(btb);
 			redoStack.clear();
+			
+			model.setUndo(undoStack.isEmpty());
+			model.setRedo(redoStack.isEmpty());
+			
+			
 			frame.repaint();
 		}
 		else
@@ -543,6 +609,10 @@ public class DrawingController {
 			log.append(btf.toString() + "\n");
 			undoStack.push(btf);
 			redoStack.clear();
+			
+			model.setUndo(undoStack.isEmpty());
+			model.setRedo(redoStack.isEmpty());
+			
 			frame.repaint();
 		}
 		else
@@ -563,6 +633,10 @@ public class DrawingController {
 			log.append(tb.toString() + "\n");
 			undoStack.push(tb);
 			redoStack.clear();
+			
+			model.setUndo(undoStack.isEmpty());
+			model.setRedo(redoStack.isEmpty());
+			
 			frame.repaint();
 		}
 		else 
@@ -582,6 +656,10 @@ public class DrawingController {
 			log.append(tf.toString() + "\n");
 			undoStack.push(tf);
 			redoStack.clear();
+			
+			model.setUndo(undoStack.isEmpty());
+			model.setRedo(redoStack.isEmpty());
+			
 			frame.repaint();
 		}
 		else 
@@ -596,6 +674,10 @@ public class DrawingController {
             cmd.unexecute();
             log.append("UNDO " + cmd.toString() + "\n");
             redoStack.push(cmd);
+            
+            model.setUndo(undoStack.isEmpty());
+			model.setRedo(redoStack.isEmpty());
+            
             frame.repaint();
         }
     }
@@ -606,6 +688,10 @@ public class DrawingController {
             cmd.execute();
             log.append("REDO " + cmd.toString() + "\n");
             undoStack.push(cmd);
+            
+            model.setUndo(undoStack.isEmpty());
+			model.setRedo(redoStack.isEmpty());
+            
             frame.repaint();
         }
     }

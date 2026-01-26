@@ -1,5 +1,7 @@
 package mvc;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import geometry.Shape;
 //u modelu cuvamo podatke - nasu listu sa oblicima
@@ -8,6 +10,18 @@ public class DrawingModel {
 	public Shape s;
 	public enum ShapeTypes {
 		POINT, LINE, RECTANGLE, CIRCLE, DONUT, HEXAGON, NONE
+	}
+	
+	PropertyChangeSupport prop;
+	
+	public DrawingModel()
+	{
+		prop = new PropertyChangeSupport(this); //jer mi treba za bas moj model
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener)
+	{
+		prop.addPropertyChangeListener(listener); //update button je meni listener on slusa promene
 	}
 	
 	public ShapeTypes shapeType = ShapeTypes.NONE;
@@ -54,6 +68,18 @@ public class DrawingModel {
 		return selectedShapes;
 	}
 	
+	
+	public void setUndo (boolean isEmpty)
+	{
+		prop.firePropertyChange("Undo", null, isEmpty);
+		
+	}
+	
+	public void setRedo (boolean isEmpty)
+	{
+		prop.firePropertyChange("Redo", null, isEmpty);
+		
+	}
 	
 	
 }

@@ -1,5 +1,5 @@
-package drawing;
-
+/*package drawing;
+/*
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -24,7 +24,7 @@ public class PnlDrawing extends JPanel {
 
 	/**
 	 * Create the panel.
-	 */
+	 *//*
 	public PnlDrawing() {
 		setPreferredSize(new Dimension(1000, 500));
 	}
@@ -84,3 +84,5 @@ public class PnlDrawing extends JPanel {
 		repaint();
 	}
 }
+
+*/

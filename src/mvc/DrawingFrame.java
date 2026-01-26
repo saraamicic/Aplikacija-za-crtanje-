@@ -28,6 +28,8 @@ public class DrawingFrame extends JFrame {
 	JTextArea textAreaLog;
 	Color defaultBorderColor;
 	Color defaultAreaColor;
+	JButton btnUndo;
+	JButton btnRedo;
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
@@ -129,28 +131,28 @@ public class DrawingFrame extends JFrame {
 		tglbtnDelete.setBounds(985, 23, 84, 26);
 		getContentPane().add(tglbtnDelete);
 		
-		JToggleButton tglbtnUndo = new JToggleButton("Undo");
-		tglbtnUndo.addMouseListener(new MouseAdapter() {
+		btnUndo = new JButton("Undo");
+		btnUndo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.Undo();
-				tglbtnUndo.setSelected(false);
+				btnUndo.setSelected(false);
 			}
 		});
-		tglbtnUndo.setBounds(409, 528, 70, 26);
-		getContentPane().add(tglbtnUndo);
+		btnUndo.setBounds(409, 528, 70, 26);
+		getContentPane().add(btnUndo);
 		
-		JToggleButton tglbtnRedo = new JToggleButton("Redo");
-		tglbtnRedo.addMouseListener(new MouseAdapter() {
+		btnRedo = new JButton("Redo");
+		btnRedo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.Redo();
-				tglbtnRedo.setSelected(false);
+				btnRedo.setSelected(false);
 				
 			}
 		});
-		tglbtnRedo.setBounds(489, 528, 76, 26);
-		getContentPane().add(tglbtnRedo);
+		btnRedo.setBounds(489, 528, 76, 26);
+		getContentPane().add(btnRedo);
 		
 		JToggleButton tglbtnToFront = new JToggleButton("To Front");
 		tglbtnToFront.addMouseListener(new MouseAdapter() {
@@ -273,4 +275,15 @@ public class DrawingFrame extends JFrame {
 	public void setDefaultAreaColor(Color defaultAreaColor) {
 		this.defaultAreaColor = defaultAreaColor;
 	}
+	
+	public JButton getBtnUndo()
+	{
+		return btnUndo;
+	}
+	
+	public JButton getBtnRedo()
+	{
+		return btnRedo;
+	}
+	
 }
