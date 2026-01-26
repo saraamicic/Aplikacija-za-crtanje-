@@ -30,6 +30,8 @@ public class DrawingFrame extends JFrame {
 	Color defaultAreaColor;
 	JButton btnUndo;
 	JButton btnRedo;
+	JButton btnDelete;
+	JButton btnModify;
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
@@ -109,27 +111,29 @@ public class DrawingFrame extends JFrame {
 		tglbtnHexagon.setBounds(443, 23, 84, 26);
 		getContentPane().add(tglbtnHexagon);
 		
-		JToggleButton tglbtnModify = new JToggleButton("Modify");
-		tglbtnModify.addMouseListener(new MouseAdapter() {
+		btnModify = new JButton("Modify");
+		btnModify.setEnabled(false);
+		btnModify.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.Modify();
 			}
 		});
-		buttonGroupShapes.add(tglbtnModify);
-		tglbtnModify.setBounds(891, 23, 84, 26);
-		getContentPane().add(tglbtnModify);
+		buttonGroupShapes.add(btnModify);
+		btnModify.setBounds(891, 23, 84, 26);
+		getContentPane().add(btnModify);
 		
-		JToggleButton tglbtnDelete = new JToggleButton("Delete");
-		tglbtnDelete.addMouseListener(new MouseAdapter() {
+		btnDelete = new JButton("Delete");
+		btnDelete.setEnabled(false);
+		btnDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.Delete();
 			}
 		});
-		buttonGroupShapes.add(tglbtnDelete);
-		tglbtnDelete.setBounds(985, 23, 84, 26);
-		getContentPane().add(tglbtnDelete);
+		//buttonGroupShapes.add(tglbtnDelete);
+		btnDelete.setBounds(985, 23, 84, 26);
+		getContentPane().add(btnDelete);
 		
 		btnUndo = new JButton("Undo");
 		btnUndo.addMouseListener(new MouseAdapter() {
@@ -284,6 +288,16 @@ public class DrawingFrame extends JFrame {
 	public JButton getBtnRedo()
 	{
 		return btnRedo;
+	}
+	
+	public JButton getBtnDelete()
+	{
+		return btnDelete;
+	}
+	
+	public JButton getBtnModify()
+	{
+		return btnModify;
 	}
 	
 }

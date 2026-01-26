@@ -18,7 +18,7 @@ public class UpdateButtons implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 	
-		if(evt.getPropertyName()=="Undo")
+		if(evt.getPropertyName().equals("Undo"))
 		{
 			if((boolean)evt.getNewValue())
 			{
@@ -30,7 +30,7 @@ public class UpdateButtons implements PropertyChangeListener {
 
 			}
 		}
-		else if(evt.getPropertyName()=="Redo")
+		else if(evt.getPropertyName().equals("Redo"))
 		{
 			if((boolean)evt.getNewValue())
 			{
@@ -41,14 +41,32 @@ public class UpdateButtons implements PropertyChangeListener {
 				frame.getBtnRedo().setEnabled(true);
 
 			}
+		
+		}
+		else if(evt.getPropertyName().equals("Selection"))
+		{
+			if((int)evt.getNewValue()==1)
+			{
+				frame.getBtnDelete().setEnabled(true);
+				frame.getBtnModify().setEnabled(true);
+			}
+			else if ((int)evt.getNewValue()>1 )
+			{
+				frame.getBtnDelete().setEnabled(true);
+				frame.getBtnModify().setEnabled(false);
+			}
+			else
+			{
+				frame.getBtnDelete().setEnabled(false);
+				frame.getBtnModify().setEnabled(false);
+			}
 			
+		}
+		
+		
 			
 		}
 		
 		
 	}
 	
-	
-	
-
-}

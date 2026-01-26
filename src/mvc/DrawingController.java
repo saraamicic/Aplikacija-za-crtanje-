@@ -266,6 +266,8 @@ public class DrawingController {
 						    model.setUndo(undoStack.isEmpty());
 							model.setRedo(redoStack.isEmpty());
 							
+							model.setSelection(model.getSelectedShapes().size());
+							
 							frame.repaint();
 						}
 						
@@ -281,24 +283,6 @@ public class DrawingController {
 
 				frame.repaint();
 			}
-			//selektovanje
-			/*public void mousePressed(MouseEvent e) {	
-				Point clickedPoint = new Point(e.getX(), e.getY());
-				Shape clickedShape = getSelected(clickedPoint);
-				if(clickedShape != null)
-				{
-					SelectShapeCmd select = new SelectShapeCmd(clickedShape, model);
-				    select.execute();
-				    
-				    log.append(select.toString() + "\n");
-				    undoStack.push(select);
-				    redoStack.clear();
-					frame.repaint();
-				}
-				
-			}
-			*/
-			
 		});
 
 	}	
@@ -316,8 +300,6 @@ public class DrawingController {
 
 	// modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
 	public void Modify() {
-		if(model.getSelectedShapes().size()==1)
-		{
 			shape = model.getSelectedShapes().get(0);
 			if (shape instanceof Point) {
 				Point modifyPoint = (Point) shape; //ovo nam je stari point
@@ -503,7 +485,6 @@ public class DrawingController {
 					
 					modifHex.execute();
 					log.append(modifHex.toString() + "\n");
-					undoStack.push(modifHex);
 					redoStack.clear();
 					
 					model.setUndo(undoStack.isEmpty());
@@ -514,53 +495,31 @@ public class DrawingController {
 			frame.getButtonGroupShapes().clearSelection();
 
 		} 
-			
-			
-	}
-	
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
-		}
+		model.setSelection(model.getSelectedShapes().size());	
 		frame.getButtonGroupShapes().clearSelection();
 		frame.repaint();
-
 	}
 
 	public void Delete() {
 		
-		if(model.getSelectedShapes().size()!=0)
-		{
-			Iterator <Shape> it = model.getSelectedShapes().iterator();
-			
-			if (JOptionPane.showConfirmDialog(null, "Confirm", "Delete", JOptionPane.YES_NO_CANCEL_OPTION) == 0) 
+		Iterator <Shape> it = model.getSelectedShapes().iterator();
+			while(it.hasNext())
 			{
-				while(it.hasNext())
-				{
-					RemoveShapeCmd remove = new RemoveShapeCmd(it.next(),model);
-					remove.execute();
-					log.append(remove.toString() + "\n");
-					undoStack.push(remove);
-					redoStack.clear();
+				RemoveShapeCmd remove = new RemoveShapeCmd(it.next(),model);
+				remove.execute();
+				log.append(remove.toString() + "\n");
 					
-					model.setUndo(undoStack.isEmpty());
-					model.setRedo(redoStack.isEmpty());
+				undoStack.push(remove);
+				redoStack.clear();
 					
-					frame.repaint();
-				}
+				model.setUndo(undoStack.isEmpty());
+				model.setRedo(redoStack.isEmpty());
+					
+				frame.repaint();
 			}
-			else
-			{
-				while(it.hasNext())
-				{
-					it.next().setSelected(false);
-				}
-			}
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Select the shapes you want to delete!", "", JOptionPane.ERROR_MESSAGE);
-		}
+
+		model.getSelectedShapes().clear(); //moram da ispraznim sad i listu selektovanih
+		model.setSelection(model.getSelectedShapes().size());	
 
 		frame.repaint();
 		frame.getButtonGroupShapes().clearSelection();
@@ -677,6 +636,7 @@ public class DrawingController {
             
             model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
+			model.setSelection(model.getSelectedShapes().size());	
             
             frame.repaint();
         }
@@ -691,6 +651,7 @@ public class DrawingController {
             
             model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
+			model.setSelection(model.getSelectedShapes().size());	
             
             frame.repaint();
         }

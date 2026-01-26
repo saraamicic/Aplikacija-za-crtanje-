@@ -81,5 +81,13 @@ public class DrawingModel {
 		
 	}
 	
+	//za dugmic za brisanje 
+	public void setSelection (int numOfSelected)
+	{
+		prop.firePropertyChange("Selection", null, numOfSelected);
+		
+	}
+	
+	
 	
 }
