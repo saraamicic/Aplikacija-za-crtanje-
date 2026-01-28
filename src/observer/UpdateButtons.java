@@ -62,6 +62,35 @@ public class UpdateButtons implements PropertyChangeListener {
 			}
 			
 		}
+		else if(evt.getPropertyName().equals("BringToBack"))
+		{
+			if((boolean)evt.getNewValue())
+			{
+				frame.getBtnBringToBack().setEnabled(true);
+				frame.getBtnToBack().setEnabled(true);
+			}
+			else
+			{
+				frame.getBtnBringToBack().setEnabled(false);
+				frame.getBtnToBack().setEnabled(false);
+			}
+			
+		}
+		else if(evt.getPropertyName().equals("BringToFront"))
+		{
+			if((boolean)evt.getNewValue())
+			{
+				frame.getBtnBringToFront().setEnabled(true);
+				frame.getBtnToFront().setEnabled(true);
+			}
+			else
+			{
+				frame.getBtnBringToFront().setEnabled(false);
+				frame.getBtnToFront().setEnabled(false);
+			}
+			
+			
+		}
 		
 		
 			

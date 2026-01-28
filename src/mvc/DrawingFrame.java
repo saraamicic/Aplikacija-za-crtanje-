@@ -32,6 +32,10 @@ public class DrawingFrame extends JFrame {
 	JButton btnRedo;
 	JButton btnDelete;
 	JButton btnModify;
+	JButton btnBringToBack;
+	JButton btnBringToFront;
+	JButton btnToBack;
+	JButton btnToFront;
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
@@ -158,49 +162,53 @@ public class DrawingFrame extends JFrame {
 		btnRedo.setBounds(489, 528, 76, 26);
 		getContentPane().add(btnRedo);
 		
-		JToggleButton tglbtnToFront = new JToggleButton("To Front");
-		tglbtnToFront.addMouseListener(new MouseAdapter() {
+		btnToFront = new JButton("To Front");
+		btnToFront.setEnabled(false);
+		btnToFront.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.ToFront();
 			}
 		});
-		tglbtnToFront.setBounds(661, 530, 96, 23);
-		getContentPane().add(tglbtnToFront);
+		btnToFront.setBounds(661, 530, 96, 23);
+		getContentPane().add(btnToFront);
 		
-		JToggleButton tglbtnToBack = new JToggleButton("To Back");
-		tglbtnToBack.addMouseListener(new MouseAdapter() {
+		btnToBack = new JButton("To Back");
+		btnToBack.setEnabled(false);
+		btnToBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.ToBack();
-				tglbtnToBack.setSelected(false);
+				btnToBack.setSelected(false);
 			}
 		});
-		tglbtnToBack.setBounds(774, 530, 96, 23);
-		getContentPane().add(tglbtnToBack);
+		btnToBack.setBounds(774, 530, 96, 23);
+		getContentPane().add(btnToBack);
 		
 
-		JToggleButton tglbtnBringToBack = new JToggleButton("Bring To Back");
-		tglbtnBringToBack.addMouseListener(new MouseAdapter() {
+		btnBringToBack = new JButton("Bring To Back");
+		btnBringToBack.setEnabled(false);
+		btnBringToBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.BringToBack();
-				tglbtnBringToBack.setSelected(false);
+				btnBringToBack.setSelected(false);
 			}
 		});
-		tglbtnBringToBack.setBounds(880, 528, 127, 23);
-		getContentPane().add(tglbtnBringToBack);
+		btnBringToBack.setBounds(880, 528, 127, 23);
+		getContentPane().add(btnBringToBack);
 		
-		JToggleButton tglbtnBringToFront = new JToggleButton("Bring To Front");
-		tglbtnBringToFront.addMouseListener(new MouseAdapter() {
+		btnBringToFront = new JButton("Bring To Front");
+		btnBringToFront.setEnabled(false);
+		btnBringToFront.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.BringToFront();
-				tglbtnBringToFront.setSelected(false);
+				btnBringToFront.setSelected(false);
 			}
 		});
-		tglbtnBringToFront.setBounds(1017, 528, 126, 23);
-		getContentPane().add(tglbtnBringToFront);
+		btnBringToFront.setBounds(1017, 528, 126, 23);
+		getContentPane().add(btnBringToFront);
 		
 		textAreaLog = new JTextArea();
 		textAreaLog.setBackground(new Color(235, 235, 235));
@@ -299,5 +307,25 @@ public class DrawingFrame extends JFrame {
 	{
 		return btnModify;
 	}
+	
+	public JButton getBtnBringToBack()
+	{
+		return btnBringToBack;
+	}
+	
+	public JButton getBtnBringToFront()
+	{
+		return btnBringToFront;
+	}
+
+	public JButton getBtnToBack() {
+		return btnToBack;
+	}
+
+
+	public JButton getBtnToFront() {
+		return btnToFront;
+	}
+	
 	
 }

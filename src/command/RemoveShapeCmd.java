@@ -18,7 +18,7 @@ public class RemoveShapeCmd implements Command {
 	}
 
 	public void execute() {
-		orgInd=model.getShapes().indexOf(shape);
+		orgInd = model.getShapes().indexOf(shape);
 		model.remove(shape);
 		model.removeSelected(shape);
 	}

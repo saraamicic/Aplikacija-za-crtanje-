@@ -258,7 +258,6 @@ public class DrawingController {
 						{
 							SelectShapeCmd select = new SelectShapeCmd(clickedShape, model);
 						    select.execute();
-						    
 						    log.append(select.toString() + "\n");
 						    undoStack.push(select);
 						    redoStack.clear();
@@ -530,8 +529,6 @@ public class DrawingController {
 
 	public void BringToBack() {
 		
-		if(model.getSelectedShapes().size()==1)
-		{
 			selectedShape = model.returnOneSelected();
 			BringToBackCmd btb = new BringToBackCmd(selectedShape, model);
 			btb.execute();
@@ -541,16 +538,10 @@ public class DrawingController {
 			
 			model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
-			
+			model.setSelection();
 			
 			frame.repaint();
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
-		}
-		
-		
+
 	}
 
 	public void BringToFront() {
@@ -566,6 +557,7 @@ public class DrawingController {
 			
 			model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
+			model.setSelection();
 			
 			frame.repaint();
 		}
@@ -573,8 +565,7 @@ public class DrawingController {
 		{
 			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
 		}
-		
-		
+	
 	}
 
 	public void ToBack() {
@@ -590,6 +581,7 @@ public class DrawingController {
 			
 			model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
+			model.setSelection();
 			
 			frame.repaint();
 		}
@@ -613,6 +605,7 @@ public class DrawingController {
 			
 			model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
+			model.setSelection();
 			
 			frame.repaint();
 		}

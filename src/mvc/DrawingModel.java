@@ -88,8 +88,22 @@ public class DrawingModel {
 	
 	public void setSelection ()
 	{
+		int size = selectedShapes.size();
 		prop.firePropertyChange("Selection", null, selectedShapes.size());
-		
+
+		if(size == 1)
+		{
+			Shape s = selectedShapes.get(0);
+			int index = shapes.indexOf(s);
+			int maxIndex = shapes.size()-1;
+			prop.firePropertyChange("BringToBack", null, index > 0); //ovime mu saljem boolean da li je indeks veci od nule
+			prop.firePropertyChange("BringToFront", null, index < maxIndex);
+		}
+		else {
+	        prop.firePropertyChange("BringToBack", null, false);
+	        prop.firePropertyChange("BringToFront", null, false);
+	    }
+
 	}
 	
 	
