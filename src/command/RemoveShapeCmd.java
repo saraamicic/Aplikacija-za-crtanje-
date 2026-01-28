@@ -9,21 +9,28 @@ public class RemoveShapeCmd implements Command {
 
 	public DrawingModel model;
 	public Shape shape;
+	private int orgInd;
 	
 	public RemoveShapeCmd(Shape shape, DrawingModel model)
 	{
 		this.model = model;
 		this.shape = shape;
 	}
-	
-	//uklanja oblik iz liste
-	public void execute() {
-		model.remove(shape);
 
+	public void execute() {
+		orgInd=model.getShapes().indexOf(shape);
+		model.remove(shape);
+		model.removeSelected(shape);
 	}
 
 	public void unexecute() {
-		model.add(shape);
+	    model.getShapes().add(orgInd, shape);
+	    //stari status
+	    shape.setSelected(true);
+	    //vratim ga u listu selektovanih
+	    if (!model.getSelectedShapes().contains(shape)) {
+	        model.getSelectedShapes().add(shape);
+	    }
 	}
 	
 	public String toString()

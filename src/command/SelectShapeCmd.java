@@ -32,7 +32,6 @@ public class SelectShapeCmd implements Command {
 			model.getSelectedShapes().add(shape);
 			shape.setSelected(true);
 		}
-
 	}
 	
 	@Override
@@ -48,16 +47,11 @@ public class SelectShapeCmd implements Command {
 			model.getSelectedShapes().remove(shape);
 			shape.setSelected(false);
 		}
-		
 	}
 
 	
 	public String toString()
 	{
-		
-
-		
-		
 		if (state == false)
 		{
 			if( shape instanceof Point || shape instanceof Line )

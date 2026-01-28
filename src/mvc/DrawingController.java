@@ -9,6 +9,7 @@ import geometry.Rectangle;
 import geometry.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -60,6 +61,7 @@ public class DrawingController {
 		model.addPropertyChangeListener(updateButtons);
 		model.setRedo(redoStack.isEmpty());
 		model.setUndo(undoStack.isEmpty());
+		model.setSelection();
 		
 		log = frame.getTextArea();
 		frame.getView().addMouseListener(new MouseAdapter() {
@@ -84,9 +86,6 @@ public class DrawingController {
 						
 						model.setUndo(undoStack.isEmpty());
 						model.setRedo(redoStack.isEmpty());
-						
-						
-						
 						
 					}
 					setShapeType(ShapeTypes.NONE);
@@ -116,6 +115,7 @@ public class DrawingController {
 							
 							model.setUndo(undoStack.isEmpty());
 							model.setRedo(redoStack.isEmpty());
+							
 						}
 						setShapeType(ShapeTypes.NONE);
 						frame.getButtonGroupShapes().clearSelection();
@@ -266,7 +266,7 @@ public class DrawingController {
 						    model.setUndo(undoStack.isEmpty());
 							model.setRedo(redoStack.isEmpty());
 							
-							model.setSelection(model.getSelectedShapes().size());
+							model.setSelection();
 							
 							frame.repaint();
 						}
@@ -495,36 +495,31 @@ public class DrawingController {
 			frame.getButtonGroupShapes().clearSelection();
 
 		} 
-		model.setSelection(model.getSelectedShapes().size());	
+		//model.setSelection();	
 		frame.getButtonGroupShapes().clearSelection();
 		frame.repaint();
 	}
-
+	
 	public void Delete() {
-		
-		Iterator <Shape> it = model.getSelectedShapes().iterator();
-			while(it.hasNext())
-			{
-				RemoveShapeCmd remove = new RemoveShapeCmd(it.next(),model);
-				remove.execute();
-				log.append(remove.toString() + "\n");
-					
-				undoStack.push(remove);
-				redoStack.clear();
-					
-				model.setUndo(undoStack.isEmpty());
-				model.setRedo(redoStack.isEmpty());
-					
-				frame.repaint();
-			}
 
-		model.getSelectedShapes().clear(); //moram da ispraznim sad i listu selektovanih
-		model.setSelection(model.getSelectedShapes().size());	
-
-		frame.repaint();
-		frame.getButtonGroupShapes().clearSelection();
+	    for (int i = model.getSelectedShapes().size() - 1; i >= 0; i--) {
+	        Shape s = model.getSelectedShapes().get(i);
+	        RemoveShapeCmd remove = new RemoveShapeCmd(s, model);
+	        
+	        remove.execute(); // deselektuje i brise iz obe liste  u modelu
+	        
+	        undoStack.push(remove);
+	        log.append(remove.toString() + "\n");
+	    }
+	    
+	    //kad je sve obrisano
+	    redoStack.clear();
+	    model.setUndo(undoStack.isEmpty());
+	    model.setRedo(redoStack.isEmpty());
+	    model.setSelection(); 
+	    frame.repaint();
 	}
-
+	
 	public ShapeTypes getShapeType() {
 		return shapeType;
 	}
@@ -636,7 +631,7 @@ public class DrawingController {
             
             model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
-			model.setSelection(model.getSelectedShapes().size());	
+			model.setSelection();
             
             frame.repaint();
         }
@@ -651,7 +646,7 @@ public class DrawingController {
             
             model.setUndo(undoStack.isEmpty());
 			model.setRedo(redoStack.isEmpty());
-			model.setSelection(model.getSelectedShapes().size());	
+			model.setSelection();
             
             frame.repaint();
         }

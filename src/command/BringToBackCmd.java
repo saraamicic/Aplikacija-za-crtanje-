@@ -23,16 +23,11 @@ public class BringToBackCmd implements Command {
 	@Override
 	public void execute() {
 		originalIndex = model.getShapes().indexOf(selectedShape); //pamtimo njegov prvobitan indeks
-		if(selectedShape != null)
-		{
+
 				model.getShapes().remove(selectedShape);   //  ukloni sa stare pozicije
 				model.getShapes().add(0, selectedShape);   //  ubaci na indeks 0
 				
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Please select a shape first","",JOptionPane.ERROR_MESSAGE);
-		}
+
 	}
 	
 	@Override

@@ -39,6 +39,11 @@ public class DrawingModel {
 		shapes.remove(shape);
 	}
 	
+	public void removeSelected(Shape shape)
+	{
+		selectedShapes.remove(shape);
+	}
+	
 	public Shape get (int index)
 	{
 		return shapes.get(index);
@@ -81,10 +86,9 @@ public class DrawingModel {
 		
 	}
 	
-	//za dugmic za brisanje 
-	public void setSelection (int numOfSelected)
+	public void setSelection ()
 	{
-		prop.firePropertyChange("Selection", null, numOfSelected);
+		prop.firePropertyChange("Selection", null, selectedShapes.size());
 		
 	}
 	
