@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import geometry.Shape;
 import mvc.DrawingModel;
@@ -38,6 +39,15 @@ public class SaveDrawingStrategy implements FileStrategy {
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
 			ArrayList<Shape> loadedShapes = (ArrayList<Shape>) ois.readObject();
 			model.getShapes().clear(); // brisem trenutne oblike
+			Iterator<Shape>it = loadedShapes.iterator();
+			while(it.hasNext())
+			{
+				Shape s = it.next();
+				s.setSelected(false); 
+	            model.add(s);
+			}
+			model.getSelectedShapes().clear();
+ 
 			model.getShapes().addAll(loadedShapes); // ubacim ove učitane
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -268,6 +268,13 @@ public class DrawingFrame extends JFrame {
 		
 		JMenuItem mnOpen = new JMenuItem("Open");
 		mnFile.add(mnOpen);
+		mnOpen.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        if (controller != null) {
+		            controller.openFile();
+		        }
+		    }
+		});
 		
 		JMenuItem mnSaveDrawing = new JMenuItem("Save Drawing (.bin)");
 		mnSaveDrawing.addActionListener(new ActionListener() {

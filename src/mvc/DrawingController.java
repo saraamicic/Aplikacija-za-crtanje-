@@ -17,6 +17,7 @@ import java.util.Stack;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import adapter.HexagonAdapter;
 import command.AddShapeCmd;
@@ -41,6 +42,7 @@ import drawing.DlgPoint;
 import drawing.DlgRectangle;
 import mvc.DrawingModel.ShapeTypes;
 import observer.UpdateButtons;
+import strategy.FileStrategy;
 import strategy.SaveDrawingStrategy;
 import strategy.SaveLogStrategy;
 
@@ -686,8 +688,36 @@ public class DrawingController {
             SaveLogStrategy strategy = new SaveLogStrategy(frame);
             strategy.Save(file);
             
-            System.out.println("Log je uspešno sačuvan!");
+            System.out.println("Log sacuvan");
         }
     	
     }
+    
+    public void openFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Otvori fajl");
+        
+        // prikazujemo samo .bin i .txt
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Binarni crtež (.bin)", "bin"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Tekstualni log (.txt)", "txt"));
+
+        if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            FileStrategy strategy; 
+
+            //u zavisnosti od ekstenzije pozivam funk
+            if (file.getName().toLowerCase().endsWith(".bin")) {
+                strategy = new SaveDrawingStrategy(model);
+            } else if (file.getName().toLowerCase().endsWith(".txt")) {
+                strategy = new SaveLogStrategy(frame);
+            } else {
+                return;
+            }
+
+            strategy.Open(file);
+        
+            frame.repaint();
+        }
+    }
+    
 }
