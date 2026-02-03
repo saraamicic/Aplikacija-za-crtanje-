@@ -18,8 +18,13 @@ import javax.swing.JColorChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.MenuBar;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class DrawingFrame extends JFrame {
 	DrawingController controller;
@@ -57,7 +62,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnPoint);
-		tglbtnPoint.setBounds(32, 23, 70, 26);
+		tglbtnPoint.setBounds(22, 23, 70, 26);
 		getContentPane().add(tglbtnPoint);
 		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
@@ -68,7 +73,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnLine);
-		tglbtnLine.setBounds(112, 23, 70, 26);
+		tglbtnLine.setBounds(102, 23, 70, 26);
 		getContentPane().add(tglbtnLine);
 		
 		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
@@ -79,7 +84,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnRectangle);
-		tglbtnRectangle.setBounds(189, 23, 84, 26);
+		tglbtnRectangle.setBounds(182, 23, 84, 26);
 		getContentPane().add(tglbtnRectangle);
 		
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
@@ -90,7 +95,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnCircle);
-		tglbtnCircle.setBounds(283, 23, 70, 26);
+		tglbtnCircle.setBounds(276, 23, 70, 26);
 		getContentPane().add(tglbtnCircle);
 		
 		JToggleButton tglbtnDonut = new JToggleButton("Donut");
@@ -101,7 +106,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnDonut);
-		tglbtnDonut.setBounds(363, 23, 70, 26);
+		tglbtnDonut.setBounds(356, 23, 70, 26);
 		getContentPane().add(tglbtnDonut);
 		
 		JToggleButton tglbtnHexagon = new JToggleButton("Hexagon");
@@ -112,7 +117,7 @@ public class DrawingFrame extends JFrame {
 			}
 		});
 		buttonGroupShapes.add(tglbtnHexagon);
-		tglbtnHexagon.setBounds(443, 23, 84, 26);
+		tglbtnHexagon.setBounds(436, 23, 84, 26);
 		getContentPane().add(tglbtnHexagon);
 		
 		btnModify = new JButton("Modify");
@@ -237,7 +242,7 @@ public class DrawingFrame extends JFrame {
 				btnDefaultBorderColor.setBackground(defaultBorderColor);
 			}
 		});
-		btnDefaultBorderColor.setBounds(649, 23, 108, 26);
+		btnDefaultBorderColor.setBounds(661, 23, 108, 26);
 		getContentPane().add(btnDefaultBorderColor);
 		
 		JButton btnDefaultAreaColor = new JButton("Area Color");
@@ -247,8 +252,43 @@ public class DrawingFrame extends JFrame {
 				btnDefaultAreaColor.setBackground(defaultAreaColor);
 			}
 		});
-		btnDefaultAreaColor.setBounds(767, 23, 102, 26);
+		btnDefaultAreaColor.setBounds(779, 23, 102, 26);
 		getContentPane().add(btnDefaultAreaColor);
+		
+		//za strategy
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.setBounds(39, 23, 101, 22);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+
+		JMenu mnSave = new JMenu("Save");
+		mnFile.add(mnSave);
+		
+		JMenuItem mnOpen = new JMenuItem("Open");
+		mnFile.add(mnOpen);
+		
+		JMenuItem mnSaveDrawing = new JMenuItem("Save Drawing (.bin)");
+		mnSaveDrawing.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        if (controller != null) {
+		            controller.saveDrawing();
+		        }
+		    }
+		});
+		mnSave.add(mnSaveDrawing);
+
+		JMenuItem mnSaveLog = new JMenuItem("Save Log (.txt)");
+		mnSaveLog.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        if (controller != null) {
+		            controller.saveLog();
+		        }
+		    }
+		});
+		mnSave.add(mnSaveLog);
+		
 		
 	}
 	
@@ -326,6 +366,4 @@ public class DrawingFrame extends JFrame {
 	public JButton getBtnToFront() {
 		return btnToFront;
 	}
-	
-	
 }

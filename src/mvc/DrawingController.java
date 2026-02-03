@@ -9,10 +9,12 @@ import geometry.Rectangle;
 import geometry.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -39,6 +41,8 @@ import drawing.DlgPoint;
 import drawing.DlgRectangle;
 import mvc.DrawingModel.ShapeTypes;
 import observer.UpdateButtons;
+import strategy.SaveDrawingStrategy;
+import strategy.SaveLogStrategy;
 
 
 public class DrawingController {
@@ -484,6 +488,7 @@ public class DrawingController {
 					
 					modifHex.execute();
 					log.append(modifHex.toString() + "\n");
+					undoStack.push(modifHex);
 					redoStack.clear();
 					
 					model.setUndo(undoStack.isEmpty());
@@ -644,5 +649,45 @@ public class DrawingController {
             frame.repaint();
         }
     }
+    
+    public void saveDrawing()
+    {
+    	JFileChooser fileChooser = new JFileChooser();
+    	fileChooser.setDialogTitle("Sačuvaj crtež kao .bin");
+    	
+    	if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            
+            // mora da ima .bin ekst
+            if (!file.getName().toLowerCase().endsWith(".bin")) {
+                file = new File(file.getAbsolutePath() + ".bin");
+            }
 
+            SaveDrawingStrategy strategy = new SaveDrawingStrategy(model);
+            strategy.Save(file);
+            
+            System.out.println("radi");
+        }
+    	
+    }
+    
+    public void saveLog()
+    {
+    	JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Sačuvaj log kao .txt");
+
+        if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            //samo sa txt ekst
+            if (!file.getName().toLowerCase().endsWith(".txt")) {
+                file = new File(file.getAbsolutePath() + ".txt");
+            }
+
+            SaveLogStrategy strategy = new SaveLogStrategy(frame);
+            strategy.Save(file);
+            
+            System.out.println("Log je uspešno sačuvan!");
+        }
+    	
+    }
 }

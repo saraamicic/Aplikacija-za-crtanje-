@@ -3,7 +3,7 @@ package geometry;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Line extends Shape {
+public class Line extends Shape implements Cloneable{
 
 	private Point startPoint;
 	private Point endPoint;
@@ -108,6 +108,18 @@ public class Line extends Shape {
 		}
 
 		g.setColor(Color.BLACK);
+	}
+	
+	
+	public Line clone()
+	{
+		try {
+			return (Line)super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null; //mora da ne bi bila greska jer mora da vrati i ovde nesto
+		}
 	}
 
 }
