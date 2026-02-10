@@ -41,6 +41,7 @@ public class DrawingFrame extends JFrame {
 	JButton btnBringToFront;
 	JButton btnToBack;
 	JButton btnToFront;
+	JButton btnNext;
 	
 	public DrawingFrame() {
 		getContentPane().setBackground(new Color(192, 192, 192));
@@ -255,6 +256,16 @@ public class DrawingFrame extends JFrame {
 		btnDefaultAreaColor.setBounds(779, 23, 102, 26);
 		getContentPane().add(btnDefaultAreaColor);
 		
+		btnNext = new JButton("Next line");
+		btnNext.setEnabled(false);
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.executeNextLine();
+			}
+		});
+		btnNext.setBounds(164, 529, 85, 21);
+		getContentPane().add(btnNext);
+		
 		//za strategy
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -373,4 +384,17 @@ public class DrawingFrame extends JFrame {
 	public JButton getBtnToFront() {
 		return btnToFront;
 	}
+
+
+	public JButton getBtnNext() {
+		return btnNext;
+	}
+
+
+	public void setBtnNext(JButton btnNext) {
+		this.btnNext = btnNext;
+	}
+	
+	
+	
 }

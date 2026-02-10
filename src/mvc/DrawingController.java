@@ -7,11 +7,14 @@ import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Shape;
+
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 
 import javax.swing.JFileChooser;
@@ -57,6 +60,8 @@ public class DrawingController {
 	Stack <Command> undoStack = new Stack<Command>(); //znaci cuva sve sto implementira interfejs command
 	Stack <Command> redoStack = new Stack<Command>();
 	JTextArea log;
+	private List<String> loadedLines = new ArrayList<>();
+	private int currentLineIndex = 0;
 	public ShapeTypes shapeType = mvc.DrawingModel.ShapeTypes.NONE;
 
 	public DrawingController(DrawingModel model, DrawingFrame frame) {
@@ -668,7 +673,6 @@ public class DrawingController {
             SaveDrawingStrategy strategy = new SaveDrawingStrategy(model);
             strategy.Save(file);
             
-            System.out.println("radi");
         }
     	
     }
@@ -688,7 +692,6 @@ public class DrawingController {
             SaveLogStrategy strategy = new SaveLogStrategy(frame);
             strategy.Save(file);
             
-            System.out.println("Log sacuvan");
         }
     	
     }
@@ -698,8 +701,8 @@ public class DrawingController {
         fileChooser.setDialogTitle("Otvori fajl");
         
         // prikazujemo samo .bin i .txt
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Binarni crtež (.bin)", "bin"));
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Tekstualni log (.txt)", "txt"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("(.bin)", "bin"));
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("(.txt)", "txt"));
 
         if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
@@ -708,16 +711,91 @@ public class DrawingController {
             //u zavisnosti od ekstenzije pozivam funk
             if (file.getName().toLowerCase().endsWith(".bin")) {
                 strategy = new SaveDrawingStrategy(model);
-            } else if (file.getName().toLowerCase().endsWith(".txt")) {
-                strategy = new SaveLogStrategy(frame);
+                log.setText("");
+                frame.getBtnUndo().setEnabled(false);
+            } else if (file.getName().toLowerCase().endsWith(".txt")) { //za log
+                strategy = new SaveLogStrategy(frame,this);
+                
             } else {
                 return;
             }
 
             strategy.Open(file);
-        
             frame.repaint();
         }
+    }
+    
+    
+    public void executeNextLine() {
+        if (currentLineIndex < loadedLines.size()) {
+            String line = loadedLines.get(currentLineIndex);
+            parseAndExecute(line);
+            log.append(line + "\n");
+            currentLineIndex++;
+            frame.repaint();
+        } else {
+            JOptionPane.showMessageDialog(null, "No more lines to execute");
+            frame.getBtnNext().setEnabled(false); 
+        }
+        frame.repaint();
+    }
+    
+    private void parseAndExecute(String line) {
+        String[] parts = line.split("--");
+        String command = parts[0]; // add, delete, selected itd
+        String detail = parts[1];  // circle x,y;radius=r itd
+
+        if (command.equals("ADD")) {
+            if (detail.startsWith("POINT")) {
+            	String[] data = detail.split(";");
+            	
+                String coordsPart = data[0].split(" ")[1]; 
+                int x = Integer.parseInt(coordsPart.split(",")[0]);
+                int y = Integer.parseInt(coordsPart.split(",")[1]);
+             
+                Color borderColor = new Color(Integer.parseInt(data[1].split(":")[1]));
+                
+                Point p = new Point(x, y);
+                p.setBorderColor(borderColor);
+                
+                AddShapeCmd addCmd = new AddShapeCmd(p, model);
+                addCmd.execute(); 
+                undoStack.push(addCmd);
+                frame.repaint();
+            	
+            }
+            else if(detail.startsWith("CIRCLE"))
+            {
+            	String[] data = detail.split(";");
+            	
+                String coordsPart = data[0].split(" ")[1]; 
+                int x = Integer.parseInt(coordsPart.split(",")[0]);
+                int y = Integer.parseInt(coordsPart.split(",")[1]);
+             
+                int radius = Integer.parseInt(data[1].split("=")[1]);
+                Color borderColor = new Color(Integer.parseInt(data[2].split(":")[1]));
+                Color areaColor = new Color(Integer.parseInt(data[3].split(":")[1]));
+                
+                Circle c = new Circle(new Point(x, y), radius);
+                c.setBorderColor(borderColor);
+                c.setAreaColor(areaColor);
+                
+                AddShapeCmd addCmd = new AddShapeCmd(c, model);
+                addCmd.execute(); 
+                undoStack.push(addCmd);
+                frame.repaint();
+            	
+            }
+            else if(detail.startsWith("LINE"))
+            {
+            	
+            }
+        }
+    }
+    
+    public void setLoadedLines(List<String> lines) {
+        this.loadedLines = new ArrayList<>(lines);
+        this.currentLineIndex = 0;
     }
     
 }

@@ -47,7 +47,6 @@ public class SaveDrawingStrategy implements FileStrategy {
 	            model.add(s);
 			}
 			model.getSelectedShapes().clear();
- 
 			model.getShapes().addAll(loadedShapes); // ubacim ove učitane
 		} catch (Exception e) {
 			e.printStackTrace();

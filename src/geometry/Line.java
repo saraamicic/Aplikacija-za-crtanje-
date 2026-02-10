@@ -70,8 +70,8 @@ public class Line extends Shape implements Cloneable{
 	}
 
 	public String toString() {
-		return "LINE StartPoint: (" + startPoint.getXCoordinate() + ", " + startPoint.getYCoordinate() +
-				") EndPoint: (" + endPoint.getXCoordinate() + ", " + endPoint.getYCoordinate() + ")";
+		return "LINE " + startPoint.getXCoordinate() + "," + startPoint.getYCoordinate() +
+				"," + endPoint.getXCoordinate() + "," + endPoint.getYCoordinate();
 	}
 
 	public boolean equals(Object obj) {

@@ -56,22 +56,22 @@ public class SelectShapeCmd implements Command {
 		{
 			if( shape instanceof Point || shape instanceof Line )
 			{
-				return "SELECTED " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
+				return "SELECTED--" + shape.toString() + ";Color:" + shape.getBorderColor().getRGB();
 			}
 			else 
 			{
-				return "SELECTED " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
+				return "SELECTED--" + shape.toString() + ";Border color:" + shape.getBorderColor().getRGB() +";Area color:" + shape.getAreaColor().getRGB();
 			}
 		}
 		else
 		{
 			if( shape instanceof Point || shape instanceof Line )
 			{
-				return "DESELECTED " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
+				return "DESELECTED--" + shape.toString() + ";Color:" + shape.getBorderColor().getRGB();
 			}
 			else 
 			{
-				return "DESELECTED " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
+				return "DESELECTED--" + shape.toString() + ";Border color:" + shape.getBorderColor().getRGB() + ";Area color:" + shape.getAreaColor().getRGB();
 			}
 		}
 	

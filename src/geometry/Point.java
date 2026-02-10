@@ -84,7 +84,7 @@ public class Point extends Shape {
 	}
 
 	public String toString() {
-		return "POINT (" + xCoordinate + "," + yCoordinate + ")";
+		return "POINT " + xCoordinate + "," + yCoordinate;
 	}
 
 	// point1 == point2 to je poredjenje po referenci i gledamo da li imaju istu

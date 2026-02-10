@@ -37,11 +37,11 @@ public class RemoveShapeCmd implements Command {
 	{
 		if( shape instanceof Point || shape instanceof Line )
 		{
-			return "DELETE " + shape.toString() + " Color: " + shape.getBorderColor().getRGB();
+			return "DELETE--" + shape.toString() + ";Color:" + shape.getBorderColor().getRGB();
 		}
 		else 
 		{
-			return "DELETE " + shape.toString() + " Border color: " + shape.getBorderColor().getRGB() + " Area color: " + shape.getAreaColor().getRGB();
+			return "DELETE--" + shape.toString() + ";Border color:" + shape.getBorderColor().getRGB() + ";Area color:" + shape.getAreaColor().getRGB();
 		}
 		
 	}
