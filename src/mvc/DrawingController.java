@@ -844,6 +844,7 @@ public class DrawingController {
                 undoStack.push(addCmd);
                 redoStack.clear();
                 frame.repaint();
+                
             }
             else if(detail.startsWith("DONUT"))
             {
@@ -971,8 +972,76 @@ public class DrawingController {
             model.setRedo(redoStack.isEmpty());
             frame.repaint();
         }
-
-
+        
+        else if(command.equals("MODIFY"))
+        {
+            String[] states = detail.split(">>"); //staru novu vr
+            Shape shapeToModify = findShapeInModel(states[0]); //nadjemo stari oblik
+            
+                if (shapeToModify instanceof Point) {
+                    // tacka sa novim vrednostima
+                    Point newState = parsePointFromLog(states[1]);
+                    ModifyPointCmd modifPoint = new ModifyPointCmd((Point)shapeToModify, newState);
+                    
+                    modifPoint.execute();
+                    undoStack.push(modifPoint);
+                    redoStack.clear();
+                    frame.repaint();
+                }
+                else if(shapeToModify instanceof Line) {
+                	Line newState = parseLineFromLog(states[1]);
+                	ModifyLineCmd modifLine = new ModifyLineCmd((Line)shapeToModify, newState);
+                	
+                	modifLine.execute();
+                	undoStack.push(modifLine);
+                	redoStack.clear();
+                	frame.repaint();
+                }
+                else if(shapeToModify instanceof Rectangle) {
+                	Rectangle newState = parseRectFromLog(states[1]);
+                	ModifyRectangleCmd modifRect = new ModifyRectangleCmd((Rectangle)shapeToModify, newState);
+                	
+                	modifRect.execute();
+                	undoStack.push(modifRect);
+                    redoStack.clear();
+                    frame.repaint();
+                	
+               }
+               else if(shapeToModify instanceof Donut)
+               {
+            	   Donut newState = parseDonutFromLog(states[1]);
+                	ModifyDonutCmd modi = new ModifyDonutCmd((Donut)shapeToModify, newState);
+                	modi.execute();
+                	undoStack.push(modi);
+                	redoStack.clear();
+                	frame.repaint();
+                	
+               }
+                
+               else if(shapeToModify instanceof Circle)
+               {
+                	Circle newState = parseCircleFromLog(states[1]);
+                	ModifyCircleCmd mod = new ModifyCircleCmd((Circle)shapeToModify, newState);
+                	mod.execute();
+                	undoStack.push(mod);
+                	redoStack.clear();
+                	frame.repaint();
+                	
+               }
+                
+               else if (shapeToModify instanceof HexagonAdapter)
+               {
+                	HexagonAdapter newState = parseHexFromLog(states[1]);
+                	ModifyHexagonCmd modi = new ModifyHexagonCmd((HexagonAdapter)shapeToModify, newState);
+                	modi.execute();
+                	undoStack.push(modi);
+                	redoStack.clear();
+                	frame.repaint();
+                	
+               }
+                
+        }
+              
 
     }
     
@@ -991,7 +1060,7 @@ public class DrawingController {
             } else {
                 modelShapeString = s.toString() + ";Border color:" + s.getBorderColor().getRGB() + ";Area color:" + s.getAreaColor().getRGB();
             }
-
+            
             // nasla ako su isti
             if (modelShapeString.equals(shapeStringFromLog)) {
                 return s;
@@ -1000,5 +1069,123 @@ public class DrawingController {
         return null;
     }
     
+    private Point parsePointFromLog(String detail) {
+    	
+        String[] space = detail.split(" "); 
+        String[] data = space[1].split(";");
+        
+        String[] coords = data[0].split(",");
+        int x = Integer.parseInt(coords[0].trim());
+        int y = Integer.parseInt(coords[1].trim());
+        
+        String color = data[1].split(":")[1].trim();
+        int colorRGB = Integer.parseInt(color);
+        
+        Point p = new Point(x, y);
+        p.setBorderColor(new Color(colorRGB));
+        return p;
+    }
+    
+    private Line parseLineFromLog(String detail)
+    {
+        String clean = detail.replace("LINE ", "");
+        String[] parts = clean.split(";"); 
+
+        String[] startCoords = parts[0].split(",");
+        int xs = Integer.parseInt(startCoords[0]);
+        int ys = Integer.parseInt(startCoords[1]);
+        
+        String[] endCoords = parts[1].split(",");
+        int xe = Integer.parseInt(endCoords[0]);
+        int ye = Integer.parseInt(endCoords[1]);
+        
+        int colorRGB = Integer.parseInt(parts[2].split(":")[1]);
+        
+        Line l = new Line(new Point(xs, ys), new Point(xe, ye));
+        l.setBorderColor(new Color(colorRGB));
+        return l;
+    	
+    }
+    
+    private Rectangle parseRectFromLog(String detail)
+    {
+    	String clean = detail.replace("RECTANGLE ", "");
+    	String [] parts = clean.split(";");
+
+    	String[] coords = parts[0].split(",");
+    	int x = Integer.parseInt(coords[0]);
+    	int y = Integer.parseInt(coords[1]);
+    	
+    	int width = Integer.parseInt(parts[1].split("=")[1]);
+    	int height = Integer.parseInt(parts[2].split("=")[1]);
+    	
+    	int borderColor = Integer.parseInt(parts[3].split(":")[1]);
+    	int areaColor = Integer.parseInt(parts[4].split(":")[1]);
+
+    	Rectangle r = new Rectangle(new Point(x, y), width, height);
+    	r.setBorderColor(new Color(borderColor));
+    	r.setAreaColor(new Color(areaColor));
+
+    	return r;
+    }
+    
+    private Circle parseCircleFromLog(String detail){
+
+    	String clean = detail.replace("CIRCLE ", "");
+    	String [] parts = clean.split(";");
+    	String[] coords = parts[0].split(",");
+    	int x = Integer.parseInt(coords[0]);
+    	int y = Integer.parseInt(coords[1]);
+    	
+    	int radius = Integer.parseInt(parts[1].split("=")[1]);
+    	int borderColor = Integer.parseInt(parts[2].split(":")[1]);
+    	int areaColor = Integer.parseInt(parts[3].split(":")[1]);
+    	
+    	Circle c = new Circle(new Point(x, y), radius);
+    	c.setBorderColor(new Color(borderColor));
+    	c.setAreaColor(new Color(areaColor));
+    	
+    	return c;
+    }
+    
+    private Donut parseDonutFromLog(String detail)
+    {
+    	String clean = detail.replace("DONUT ", "");
+    	String [] parts = clean.split(";");
+    	String[] coords = parts[0].split(",");
+    	int x = Integer.parseInt(coords[0]);
+    	int y = Integer.parseInt(coords[1]);
+    	
+    	int radius = Integer.parseInt(parts[1].split("=")[1]);
+    	int innerRadius = Integer.parseInt(parts[2].split("=")[1]);
+    	int borderColor = Integer.parseInt(parts[3].split(":")[1]);
+    	int areaColor = Integer.parseInt(parts[4].split(":")[1]);
+    	
+    	Donut d = new Donut(new Point(x, y), radius, innerRadius);
+    	d.setBorderColor(new Color(borderColor));
+    	d.setAreaColor(new Color(areaColor));
+    	
+    	return d;
+    	
+    }
+    
+    private HexagonAdapter parseHexFromLog(String detail){
+
+    	String clean = detail.replace("HEXAGON ", "");
+    	String [] parts = clean.split(";");
+    	String[] coords = parts[0].split(",");
+    	int x = Integer.parseInt(coords[0]);
+    	int y = Integer.parseInt(coords[1]);
+    	
+    	int radius = Integer.parseInt(parts[1].split("=")[1]);
+    	int borderColor = Integer.parseInt(parts[2].split(":")[1]);
+    	int areaColor = Integer.parseInt(parts[3].split(":")[1]);
+    	
+    	HexagonAdapter hex = new HexagonAdapter(x, y, radius);
+    	hex.setBorderColor(new Color(borderColor));
+    	hex.setAreaColor(new Color(areaColor));
+    	
+    	return hex;
+    }
     
 }

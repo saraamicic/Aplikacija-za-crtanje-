@@ -60,8 +60,8 @@ public class ModifyHexagonCmd implements Command {
 	
 	public String toString()
 	{
-		return "MODIFY old values: " + hexagon.toString() + " Border Color: " + hexagon.getBorderColor().getRGB() + " Area Color: " + hexagon.getAreaColor().getRGB()
-				+ ", new values: " + newState.toString() + " Border Color: " + newState.getBorderColor().getRGB() + " Area Color: " + newState.getAreaColor().getRGB();
+		return "MODIFY--" + oldState.toString() + ";Border color:" + oldState.getBorderColor().getRGB() + ";Area color:" + oldState.getAreaColor().getRGB()
+				+ ">>" + newState.toString() + ";Border color:" + newState.getBorderColor().getRGB() + ";Area color:" + newState.getAreaColor().getRGB();
 	}
 	
 

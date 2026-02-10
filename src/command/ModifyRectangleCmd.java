@@ -7,9 +7,7 @@ public class ModifyRectangleCmd implements Command {
 
 	private Rectangle rectangle; //stari
 	private Rectangle newState; //kakav zelimo
-	
-	private Point p1 = new Point(0,0);
-	private Rectangle oldState = new Rectangle(p1,0,0); //pomocni (moramo da mu dodelimo vrednosti inace dobijam null pointer exception
+	private Rectangle oldState = new Rectangle(new Point(0,0),0,0); //pomocni (moramo da mu dodelimo vrednosti inace dobijam null pointer exception
 	
 	
 	public ModifyRectangleCmd(Rectangle rectangle, Rectangle newState)
@@ -33,6 +31,7 @@ public class ModifyRectangleCmd implements Command {
 		rectangle.setWidth(newState.getWidth());
 		rectangle.setBorderColor(newState.getBorderColor());
 		rectangle.setAreaColor(newState.getAreaColor());
+
 		
 	}
 
@@ -47,7 +46,7 @@ public class ModifyRectangleCmd implements Command {
 	}
 	public String toString()
 	{
-		return "MODIFY old values: " + rectangle.toString() + " Border Color: " + rectangle.getBorderColor().getRGB() + " Area Color: " + rectangle.getAreaColor().getRGB()
-				+ ", new values: " + newState.toString() + " Border Color: " + newState.getBorderColor().getRGB() + " Area Color: " + newState.getAreaColor().getRGB();
+		return "MODIFY--" + oldState.toString() + ";Border color:" + oldState.getBorderColor().getRGB() + ";Area color:" + oldState.getAreaColor().getRGB()
+				+ ">>" + newState.toString() + ";Border color:" + newState.getBorderColor().getRGB() + ";Area color:" + newState.getAreaColor().getRGB();
 	}
 }

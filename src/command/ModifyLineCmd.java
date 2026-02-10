@@ -47,7 +47,7 @@ public class ModifyLineCmd implements Command {
 
 	public String toString()
 	{
-		return "MODIFY old values: " + line.toString() + " Color: " + line.getBorderColor().getRGB() + 
-				" new values: " + newState.toString() + " Color: " + line.getBorderColor().getRGB();	
+		return "MODIFY--" + oldState.toString() + ";Color:" + oldState.getBorderColor().getRGB() + 
+				">>" + newState.toString() + ";Color:" + newState.getBorderColor().getRGB();	
 	}
 }
