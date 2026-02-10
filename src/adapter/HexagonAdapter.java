@@ -41,7 +41,7 @@ public class HexagonAdapter extends Shape {
 	}
 	//dodala
 	public String toString() {
-		return "HEXAGON Center: (" + hexagon.getX() + "," + hexagon.getY() + ", radius=" + hexagon.getR() + ")";
+		return "HEXAGON " + hexagon.getX() + "," + hexagon.getY() + ";radius=" + hexagon.getR();
 	}
 
 	@Override

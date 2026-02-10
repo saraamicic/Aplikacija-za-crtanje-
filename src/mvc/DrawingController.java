@@ -7,6 +7,7 @@ import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Shape;
+import hexagon.Hexagon;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -761,6 +762,7 @@ public class DrawingController {
                 AddShapeCmd addCmd = new AddShapeCmd(p, model);
                 addCmd.execute(); 
                 undoStack.push(addCmd);
+                redoStack.clear();
                 frame.repaint();
             	
             }
@@ -783,13 +785,120 @@ public class DrawingController {
                 AddShapeCmd addCmd = new AddShapeCmd(c, model);
                 addCmd.execute(); 
                 undoStack.push(addCmd);
+                redoStack.clear();
                 frame.repaint();
             	
             }
             else if(detail.startsWith("LINE"))
             {
+            	String[] data = detail.split(";");
             	
+                String coordsPart = data[0].split(" ")[1]; 
+                int xs = Integer.parseInt(coordsPart.split(",")[0]);
+                int ys = Integer.parseInt(coordsPart.split(",")[1]);
+                
+                String coordsPart2 = data[1];
+                int xe = Integer.parseInt(coordsPart2.split(",")[0]);
+                int ye = Integer.parseInt(coordsPart2.split(",")[1]);
+             
+                Color borderColor = new Color(Integer.parseInt(data[2].split(":")[1]));
+                
+                Line l = new Line(new Point(xs, ys), new Point(xe, ye));
+                l.setBorderColor(borderColor);
+                
+                AddShapeCmd addCmd = new AddShapeCmd(l, model);
+                addCmd.execute(); 
+                undoStack.push(addCmd);
+                redoStack.clear();
+                frame.repaint();
             }
+            else if(detail.startsWith("RECTANGLE"))
+            {
+            	String[] data = detail.split(";");
+            	
+                String coordsPart = data[0].split(" ")[1]; 
+                int x = Integer.parseInt(coordsPart.split(",")[0]);
+                int y = Integer.parseInt(coordsPart.split(",")[1]);
+             
+                int width = Integer.parseInt(data[1].split("=")[1]);
+                int height = Integer.parseInt(data[2].split("=")[1]);
+         
+                Color borderColor = new Color(Integer.parseInt(data[3].split(":")[1]));
+                Color areaColor = new Color(Integer.parseInt(data[4].split(":")[1]));
+                
+                Rectangle r = new Rectangle(new Point(x,y), width, height);
+                r.setBorderColor(borderColor);
+                r.setAreaColor(areaColor);
+                
+                AddShapeCmd addCmd = new AddShapeCmd(r, model);
+                addCmd.execute(); 
+                undoStack.push(addCmd);
+                redoStack.clear();
+                frame.repaint();
+            }
+            else if(detail.startsWith("DONUT"))
+            {
+            	String[] data = detail.split(";");
+            	
+                String coordsPart = data[0].split(" ")[1]; 
+                int x = Integer.parseInt(coordsPart.split(",")[0]);
+                int y = Integer.parseInt(coordsPart.split(",")[1]);
+             
+                int radius = Integer.parseInt(data[1].split("=")[1]);
+                int innerRadius = Integer.parseInt(data[2].split("=")[1]);
+                Color borderColor = new Color(Integer.parseInt(data[3].split(":")[1]));
+                Color areaColor = new Color(Integer.parseInt(data[4].split(":")[1]));
+                
+                Donut d = new Donut(new Point(x,y), radius, innerRadius);
+                d.setBorderColor(borderColor);
+                d.setAreaColor(areaColor);
+                
+                AddShapeCmd addCmd = new AddShapeCmd(d, model);
+                addCmd.execute(); 
+                undoStack.push(addCmd);
+                redoStack.clear();
+                frame.repaint();
+            }
+            else if(detail.startsWith("HEXAGON"))
+            {
+            	String[] data = detail.split(";");
+            	
+                String coordsPart = data[0].split(" ")[1]; 
+                int x = Integer.parseInt(coordsPart.split(",")[0]);
+                int y = Integer.parseInt(coordsPart.split(",")[1]);
+             
+                int radius = Integer.parseInt(data[1].split("=")[1]);
+                Color borderColor = new Color(Integer.parseInt(data[2].split(":")[1]));
+                Color areaColor = new Color(Integer.parseInt(data[3].split(":")[1]));
+                
+                HexagonAdapter h  = new HexagonAdapter(x, y, radius);
+                h.setBorderColor(borderColor);
+                h.setAreaColor(areaColor);
+                
+                AddShapeCmd addCmd = new AddShapeCmd(h, model);
+                addCmd.execute(); 
+                undoStack.push(addCmd);
+                redoStack.clear();
+                frame.repaint();
+            }
+        }
+        else if (command.equals("SELECTED") || command.equals("DESELECTED")) {
+        	//saljem detalje da nadjem u modelu takav
+            Shape shapeToSelect = findShapeInModel(detail);
+                SelectShapeCmd select = new SelectShapeCmd(shapeToSelect, model);
+                select.execute();
+                undoStack.push(select);
+                redoStack.clear();
+                frame.repaint();
+        }
+
+        else if (command.equals("DELETE")) {
+            Shape shapeToDelete = findShapeInModel(detail);
+                RemoveShapeCmd remove = new RemoveShapeCmd(shapeToDelete, model);
+                remove.execute();
+                undoStack.push(remove);
+                redoStack.clear();
+                frame.repaint();
         }
     }
     
@@ -797,5 +906,25 @@ public class DrawingController {
         this.loadedLines = new ArrayList<>(lines);
         this.currentLineIndex = 0;
     }
+    
+    private Shape findShapeInModel(String shapeStringFromLog) {
+        for (Shape s : model.getShapes()) {
+            String modelShapeString = "";
+            
+            // rekonst toStringa
+            if (s instanceof Point || s instanceof Line) {
+                modelShapeString = s.toString() + ";Color:" + s.getBorderColor().getRGB();
+            } else {
+                modelShapeString = s.toString() + ";Border color:" + s.getBorderColor().getRGB() + ";Area color:" + s.getAreaColor().getRGB();
+            }
+
+            // nasla ako su isti
+            if (modelShapeString.equals(shapeStringFromLog)) {
+                return s;
+            }
+        }
+        return null;
+    }
+    
     
 }
