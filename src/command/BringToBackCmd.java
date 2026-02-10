@@ -40,11 +40,11 @@ public class BringToBackCmd implements Command {
 	{
 		if( selectedShape instanceof Point || selectedShape instanceof Line )
 		{
-			return "Bring To Back shape: " + selectedShape.toString() + " Color: " + selectedShape.getBorderColor().getRGB();
+			return "BRING_TO_BACK--" + selectedShape.toString() + ";Color:" + selectedShape.getBorderColor().getRGB();
 		}
 		else 
 		{
-			return "Bring To Back shape: " + selectedShape.toString() + " Border color: " + selectedShape.getBorderColor().getRGB() + " Area color: " + selectedShape.getAreaColor().getRGB();
+			return "BRING_TO_BACK--" + selectedShape.toString() + ";Border color:" + selectedShape.getBorderColor().getRGB() + ";Area color:" + selectedShape.getAreaColor().getRGB();
 		}
 	}
 	

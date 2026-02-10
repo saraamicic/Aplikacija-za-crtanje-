@@ -60,11 +60,11 @@ public class ToFrontCmd implements Command {
 	{
 		if( selectedShape instanceof Point || selectedShape instanceof Line )
 		{
-			return "To Front shape: " + selectedShape.toString() + " Color: " + selectedShape.getBorderColor().getRGB();
+			return "TO_FRONT--" + selectedShape.toString() + ";Color:" + selectedShape.getBorderColor().getRGB();
 		}
 		else 
 		{
-			return "To Front shape " + selectedShape.toString() + " Border color: " + selectedShape.getBorderColor().getRGB() + " Area color: " + selectedShape.getAreaColor().getRGB();
+			return "TO_FRONT--" + selectedShape.toString() + ";Border color:" + selectedShape.getBorderColor().getRGB() + ";Area color:" + selectedShape.getAreaColor().getRGB();
 		}
 	}
 

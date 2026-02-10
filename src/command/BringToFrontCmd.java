@@ -49,11 +49,11 @@ public class BringToFrontCmd implements Command {
 	{
 		if( selectedShape instanceof Point || selectedShape instanceof Line )
 		{
-			return "Bring To Front shape: " + selectedShape.toString() + " Color: " + selectedShape.getBorderColor().getRGB();
+			return "BRING_TO_FRONT--" + selectedShape.toString() + ";Color:" + selectedShape.getBorderColor().getRGB();
 		}
 		else 
 		{
-			return "Bring To Front shape " + selectedShape.toString() + " Border color: " + selectedShape.getBorderColor().getRGB() + " Area color: " + selectedShape.getAreaColor().getRGB();
+			return "BRING_TO_FRONT--" + selectedShape.toString() + ";Border color:" + selectedShape.getBorderColor().getRGB() + ";Area color:" + selectedShape.getAreaColor().getRGB();
 		}
 	}
 

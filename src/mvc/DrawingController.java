@@ -543,6 +543,9 @@ public class DrawingController {
 	public void BringToBack() {
 		
 			selectedShape = model.returnOneSelected();
+			if(model.get(0).equals(selectedShape))
+				return;
+				
 			BringToBackCmd btb = new BringToBackCmd(selectedShape, model);
 			btb.execute();
 			log.append(btb.toString() + "\n");
@@ -562,6 +565,8 @@ public class DrawingController {
 		if(model.getSelectedShapes().size()==1)
 		{
 			selectedShape = model.returnOneSelected();
+			if(model.get(model.getShapes().size()-1).equals(selectedShape))
+				return;
 			BringToFrontCmd btf = new BringToFrontCmd(selectedShape, model);
 			btf.execute();
 			log.append(btf.toString() + "\n");
@@ -586,6 +591,8 @@ public class DrawingController {
 		if(model.getSelectedShapes().size()==1)
 		{
 			selectedShape = model.returnOneSelected();
+			if(model.get(0).equals(selectedShape))
+				return;
 			ToBackCmd tb = new ToBackCmd(selectedShape, model);
 			tb.execute();
 			log.append(tb.toString() + "\n");
@@ -610,6 +617,8 @@ public class DrawingController {
 		if(model.getSelectedShapes().size()==1)
 		{
 			selectedShape = model.returnOneSelected();
+			if(model.get(model.getShapes().size()-1).equals(selectedShape))
+				return;
 			ToFrontCmd tf = new ToFrontCmd(selectedShape, model);
 			tf.execute();
 			log.append(tf.toString() + "\n");
@@ -632,7 +641,7 @@ public class DrawingController {
         if (!undoStack.isEmpty()) {
             Command cmd = undoStack.pop(); //cuvam popovanu u cmd
             cmd.unexecute();
-            log.append("UNDO " + cmd.toString() + "\n");
+            log.append("UNDO-->" + cmd.toString() + "\n");
             redoStack.push(cmd);
             
             model.setUndo(undoStack.isEmpty());
@@ -647,7 +656,7 @@ public class DrawingController {
         if (!redoStack.isEmpty()) {
             Command cmd = redoStack.pop();
             cmd.execute();
-            log.append("REDO " + cmd.toString() + "\n");
+            log.append("REDO-->" + cmd.toString() + "\n");
             undoStack.push(cmd);
             
             model.setUndo(undoStack.isEmpty());
@@ -900,6 +909,71 @@ public class DrawingController {
                 redoStack.clear();
                 frame.repaint();
         }
+        
+        else if (command.equals("BRING_TO_BACK")) {
+            Shape shape = findShapeInModel(detail);
+            if (shape != null) {
+                BringToBackCmd btb = new BringToBackCmd(shape, model);
+                btb.execute();
+                undoStack.push(btb);
+                redoStack.clear();
+                frame.repaint();
+            }
+        }
+        
+        else if (command.equals("TO_BACK")) {
+            Shape shape = findShapeInModel(detail);
+            if (shape != null) {
+                ToBackCmd tb = new ToBackCmd(shape, model);
+                tb.execute();
+                undoStack.push(tb);
+                redoStack.clear();
+                frame.repaint();
+            }
+        }
+        
+        else if (command.equals("BRING_TO_FRONT")) {
+            Shape shape = findShapeInModel(detail);
+            if (shape != null) {
+                BringToFrontCmd btf = new BringToFrontCmd(shape, model);
+                btf.execute();
+                undoStack.push(btf);
+                redoStack.clear();
+                frame.repaint();
+            }
+        }
+        else if (command.equals("TO_FRONT")) {
+            Shape shape = findShapeInModel(detail);
+            if (shape != null) {
+                ToFrontCmd tf = new ToFrontCmd(shape, model);
+                tf.execute();
+                undoStack.push(tf);
+                redoStack.clear();
+                frame.repaint();
+            }
+        }
+        
+        else if(command.equals("UNDO"))
+        {
+        	Command cmd = undoStack.pop();
+            cmd.unexecute();
+            redoStack.push(cmd);
+            model.setUndo(undoStack.isEmpty());
+            model.setRedo(redoStack.isEmpty());
+            frame.repaint();
+        }
+        else if(command.equals("REDO"))
+        {
+        	Command cmd = redoStack.pop();
+            cmd.execute();
+            undoStack.push(cmd);
+            model.setUndo(undoStack.isEmpty());
+            model.setRedo(redoStack.isEmpty());
+            frame.repaint();
+        }
+
+
+
     }
     
     public void setLoadedLines(List<String> lines) {

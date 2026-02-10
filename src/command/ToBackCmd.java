@@ -61,11 +61,11 @@ public class ToBackCmd implements Command {
 	{
 		if( selectedShape instanceof Point || selectedShape instanceof Line )
 		{
-			return "To Back shape: " + selectedShape.toString() + " Color: " + selectedShape.getBorderColor().getRGB();
+			return "TO_BACK--" + selectedShape.toString() + ";Color:" + selectedShape.getBorderColor().getRGB();
 		}
 		else 
 		{
-			return "To Back shape " + selectedShape.toString() + " Border color: " + selectedShape.getBorderColor().getRGB() + " Area color: " + selectedShape.getAreaColor().getRGB();
+			return "TO_BACK--" + selectedShape.toString() + ";Border color:" + selectedShape.getBorderColor().getRGB() + ";Area color:" + selectedShape.getAreaColor().getRGB();
 		}
 		
 	}
