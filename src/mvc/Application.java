@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 public class Application {
 
+	//gotovo 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DrawingModel model = new DrawingModel();
