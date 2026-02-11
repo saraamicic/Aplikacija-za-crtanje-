@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import geometry.Shape;
-//u modelu cuvamo podatke - nasu listu sa oblicima
+
 
 public class DrawingModel {
 	public Shape s;
@@ -16,12 +16,12 @@ public class DrawingModel {
 	
 	public DrawingModel()
 	{
-		prop = new PropertyChangeSupport(this); //jer mi treba za bas moj model
+		prop = new PropertyChangeSupport(this); 
 	}
 	
 	public void addPropertyChangeListener(PropertyChangeListener listener)
 	{
-		prop.addPropertyChangeListener(listener); //update button je meni listener on slusa promene
+		prop.addPropertyChangeListener(listener); 
 	}
 	
 	public ShapeTypes shapeType = ShapeTypes.NONE;
@@ -29,7 +29,7 @@ public class DrawingModel {
 	private ArrayList<Shape> shapes = new ArrayList<>();
 	private ArrayList<Shape> selectedShapes = new ArrayList<>();
 	
-	public void add(Shape shape) //da mozemo samo da pozovemo model.add a ne celu listu itd
+	public void add(Shape shape) 
 	{
 		shapes.add(shape);
 	}

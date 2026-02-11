@@ -20,11 +20,10 @@ public class ToFrontCmd implements Command {
 	}
 	
 	@Override
-	//execute nam je isti kao unexecute od ToBack
 	public void execute() {
 		if(selectedShape != null)
 		{
-			originalIndex = model.getShapes().indexOf(selectedShape);//njegov originalni indeks
+			originalIndex = model.getShapes().indexOf(selectedShape);
 
 			if(originalIndex < model.getShapes().size()- 1)
 			{
@@ -42,8 +41,8 @@ public class ToFrontCmd implements Command {
 	public void unexecute() {
 		if(selectedShape != null)
 		{
-			originalIndex = model.getShapes().indexOf(selectedShape);//njegov originalni indeks
-			if(originalIndex >= 1) //da ne ode indeks na minus 1 (out of bounds)
+			originalIndex = model.getShapes().indexOf(selectedShape);
+			if(originalIndex >= 1) 
 			{
 				model.remove(selectedShape);
 				model.getShapes().add(originalIndex - 1, selectedShape);

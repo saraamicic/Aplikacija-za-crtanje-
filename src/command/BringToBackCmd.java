@@ -21,10 +21,10 @@ public class BringToBackCmd implements Command {
 	
 	@Override
 	public void execute() {
-		originalIndex = model.getShapes().indexOf(selectedShape); //pamtimo njegov prvobitan indeks
+		originalIndex = model.getShapes().indexOf(selectedShape); 
 
-				model.getShapes().remove(selectedShape);   //  ukloni sa stare pozicije
-				model.getShapes().add(0, selectedShape);   //  ubaci na indeks 0
+				model.getShapes().remove(selectedShape);  
+				model.getShapes().add(0, selectedShape); 
 				
 
 	}

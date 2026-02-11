@@ -32,7 +32,6 @@ public class SaveLogStrategy implements FileStrategy {
 	
 	@Override
 	public void Save(File file) {
-		// writer pise tekst u stream
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(frame.getTextArea().getText());
         } catch (IOException e) {
@@ -50,10 +49,8 @@ public class SaveLogStrategy implements FileStrategy {
                 logLines.add(line);
             }
             
-            // salje listu linija
             controller.setLoadedLines(logLines); 
             
-            // sad moze next
             frame.getBtnNext().setEnabled(true);
             
             JOptionPane.showMessageDialog(null, "Click Next to execute");

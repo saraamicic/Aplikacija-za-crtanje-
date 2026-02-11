@@ -4,9 +4,9 @@ import geometry.Rectangle;
 
 public class ModifyRectangleCmd implements Command {
 
-	private Rectangle rectangle; //stari
-	private Rectangle newState; //kakav zelimo
-	private Rectangle oldState; //pomocni (moramo da mu dodelimo vrednosti inace dobijam null pointer exception
+	private Rectangle rectangle; 
+	private Rectangle newState; 
+	private Rectangle oldState; 
 	
 	
 	public ModifyRectangleCmd(Rectangle rectangle, Rectangle newState)

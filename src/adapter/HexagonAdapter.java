@@ -3,12 +3,11 @@ package adapter;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import geometry.Circle;
-import geometry.Point;
 import geometry.Shape;
 import hexagon.Hexagon;
 
 public class HexagonAdapter extends Shape {
+	private static final long serialVersionUID = 1L;
 
 	Hexagon hexagon;
 	
@@ -17,19 +16,16 @@ public class HexagonAdapter extends Shape {
 		this.hexagon = new Hexagon(x,y,radius);
 	}
 	
-	//ovo mi ne treba
 	@Override
 	public void moveTo(int x, int y) {
 		// TODO Auto-generated method stub
 		
 	}
-	//ni ovo mi ne treba
 	@Override
 	public void moveBy(int x, int y) {
 		// TODO Auto-generated method stub
 		
 	}
-	//ne znam jel mi ovo treba, uzela sam od kruga pa izmenila
 	@Override
 	public int compareTo(Object obj) {
 		if (obj instanceof HexagonAdapter hex) {
@@ -42,7 +38,6 @@ public class HexagonAdapter extends Shape {
 	public boolean contains(int x, int y) {
 		return hexagon.doesContain(x, y);
 	}
-	//dodala
 	public String toString() {
 		return "HEXAGON " + hexagon.getX() + "," + hexagon.getY() + ";radius=" + hexagon.getR();
 	}
@@ -52,7 +47,6 @@ public class HexagonAdapter extends Shape {
 		
 		hexagon.paint(g);
 		
-		//za selektovanje
 		if (this.isSelected()) {
 		    g.setColor(Color.BLUE);
 

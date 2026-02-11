@@ -21,7 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.MenuBar;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -141,7 +140,6 @@ public class DrawingFrame extends JFrame {
 				controller.Delete();
 			}
 		});
-		//buttonGroupShapes.add(tglbtnDelete);
 		btnDelete.setBounds(985, 23, 84, 26);
 		getContentPane().add(btnDelete);
 		
@@ -266,7 +264,6 @@ public class DrawingFrame extends JFrame {
 		btnNext.setBounds(164, 529, 85, 21);
 		getContentPane().add(btnNext);
 		
-		//za strategy
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.setBounds(39, 23, 101, 22);

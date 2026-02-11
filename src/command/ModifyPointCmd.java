@@ -4,9 +4,9 @@ import geometry.Point;
 
 public class ModifyPointCmd implements Command {
 
-	private Point point; //kakav nam je point sad
-	private Point newState; //kakav hocemo da bude posle apdejta
-	private Point oldState; //pomocni
+	private Point point;
+	private Point newState; 
+	private Point oldState; 
 	
 	
 	public ModifyPointCmd(Point point, Point newState)
@@ -18,7 +18,6 @@ public class ModifyPointCmd implements Command {
 	public void execute() {
 			oldState = point.clone();
 			
-			//ovde pamtimo u nas point ovo novo stanje
 			point.setXCoordinate(newState.getXCoordinate());
 			point.setYCoordinate(newState.getYCoordinate());
 			point.setBorderColor(newState.getBorderColor());
@@ -26,7 +25,7 @@ public class ModifyPointCmd implements Command {
 	//iz new state ga vratimo u point
 	public void unexecute() {
 		
-		point.setXCoordinate(oldState.getXCoordinate()); //dodelimo mu staro stanje koje smo zapamtili u pomocnom
+		point.setXCoordinate(oldState.getXCoordinate()); 
 		point.setYCoordinate(oldState.getYCoordinate());
 		point.setBorderColor(oldState.getBorderColor());
 		

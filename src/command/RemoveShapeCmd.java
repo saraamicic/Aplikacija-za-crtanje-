@@ -25,9 +25,9 @@ public class RemoveShapeCmd implements Command {
 
 	public void unexecute() {
 	    model.getShapes().add(orgInd, shape);
-	    //stari status
+
 	    shape.setSelected(true);
-	    //vratim ga u listu selektovanih
+
 	    if (!model.getSelectedShapes().contains(shape)) {
 	        model.getSelectedShapes().add(shape);
 	    }

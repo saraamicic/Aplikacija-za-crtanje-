@@ -7,14 +7,12 @@ import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Shape;
-import hexagon.Hexagon;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
@@ -58,7 +56,7 @@ public class DrawingController {
 	private Point startPoint = null;
 	private Shape shape; 
 	public Shape selectedShape;
-	Stack <Command> undoStack = new Stack<Command>(); //znaci cuva sve sto implementira interfejs command
+	Stack <Command> undoStack = new Stack<Command>(); 
 	Stack <Command> redoStack = new Stack<Command>();
 	JTextArea log;
 	private List<String> loadedLines = new ArrayList<>();
@@ -86,12 +84,12 @@ public class DrawingController {
 					DlgPoint dlgPoint = new DlgPoint(p);
 					dlgPoint.getTextFieldXCoordinate().setEditable(false);
 					dlgPoint.getTextFieldYCoordinate().setEditable(false);
-					dlgPoint.setColorPoint(frame.defaultBorderColor);//default boja
+					dlgPoint.setColorPoint(frame.defaultBorderColor);
 					dlgPoint.setVisible(true);
 					if (dlgPoint.isOk()) {
 						p.setBorderColor(dlgPoint.getColorPoint());
 						AddShapeCmd addShapePoint = new AddShapeCmd(p, model);
-						addShapePoint.execute(); // dodajemo tacku u listu
+						addShapePoint.execute(); 
 						log.append(addShapePoint.toString()+ "\n");
 						undoStack.add(addShapePoint);
 						redoStack.clear();
@@ -262,7 +260,6 @@ public class DrawingController {
 					
 				case NONE:
 					setShapeType(ShapeTypes.NONE);
-					//selektovanje
 						
 						Point clickedPoint = new Point(e.getX(), e.getY());
 						Shape clickedShape = getSelected(clickedPoint);
@@ -298,9 +295,8 @@ public class DrawingController {
 
 	}	
 	
-	//ovo nam treba radi selektovanja
 	public Shape getSelected(Point p) {
-	    for (int i = model.getShapes().size() - 1; i >= 0; i--) { //idemo od poslednjeg
+	    for (int i = model.getShapes().size() - 1; i >= 0; i--) { 
 	        Shape s = model.get(i);
 	        if (s.contains(p.getXCoordinate(), p.getYCoordinate())) {
 	            return s;
@@ -309,17 +305,16 @@ public class DrawingController {
 	   return null;
 	}
 
-	// modifikovanje - u frejmu na klik dugmeta preko kontrolera pozivamo ovu funkciju
 	public void Modify() {
 			shape = model.getSelectedShapes().get(0);
 			if (shape instanceof Point) {
-				Point modifyPoint = (Point) shape; //ovo nam je stari point
+				Point modifyPoint = (Point) shape; 
 				DlgPoint dlgPointM = new DlgPoint(modifyPoint);
 				dlgPointM.setColorPoint(modifyPoint.getBorderColor());
 				dlgPointM.setVisible(true);
 				
 				if (dlgPointM.isOk()) {
-					Point newStatePoint = new Point(); //znaci ovo je point na kakav updatujemo nas stari point
+					Point newStatePoint = new Point(); 
 					newStatePoint.setXCoordinate(Integer.parseInt(dlgPointM.getTextFieldXCoordinate().getText()));
 					newStatePoint.setYCoordinate(Integer.parseInt(dlgPointM.getTextFieldYCoordinate().getText()));
 					newStatePoint.setBorderColor(dlgPointM.getColorPoint());
@@ -339,16 +334,15 @@ public class DrawingController {
 			}
 
 			else if (shape instanceof Line) {
-				Line modifyLine = (Line) shape; //ovo nam je stara linija
+				Line modifyLine = (Line) shape; 
 				DlgLine dlgLineM = new DlgLine(modifyLine);
 				dlgLineM.setLineColor(modifyLine.getBorderColor());
 				dlgLineM.setVisible(true);
 				if (dlgLineM.isOk()) {
-					//moramo ovako tacke da napravimo zbog nullpointerexceptiona
 					Point stPoint = new Point(Integer.parseInt(dlgLineM.getTextFieldXStartPoint().getText()),Integer.parseInt(dlgLineM.getTextFieldYStartPoint().getText()));
 					Point enPoint = new Point(Integer.parseInt(dlgLineM.getTextFieldXEndPoint().getText()),Integer.parseInt(dlgLineM.getTextFieldYEndPoint().getText()));
 					
-					Line newStateLine = new Line(stPoint,enPoint); //ovakvu liniju zelimo posle updejta, znaci iz dijaloga preuzmemo vrednosti
+					Line newStateLine = new Line(stPoint,enPoint); 
 					newStateLine.setBorderColor(dlgLineM.getLineColor());
 					
 					ModifyLineCmd modifLine = new ModifyLineCmd(modifyLine,newStateLine);
@@ -367,7 +361,7 @@ public class DrawingController {
 			}
 
 			else if (shape instanceof Rectangle) {
-				Rectangle modifyRect = (Rectangle) shape;//stari pravougaonik
+				Rectangle modifyRect = (Rectangle) shape;
 				DlgRectangle dlgRectM = new DlgRectangle(modifyRect);
 
 				dlgRectM.getTextFieldWidth().setText(Integer.toString(modifyRect.getWidth()));
@@ -402,7 +396,7 @@ public class DrawingController {
 				}
 
 			} else if (shape instanceof Donut) {
-				Donut modifyDonut = (Donut) shape; //stari donut
+				Donut modifyDonut = (Donut) shape; 
 				DlgDonut dlgDonutM = new DlgDonut(modifyDonut);
 				dlgDonutM.getTextFieldDonutRadius().setText(Integer.toString(modifyDonut.getRadius()));
 				dlgDonutM.getTextFieldInnerRadius().setText(Integer.toString(modifyDonut.getInnerRadius()));
@@ -412,7 +406,7 @@ public class DrawingController {
 				if (dlgDonutM.isOk()) {
 					
 					Point p1 = new Point(Integer.parseInt(dlgDonutM.getTextFieldXDonutCenter().getText()),Integer.parseInt(dlgDonutM.getTextFieldYDonutCenter().getText()));
-					Donut newStateDonut = new Donut(); //kakav zelimo da bude
+					Donut newStateDonut = new Donut(); 
 					newStateDonut.setCenter(p1);
 					try {
 						newStateDonut.setRadius(Integer.parseInt(dlgDonutM.getTextFieldDonutRadius().getText()));
@@ -507,7 +501,6 @@ public class DrawingController {
 			frame.getButtonGroupShapes().clearSelection();
 
 		} 
-		//model.setSelection();	
 		frame.getButtonGroupShapes().clearSelection();
 		frame.repaint();
 	}
@@ -518,13 +511,12 @@ public class DrawingController {
 	        Shape s = model.getSelectedShapes().get(i);
 	        RemoveShapeCmd remove = new RemoveShapeCmd(s, model);
 	        
-	        remove.execute(); // deselektuje i brise iz obe liste  u modelu
+	        remove.execute();
 	        
 	        undoStack.push(remove);
 	        log.append(remove.toString() + "\n");
 	    }
 	    
-	    //kad je sve obrisano
 	    redoStack.clear();
 	    model.setUndo(undoStack.isEmpty());
 	    model.setRedo(redoStack.isEmpty());
@@ -639,7 +631,7 @@ public class DrawingController {
 	
 	public void Undo() { 
         if (!undoStack.isEmpty()) {
-            Command cmd = undoStack.pop(); //cuvam popovanu u cmd
+            Command cmd = undoStack.pop(); 
             cmd.unexecute();
             log.append("UNDO-->" + cmd.toString() + "\n");
             redoStack.push(cmd);
@@ -675,7 +667,6 @@ public class DrawingController {
     	if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             
-            // mora da ima .bin ekst
             if (!file.getName().toLowerCase().endsWith(".bin")) {
                 file = new File(file.getAbsolutePath() + ".bin");
             }
@@ -694,7 +685,6 @@ public class DrawingController {
 
         if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            //samo sa txt ekst
             if (!file.getName().toLowerCase().endsWith(".txt")) {
                 file = new File(file.getAbsolutePath() + ".txt");
             }
@@ -710,7 +700,6 @@ public class DrawingController {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Otvori fajl");
         
-        // prikazujemo samo .bin i .txt
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("(.bin)", "bin"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("(.txt)", "txt"));
 
@@ -718,12 +707,11 @@ public class DrawingController {
             File file = fileChooser.getSelectedFile();
             FileStrategy strategy; 
 
-            //u zavisnosti od ekstenzije pozivam funk
             if (file.getName().toLowerCase().endsWith(".bin")) {
                 strategy = new SaveDrawingStrategy(model);
                 log.setText("");
                 frame.getBtnUndo().setEnabled(false);
-            } else if (file.getName().toLowerCase().endsWith(".txt")) { //za log
+            } else if (file.getName().toLowerCase().endsWith(".txt")) {
                 strategy = new SaveLogStrategy(frame,this);
                 
             } else {
@@ -752,8 +740,8 @@ public class DrawingController {
     
     private void parseAndExecute(String line) {
         String[] parts = line.split("--");
-        String command = parts[0]; // add, delete, selected itd
-        String detail = parts[1];  // circle x,y;radius=r itd
+        String command = parts[0]; 
+        String detail = parts[1];  
 
         if (command.equals("ADD")) {
             if (detail.startsWith("POINT")) {
@@ -893,7 +881,6 @@ public class DrawingController {
             }
         }
         else if (command.equals("SELECTED") || command.equals("DESELECTED")) {
-        	//saljem detalje da nadjem u modelu takav
             Shape shapeToSelect = findShapeInModel(detail);
                 SelectShapeCmd select = new SelectShapeCmd(shapeToSelect, model);
                 select.execute();
@@ -975,11 +962,10 @@ public class DrawingController {
         
         else if(command.equals("MODIFY"))
         {
-            String[] states = detail.split(">>"); //staru novu vr
-            Shape shapeToModify = findShapeInModel(states[0]); //nadjemo stari oblik
+            String[] states = detail.split(">>"); 
+            Shape shapeToModify = findShapeInModel(states[0]); 
             
                 if (shapeToModify instanceof Point) {
-                    // tacka sa novim vrednostima
                     Point newState = parsePointFromLog(states[1]);
                     ModifyPointCmd modifPoint = new ModifyPointCmd((Point)shapeToModify, newState);
                     
@@ -1054,14 +1040,12 @@ public class DrawingController {
         for (Shape s : model.getShapes()) {
             String modelShapeString = "";
             
-            // rekonst toStringa
             if (s instanceof Point || s instanceof Line) {
                 modelShapeString = s.toString() + ";Color:" + s.getBorderColor().getRGB();
             } else {
                 modelShapeString = s.toString() + ";Border color:" + s.getBorderColor().getRGB() + ";Area color:" + s.getAreaColor().getRGB();
             }
             
-            // nasla ako su isti
             if (modelShapeString.equals(shapeStringFromLog)) {
                 return s;
             }

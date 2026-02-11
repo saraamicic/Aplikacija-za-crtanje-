@@ -21,14 +21,13 @@ public class BringToFrontCmd implements Command {
 	
 	
 	@Override
-	//trebamo oblik da premestimo na kraj liste 
 	public void execute() {
 		originalIndex = model.getShapes().indexOf(selectedShape);
-		lastIndex = model.getShapes().size() - 1; //da znamo koji je indeks poslednjeg elementa
+		lastIndex = model.getShapes().size() - 1; 
 		if(selectedShape != null)
 		{
 			model.getShapes().remove(selectedShape);
-			model.getShapes().add(lastIndex, selectedShape); //dodamo ga kao poslednjeg
+			model.getShapes().add(lastIndex, selectedShape); 
 			
 		}
 		else

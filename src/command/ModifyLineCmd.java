@@ -4,11 +4,9 @@ import geometry.Line;
 
 public class ModifyLineCmd implements Command {
 
-	private Line line; //stara linija
-	private Line newState; //kakva hocemo da bude linija
-	
-	private Line oldState; //pomocna	
-	
+	private Line line; 
+	private Line newState; 
+	private Line oldState; 
 	
 	public ModifyLineCmd(Line line, Line newState) {
 		this.line = line;
@@ -20,7 +18,6 @@ public class ModifyLineCmd implements Command {
 		
 		oldState = line.clone();
 		
-		//staroj dodelimo vrednosti kakve zelimo da ima
 		line.getStartPoint().setXCoordinate(newState.getStartPoint().getXCoordinate());
 		line.getStartPoint().setYCoordinate(newState.getStartPoint().getYCoordinate());
 		line.getEndPoint().setXCoordinate(newState.getEndPoint().getXCoordinate());
@@ -30,7 +27,6 @@ public class ModifyLineCmd implements Command {
 
 	@Override
 	public void unexecute() {
-		//staroj liniji vratimo vrednosti koje smo zapamtili u oldState tj pomocnoj
 		line.getStartPoint().setXCoordinate(oldState.getStartPoint().getXCoordinate());
 		line.getStartPoint().setYCoordinate(oldState.getStartPoint().getYCoordinate());
 		line.getEndPoint().setXCoordinate(oldState.getEndPoint().getXCoordinate());

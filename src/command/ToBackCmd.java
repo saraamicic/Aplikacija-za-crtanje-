@@ -21,12 +21,12 @@ public class ToBackCmd implements Command {
 	
 	
 	@Override
-	//ovo nam je da se samo za jedno mesto unazad pomeri, znaci za jedan indeks manje (ako moze)
+
 	public void execute() {
 		if(selectedShape != null)
 		{
-			originalIndex = model.getShapes().indexOf(selectedShape);//njegov originalni indeks
-			if(originalIndex >= 1) //da indeks ne ode na -1
+			originalIndex = model.getShapes().indexOf(selectedShape);
+			if(originalIndex >= 1) 
 			{
 				model.remove(selectedShape);
 				model.getShapes().add(originalIndex - 1, selectedShape);
@@ -39,12 +39,11 @@ public class ToBackCmd implements Command {
 	}
 
 	@Override
-	//ovo mi je da ga stavim na njegov originalni indeks + 1 tj da ga pomerim za jedno napred mesto (gde je pre bio)
+
 	public void unexecute() {
 		if(selectedShape != null)
 		{
-			originalIndex = model.getShapes().indexOf(selectedShape);//njegov originalni indeks
-
+			originalIndex = model.getShapes().indexOf(selectedShape);
 			if(originalIndex < model.getShapes().size()- 1)
 			{
 				model.remove(selectedShape);

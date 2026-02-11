@@ -24,7 +24,6 @@ public class SaveDrawingStrategy implements FileStrategy {
 
 	@Override
 	public void Save(File file) {
-		//celu listu oblika ubacu, oos upisuje objekte u tok podataka 
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
 			oos.writeObject(model.getShapes()); 
 		} catch (Exception e) {
@@ -35,10 +34,9 @@ public class SaveDrawingStrategy implements FileStrategy {
 
 	@Override
 	public void Open(File file) {
-		// ois čita objekate iz toka podataka
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
 			ArrayList<Shape> loadedShapes = (ArrayList<Shape>) ois.readObject();
-			model.getShapes().clear(); // brisem trenutne oblike
+			model.getShapes().clear(); 
 			Iterator<Shape>it = loadedShapes.iterator();
 			while(it.hasNext())
 			{
@@ -47,7 +45,7 @@ public class SaveDrawingStrategy implements FileStrategy {
 	            model.add(s);
 			}
 			model.getSelectedShapes().clear();
-			model.getShapes().addAll(loadedShapes); // ubacim ove učitane
+			model.getShapes().addAll(loadedShapes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

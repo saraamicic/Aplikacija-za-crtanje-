@@ -8,9 +8,7 @@ public class Application {
 		// TODO Auto-generated method stub
 		DrawingModel model = new DrawingModel();
 		DrawingFrame frame = new DrawingFrame();
-		frame.getView().setModel(model); //veza izmedju drawing viewa i modela, 
-		//ovde i resavamo ono sto smo namestili tamo u frejmu (ono gde smo pravili jos jedan model
-		//radi ucitavanja
+		frame.getView().setModel(model);
 		DrawingController controller = new DrawingController(model,frame);
 		frame.SetController(controller);
 		

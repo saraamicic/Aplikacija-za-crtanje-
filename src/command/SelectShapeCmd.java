@@ -20,7 +20,7 @@ public class SelectShapeCmd implements Command {
 	@Override
 	public void execute() {
 		
-		state = model.getSelectedShapes().contains(shape); //true ako je bio selektovan, false ako nije
+		state = model.getSelectedShapes().contains(shape); 
 		
 		if(state == true)
 		{
