@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Point extends Shape {
+	private static final long serialVersionUID = 1L;
 	private int xCoordinate;
 	private int yCoordinate;
 	private Color borderColor;
@@ -135,6 +136,13 @@ public class Point extends Shape {
 		g.setColor(Color.BLACK);
 	}
 
-	
-
+	 public Point clone() {
+	    Point clone = new Point();
+	    //deep copy
+	    clone.setXCoordinate(this.xCoordinate);
+	    clone.setYCoordinate(this.yCoordinate);
+	    clone.setBorderColor(this.getBorderColor());
+	        
+	    return clone;
+	}
 }

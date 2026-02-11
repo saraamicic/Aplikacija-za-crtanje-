@@ -2,6 +2,9 @@ package adapter;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import geometry.Circle;
+import geometry.Point;
 import geometry.Shape;
 import hexagon.Hexagon;
 
@@ -125,4 +128,14 @@ public class HexagonAdapter extends Shape {
 		return hexagon.getY();
 	}
 	
+	 public HexagonAdapter clone() {
+		 
+		HexagonAdapter clone = new HexagonAdapter(this.getX(),this.getY(),this.getRadius());
+		clone.setBorderColor(this.getBorderColor());
+		clone.setAreaColor(this.getAreaColor());
+	        
+	    return clone;
+	    
+	 
+	 }
 }

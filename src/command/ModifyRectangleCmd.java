@@ -1,13 +1,12 @@
 package command;
 
-import geometry.Point;
 import geometry.Rectangle;
 
 public class ModifyRectangleCmd implements Command {
 
 	private Rectangle rectangle; //stari
 	private Rectangle newState; //kakav zelimo
-	private Rectangle oldState = new Rectangle(new Point(0,0),0,0); //pomocni (moramo da mu dodelimo vrednosti inace dobijam null pointer exception
+	private Rectangle oldState; //pomocni (moramo da mu dodelimo vrednosti inace dobijam null pointer exception
 	
 	
 	public ModifyRectangleCmd(Rectangle rectangle, Rectangle newState)
@@ -18,12 +17,8 @@ public class ModifyRectangleCmd implements Command {
 	
 	@Override
 	public void execute() {
-		oldState.getUpperLeftPoint().setXCoordinate(rectangle.getUpperLeftPoint().getXCoordinate());
-		oldState.getUpperLeftPoint().setYCoordinate(rectangle.getUpperLeftPoint().getYCoordinate());
-		oldState.setHeight(rectangle.getHeight());
-		oldState.setWidth(rectangle.getWidth());
-		oldState.setBorderColor(rectangle.getBorderColor());
-		oldState.setAreaColor(rectangle.getAreaColor());
+		
+		oldState = rectangle.clone();
 		
 		rectangle.getUpperLeftPoint().setXCoordinate(newState.getUpperLeftPoint().getXCoordinate());
 		rectangle.getUpperLeftPoint().setYCoordinate(newState.getUpperLeftPoint().getYCoordinate());

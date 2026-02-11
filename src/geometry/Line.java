@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Line extends Shape implements Cloneable{
+	private static final long serialVersionUID = 1L;
 
 	private Point startPoint;
 	private Point endPoint;
@@ -110,16 +111,16 @@ public class Line extends Shape implements Cloneable{
 		g.setColor(Color.BLACK);
 	}
 	
-	
-	public Line clone()
-	{
-		try {
-			return (Line)super.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null; //mora da ne bi bila greska jer mora da vrati i ovde nesto
-		}
-	}
+    public Line clone() {
+        Line clone = new Line();
+        //deep copy
+        clone.setStartPoint(new Point(this.getStartPoint().getXCoordinate(), this.getStartPoint().getYCoordinate()));
+        clone.setEndPoint(new Point(this.getEndPoint().getXCoordinate(), this.getEndPoint().getYCoordinate()));
+        clone.setBorderColor(this.getBorderColor());
+        
+        return clone;
+    }
 
+	
+	
 }

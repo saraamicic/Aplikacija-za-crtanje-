@@ -7,7 +7,7 @@ public class ModifyHexagonCmd implements Command {
 	
 	private HexagonAdapter hexagon;
 	private HexagonAdapter newState;
-	private HexagonAdapter oldState = new HexagonAdapter(0,0,0);
+	private HexagonAdapter oldState;
 	
 	public ModifyHexagonCmd (HexagonAdapter hexagon, HexagonAdapter newState)
 	{
@@ -17,16 +17,7 @@ public class ModifyHexagonCmd implements Command {
 	
 	@Override
 	public void execute() {
-		oldState.setX(hexagon.getX());
-		oldState.setY(hexagon.getY());
-		try {
-			oldState.setRadius(hexagon.getRadius());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		oldState.setBorderColor(hexagon.getBorderColor());
-		oldState.setAreaColor(hexagon.getAreaColor());
+		oldState = hexagon.clone();
 		
 		hexagon.setX(newState.getX());
 		hexagon.setY(newState.getY());

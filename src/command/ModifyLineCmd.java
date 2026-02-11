@@ -1,16 +1,13 @@
 package command;
 
 import geometry.Line;
-import geometry.Point;
 
 public class ModifyLineCmd implements Command {
 
 	private Line line; //stara linija
 	private Line newState; //kakva hocemo da bude linija
 	
-	private Point p1 = new Point(0,0);
-	private Point p2 = new Point(0,0);
-	private Line oldState = new Line(p1,p2); //pomocna	
+	private Line oldState; //pomocna	
 	
 	
 	public ModifyLineCmd(Line line, Line newState) {
@@ -20,12 +17,8 @@ public class ModifyLineCmd implements Command {
 
 	@Override
 	public void execute() {
-		//pomocnoj dodelimo vrednosti stare linije da zapamti
-		oldState.getStartPoint().setXCoordinate(line.getStartPoint().getXCoordinate());
-		oldState.getStartPoint().setYCoordinate(line.getStartPoint().getYCoordinate());
-		oldState.getEndPoint().setXCoordinate(line.getEndPoint().getXCoordinate());
-		oldState.getEndPoint().setYCoordinate(line.getEndPoint().getYCoordinate());
-		oldState.setBorderColor(line.getBorderColor());
+		
+		oldState = line.clone();
 		
 		//staroj dodelimo vrednosti kakve zelimo da ima
 		line.getStartPoint().setXCoordinate(newState.getStartPoint().getXCoordinate());

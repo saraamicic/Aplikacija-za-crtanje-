@@ -1,14 +1,12 @@
 package command;
 
 import geometry.Donut;
-import geometry.Point;
 
 public class ModifyDonutCmd implements Command {
 
 	private Donut donut;
 	private Donut newState;
-	private Point p1 = new Point(0,0);
-	private Donut oldState = new Donut(p1,0,0);
+	private Donut oldState;
 	
 	public ModifyDonutCmd (Donut donut, Donut newState)
 	{
@@ -18,17 +16,7 @@ public class ModifyDonutCmd implements Command {
 	
 	@Override
 	public void execute() {
-		oldState.getCenter().setXCoordinate(donut.getCenter().getXCoordinate());
-		oldState.getCenter().setYCoordinate(donut.getCenter().getYCoordinate());
-		try {
-			oldState.setRadius(donut.getRadius());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		oldState.setInnerRadius(donut.getInnerRadius());
-		oldState.setBorderColor(donut.getBorderColor());
-		oldState.setAreaColor(donut.getAreaColor());
+		oldState = donut.clone();
 		
 		donut.getCenter().setXCoordinate(newState.getCenter().getXCoordinate());
 		donut.getCenter().setYCoordinate(newState.getCenter().getYCoordinate());

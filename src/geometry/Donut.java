@@ -7,6 +7,7 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 public class Donut extends Circle {
+	private static final long serialVersionUID = 1L;
 //iz klase donut je vidljivo sve iz circle (radius, center..)
 
 	int innerRadius;
@@ -123,4 +124,24 @@ public class Donut extends Circle {
 		return 0;
 	}
 
+	
+	 public Donut clone() {
+		 
+		Donut clone = new Donut();
+		clone.setCenter(new Point(this.getCenter().getXCoordinate(),this.getCenter().getYCoordinate()));
+		try {
+		clone.setRadius(this.getRadius());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		clone.setInnerRadius(this.getInnerRadius());
+		 
+		clone.setBorderColor(this.getBorderColor());
+		clone.setAreaColor(this.getAreaColor());
+	        
+	    return clone;
+	 
+	 }
+	
 }

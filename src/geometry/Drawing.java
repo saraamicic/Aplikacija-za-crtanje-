@@ -2,13 +2,12 @@ package geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Drawing extends JPanel {
+	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) {
 

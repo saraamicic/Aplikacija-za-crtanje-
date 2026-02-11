@@ -1,14 +1,12 @@
 package command;
 
 import geometry.Circle;
-import geometry.Point;
 
 public class ModifyCircleCmd implements Command {
 
 	private Circle circle;
 	private Circle newState;
-	private Point p = new Point(0,0);
-	private Circle oldState = new Circle(p,0);
+	private Circle oldState;
 	
 	public ModifyCircleCmd (Circle circle, Circle newState)
 	{
@@ -18,16 +16,8 @@ public class ModifyCircleCmd implements Command {
 	
 	@Override
 	public void execute() {
-		oldState.getCenter().setXCoordinate(circle.getCenter().getXCoordinate());
-		oldState.getCenter().setYCoordinate(circle.getCenter().getYCoordinate());
-		try {
-			oldState.setRadius(circle.getRadius());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		oldState.setBorderColor(circle.getBorderColor());
-		oldState.setAreaColor(circle.getAreaColor());
+		
+		oldState = circle.clone();
 		
 		circle.getCenter().setXCoordinate(newState.getCenter().getXCoordinate());
 		circle.getCenter().setYCoordinate(newState.getCenter().getYCoordinate());

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Circle extends Shape {
+	private static final long serialVersionUID = 1L;
 
 	private Point center;
 	private int radius;
@@ -122,4 +123,23 @@ public class Circle extends Shape {
 		}
 		g.setColor(Color.BLACK);
 	}
+	
+	 public Circle clone() {
+		 
+		 Circle clone = new Circle();
+		 clone.setCenter(new Point(this.getCenter().getXCoordinate(),this.getCenter().getYCoordinate()));
+		 try {
+			clone.setRadius(this.getRadius());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 clone.setBorderColor(this.getBorderColor());
+		 clone.setAreaColor(this.getAreaColor());
+	        
+	     return clone;
+	    
+	 
+	 	}
+	
 }

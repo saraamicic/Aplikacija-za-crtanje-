@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Rectangle extends Shape {
+	private static final long serialVersionUID = 1L;
 
 	private Point upperLeftPoint;
 	private int width;
@@ -125,5 +126,19 @@ public class Rectangle extends Shape {
 		}
 		g.setColor(Color.BLACK);
 	}
+	
+	 public Rectangle clone() {
+		 Rectangle clone = new Rectangle();
+		 clone.setUpperLeftPoint(new Point(this.getUpperLeftPoint().getXCoordinate(),this.getUpperLeftPoint().getYCoordinate()));
+		 clone.setWidth(this.getWidth());
+		 clone.setHeight(this.getHeight());
+
+	     clone.setBorderColor(this.getBorderColor());
+	     clone.setAreaColor(this.getAreaColor());
+	        
+	     return clone;
+	    
+	 
+	 	}
 
 }
