@@ -278,9 +278,6 @@ public class DrawingController {
 							
 							frame.repaint();
 						}
-						
-					
-					
 					
 					break;
 
@@ -554,8 +551,6 @@ public class DrawingController {
 
 	public void BringToFront() {
 		
-		if(model.getSelectedShapes().size()==1)
-		{
 			selectedShape = model.returnOneSelected();
 			if(model.get(model.getShapes().size()-1).equals(selectedShape))
 				return;
@@ -570,12 +565,7 @@ public class DrawingController {
 			model.setSelection();
 			
 			frame.repaint();
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Select one shape first","",JOptionPane.ERROR_MESSAGE);
-		}
-	
+		
 	}
 
 	public void ToBack() {

@@ -16,7 +16,7 @@ public class DrawingModel {
 	
 	public DrawingModel()
 	{
-		prop = new PropertyChangeSupport(this); 
+		prop = new PropertyChangeSupport(this);
 	}
 	
 	public void addPropertyChangeListener(PropertyChangeListener listener)
@@ -72,7 +72,6 @@ public class DrawingModel {
 	{
 		return selectedShapes;
 	}
-	
 	
 	public void setUndo (boolean isEmpty)
 	{

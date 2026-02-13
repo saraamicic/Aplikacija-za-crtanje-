@@ -49,7 +49,8 @@ public class DrawingFrame extends JFrame {
 		getContentPane().setLayout(null);
 		view.setBounds(409, 69, 734, 449);
 		view.setBackground(new Color(255, 255, 255));
-		getContentPane().add(view);
+		getContentPane().add(view); //
+		
 		defaultBorderColor = Color.BLACK;
 		defaultAreaColor = Color.WHITE;
 		

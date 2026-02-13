@@ -8,7 +8,7 @@ import geometry.Shape;
 public class DrawingView extends JPanel{
 	private static final long serialVersionUID = 1L;
 
-	DrawingModel model = new DrawingModel(); 
+	DrawingModel model = new DrawingModel(); //
 	
 	public void paint(Graphics g) {
 		super.paint(g);
