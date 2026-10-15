@@ -662,7 +662,7 @@ public class DrawingController {
             }
 
             SaveDrawingStrategy strategy = new SaveDrawingStrategy(model);
-            strategy.Save(file);
+            strategy.Save(file); 
             
         }
     	
